@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class GuardStateBase
 {
-    public abstract void EnterState(GuardStateManager guard);
+    public abstract void EnterState(GuardStateManager guard, Transform[] wp);
 
     public abstract void UpdateState(GuardStateManager guard);
 

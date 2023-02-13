@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GuardStationaryState : GuardStateBase
 {
-    public override void EnterState(GuardStateManager guard)
+    public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
         Debug.Log("STATIONARY STATE");
 

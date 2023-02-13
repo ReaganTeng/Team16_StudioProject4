@@ -20,16 +20,16 @@ public class VirtualCamScript : MonoBehaviour
         // Zoom in/out by right click on the mouse       
         if (Input.GetMouseButton(1))
         {
-            if (vcam.m_Lens.FieldOfView > 10)
+            if (vcam.m_Lens.FieldOfView > 20)
             {
-                vcam.m_Lens.FieldOfView--;
+                vcam.m_Lens.FieldOfView -= 0.3f;
             }
         }
         else
         {
             if (vcam.m_Lens.FieldOfView < 40)
             {
-                vcam.m_Lens.FieldOfView++;
+                vcam.m_Lens.FieldOfView += 0.3f;
             }
         }
     }
