@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class PlayerInputs : MonoBehaviour
 {
     public Rigidbody projectile;
     private GameObject player;
     private Vector3 pos;
 
+
     void Awake()
     {
         player = GameObject.Find("NestedParentArmature_Unpack");
-        //camera = GameObject<GetComponent>(Camera);
+
     }
 
     void Update()
@@ -30,6 +32,7 @@ public class PlayerInputs : MonoBehaviour
             clone.position += Camera.main.transform.forward * 3.0f;
             clone.velocity = transform.TransformDirection(Camera.main.transform.forward * 40);
         }
+
     }
 
 }
