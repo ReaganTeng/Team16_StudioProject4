@@ -61,9 +61,6 @@ public class ProjectileScript : MonoBehaviour
                     break;
                 }
             }
-
-
-
         }
         
 
