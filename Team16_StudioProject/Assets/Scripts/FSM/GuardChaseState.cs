@@ -42,18 +42,17 @@ public class GuardChaseState : GuardStateBase
         if (timer_between_shots >= 3.0f)
         {
             // Instantiate the projectile at the position and rotation of this transform
-            //Rigidbody clone;
-            //clone = GameObject.Instantiate(guard.projectile, guard.getgenemyPos().position, guard.getgenemyPos().rotation);
+            Rigidbody clone;
+            clone = GameObject.Instantiate(guard.projectile, guard.getgenemyPos().position, guard.getgenemyPos().rotation);
+            //pos = guard.getgenemyPos().position;
 
-            ////pos = guard.getgenemyPos().position;
-            //clone.position = guard.getgenemyPos().position;
+            //clone.position = Camera.main.transform.position;
             //clone.position += Vector3.up * 1.0f;
-            //clone.position += guard.getgenemyPos().forward * 3.0f;
+            //clone.position += Camera.main.transform.forward * 3.0f;
+            clone.velocity = guard.getgenemyPos()/*.TransformDirection(guard.getgenemyPos().transform*/.forward * 40/*)*/;
+            clone.MoveRotation(guard.getgenemyPos().rotation);
 
-            //clone.velocity = guard.getgenemyPos().TransformDirection(guard.getgenemyPos().forward * 0);
-            //clone.MoveRotation(guard.getgenemyPos().rotation);
-
-            //timer_between_shots = 0;
+            timer_between_shots = 0;
         }
 
         //CONTANTLY SET DESTINATION AS PLAYER'S CURRENT POSITION

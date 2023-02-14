@@ -532,7 +532,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 3540391287371809819}
   pov: {fileID: 7497166902168839598}
   pov2: {fileID: 9057557556642972549}
-  projectile: {fileID: 4393858458788388990, guid: 74f259af7dcb130468df9bd12285dfa2,
+  projectile: {fileID: 578568151510016866, guid: a02a93585f7d4f7458dd5e3d5144691a,
     type: 3}
 --- !u!136 &3751484280772504296
 CapsuleCollider:

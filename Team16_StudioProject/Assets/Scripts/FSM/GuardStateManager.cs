@@ -60,9 +60,9 @@ public class GuardStateManager : MonoBehaviour
     void Update()
     {
 
-       // player = GameObject.Find("PlayerArmature");
+       player = GameObject.Find("PlayerArmature");
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
         enemyPos = GetComponent<Transform>();
 
         currentState.UpdateState(this);

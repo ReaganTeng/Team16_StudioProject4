@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class ProjectileScript : MonoBehaviour
+public class EnemyProjectile : MonoBehaviour
 {
 
     float time;
-    private GameObject enemies;
+    private GameObject players;
     private Vector3 pos;
 
 
@@ -24,7 +24,7 @@ public class ProjectileScript : MonoBehaviour
         time = 1.0f;
 
         // GameObjects that the projectile can collide with.
-        enemies = GameObject.Find("Enemies");
+        players = GameObject.Find("PlayerArmature");
     }
 
 
@@ -47,14 +47,15 @@ public class ProjectileScript : MonoBehaviour
     {
         foreach (ContactPoint contact in collision.contacts)
         {
-            foreach (Transform child in enemies.transform)
+            foreach (Transform child in players.transform)
             {
                 float distance = Vector3.Distance(child.position, pos);
                 if (distance < 1.3f)
                 {
                     // Destroy the enemy
-                    Destroy(child.gameObject);
-                    Destroy(gameObject);
+                    //Destroy(child.gameObject);
+                    //Destroy(gameObject);
+                    Debug.Log("YOURE SHOT");
 
                     break;
                 }

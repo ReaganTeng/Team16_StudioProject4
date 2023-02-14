@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 33472196568393678}
   - component: {fileID: 23288869359682376}
   - component: {fileID: 578568151510016866}
-  - component: {fileID: -9039844049623663265}
+  - component: {fileID: 1564977763226328588}
   - component: {fileID: 2771785037403067794}
   m_Layer: 0
-  m_Name: Pistol Bullet
+  m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-9039844049623663265
+--- !u!114 &1564977763226328588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,10 +111,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1404200745246544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f9f38ca732395747b26659989b39ca7, type: 3}
+  m_Script: {fileID: 11500000, guid: 60d97d07c95e06b4d9bbbe17b5f17b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: {fileID: 5075534488604402034, guid: abeb186619cc7e6419cb81e1e4dfa162, type: 3}
 --- !u!135 &2771785037403067794
 SphereCollider:
   m_ObjectHideFlags: 0
