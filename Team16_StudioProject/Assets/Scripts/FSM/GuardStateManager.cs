@@ -9,6 +9,7 @@ public class GuardStateManager : MonoBehaviour
     GuardStateBase currentState;
     public GuardPatrolState PatrolState = new GuardPatrolState();
     public GuardChaseState ChaseState = new GuardChaseState();
+    public GuardCoinState CoinState = new GuardCoinState();
     public GuardStationaryState StationState = new GuardStationaryState();
     public GuardSearchState SearchState = new GuardSearchState();
 
