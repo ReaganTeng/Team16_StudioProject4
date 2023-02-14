@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 116b5e34fbfd7d34e924cec77082c52f, type: 3}
-  m_Name: InventoryItem_Shiv
+  m_Script: {fileID: 11500000, guid: 09b6fd137a0c3e74e903c5ea85e77128, type: 3}
+  m_Name: First Aid Kit
   m_EditorClassIdentifier: 
-  id: 
-  displayName: 
-  icon: {fileID: 0}
-  prefab: {fileID: 0}
+  prefab: {fileID: 919132149155446097, guid: 31542600aa1926f4b864847996fc0896, type: 3}
+  type: 2
+  description: 
+  health: 20
+  ammoClip: 0

@@ -9,6 +9,7 @@ public class GuardStateManager : MonoBehaviour
     GuardStateBase currentState;
     public GuardPatrolState PatrolState = new GuardPatrolState();
     public GuardChaseState ChaseState = new GuardChaseState();
+    public GuardCoinState CoinState = new GuardCoinState();
     public GuardStationaryState StationState = new GuardStationaryState();
     public GuardSearchState SearchState = new GuardSearchState();
 
@@ -18,12 +19,15 @@ public class GuardStateManager : MonoBehaviour
     public Transform[] waypoints;
     public NavMeshAgent navMeshAgent;
     //
-    public GameObject pov;
-    public GameObject pov2;
+    private GameObject pov;
+    private GameObject pov2;
 
-    private GameObject[] LadderObjects;
     private GameObject player;
     Transform enemyPos;
+    public Rigidbody projectile;
+
+
+    private Observer[] childscript;
 
     void Awake()
     {
@@ -47,27 +51,33 @@ public class GuardStateManager : MonoBehaviour
 
         //Debug.Log("WAYPOINTS ARE: " + waypoints[0].position);
         currentState.EnterState(this, waypoints);
+         
 
-        LadderObjects = GameObject.FindGameObjectsWithTag("Ladder");
+        childscript = gameObject.GetComponentsInChildren<Observer>();
 
     }
 
 
-    void OnCollisionEnter(Collision collision)
+    
+    public bool returnObserver(int i)
     {
-        currentState.OnCollisionEnter(this, collision);
+        return childscript[i].getdetected();
     }
+
+
+
 
     // Update is called once per frame
     void Update()
     {
 
-        player = GameObject.Find("PlayerArmature");
+       player = GameObject.Find("PlayerArmature");
 
         //player = GameObject.FindGameObjectWithTag("Player");
         enemyPos = GetComponent<Transform>();
 
         currentState.UpdateState(this);
+
     }
 
     public void SwitchState(GuardStateBase state)
@@ -109,20 +119,5 @@ public class GuardStateManager : MonoBehaviour
     public GameObject getpov2()
     {
         return pov2;
-    }
-    void CheckForCollision()
-    {
-        foreach (GameObject ladder in LadderObjects)
-        {
-            float distance = Vector3.Distance(new Vector3(enemyPos.position.x, 0, enemyPos.position.z), new Vector3(ladder.transform.position.x, 0, ladder.transform.position.z));
-            if (distance < 1 && enemyPos.position.y < ladder.GetComponent<BoxCollider>().size.y + ladder.transform.position.y)
-            {
-                transform.Translate(Vector3.up * 10.0f * Time.deltaTime, Space.World);
-                //Debug.Log("Player Pos:" + transform.position.y);
-                //Debug.Log("Ladder Height:" + (ladder.GetComponent<BoxCollider>().size.y + ladder.transform.position.y));
-                //thirdPersonController.SetClimbing(true);
-            }
-
-        }
     }
 }

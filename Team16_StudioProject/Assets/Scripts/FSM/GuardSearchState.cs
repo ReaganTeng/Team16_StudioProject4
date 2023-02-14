@@ -23,9 +23,15 @@ public class GuardSearchState : GuardStateBase
     public override void UpdateState(GuardStateManager guard)
     {
         //if player and enemy diatance is within 5
-        if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
+        //if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
+        //{
+        for (int i = 0; i < 2; i++)
         {
-            guard.SwitchState(guard.ChaseState);
+            if (guard.returnObserver(i) == true
+                && (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance))
+            {
+                guard.SwitchState(guard.ChaseState);
+            }
         }
 
         if (guard.navMeshAgent.remainingDistance < guard.navMeshAgent.stoppingDistance)

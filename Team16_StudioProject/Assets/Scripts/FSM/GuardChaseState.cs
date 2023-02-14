@@ -5,6 +5,7 @@ public class GuardChaseState : GuardStateBase
 
     float distfromPlayer;
     float stoppingdistance;
+    float timer_between_shots;
 
 
     public override void EnterState(GuardStateManager guard, Transform[] wp)
@@ -32,6 +33,26 @@ public class GuardChaseState : GuardStateBase
         else if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > stoppingdistance)
         {
             guard.navMeshAgent.speed = 5.0f;
+        }
+
+
+        timer_between_shots += 1.0f * Time.deltaTime;
+
+
+        if (timer_between_shots >= 3.0f)
+        {
+            // Instantiate the projectile at the position and rotation of this transform
+            Rigidbody clone;
+            clone = GameObject.Instantiate(guard.projectile, guard.getgenemyPos().position, guard.getgenemyPos().rotation);
+            //pos = guard.getgenemyPos().position;
+
+            //clone.position = Camera.main.transform.position;
+            //clone.position += Vector3.up * 1.0f;
+            //clone.position += Camera.main.transform.forward * 3.0f;
+            clone.velocity = guard.getgenemyPos()/*.TransformDirection(guard.getgenemyPos().transform*/.forward * 40/*)*/;
+            clone.MoveRotation(guard.getgenemyPos().rotation);
+
+            timer_between_shots = 0;
         }
 
         //CONTANTLY SET DESTINATION AS PLAYER'S CURRENT POSITION
