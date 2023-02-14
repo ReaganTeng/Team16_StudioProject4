@@ -54,7 +54,7 @@ public class EnemyProjectile : MonoBehaviour
                 {
                     // Destroy the enemy
                     //Destroy(child.gameObject);
-                    //Destroy(gameObject);
+                    Destroy(gameObject);
                     Debug.Log("YOURE SHOT");
 
                     break;

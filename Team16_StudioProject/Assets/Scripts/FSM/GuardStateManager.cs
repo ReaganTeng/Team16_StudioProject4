@@ -19,12 +19,15 @@ public class GuardStateManager : MonoBehaviour
     public Transform[] waypoints;
     public NavMeshAgent navMeshAgent;
     //
-    public GameObject pov;
-    public GameObject pov2;
+    private GameObject pov;
+    private GameObject pov2;
 
     private GameObject player;
     Transform enemyPos;
     public Rigidbody projectile;
+
+
+    private Observer[] childscript;
 
     void Awake()
     {
@@ -48,13 +51,21 @@ public class GuardStateManager : MonoBehaviour
 
         //Debug.Log("WAYPOINTS ARE: " + waypoints[0].position);
         currentState.EnterState(this, waypoints);
+         
+
+        childscript = gameObject.GetComponentsInChildren<Observer>();
+
     }
 
 
-    void OnCollisionEnter(Collision collision)
+    
+    public bool returnObserver(int i)
     {
-        currentState.OnCollisionEnter(this, collision);
+        return childscript[i].getdetected();
     }
+
+
+
 
     // Update is called once per frame
     void Update()
@@ -66,6 +77,7 @@ public class GuardStateManager : MonoBehaviour
         enemyPos = GetComponent<Transform>();
 
         currentState.UpdateState(this);
+
     }
 
     public void SwitchState(GuardStateBase state)
