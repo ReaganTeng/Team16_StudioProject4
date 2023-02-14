@@ -59,14 +59,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.39382136, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 1d78ea13ed0615c4996735add71cbd43, type: 3}
+  m_Texture: {fileID: 2800000, guid: b8e78032f8af0954784d1fe9e5a09187, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -480,6 +480,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4070636864858343835, guid: 64dce48905ffd9b4293e595fa6941544,
         type: 3}
+      propertyPath: Ladder
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070636864858343835, guid: 64dce48905ffd9b4293e595fa6941544,
+        type: 3}
       propertyPath: aimSensitivity
       value: 0.1
       objectReference: {fileID: 0}
@@ -542,7 +547,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: field of view
-      value: 20
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -567,12 +572,12 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.695
+      value: 0.445
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
