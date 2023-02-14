@@ -4,20 +4,24 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
- 
     [SerializeField] private int health = 100;
     [SerializeField] public int ammoCount = 10;
     [SerializeField] private bool shootPistol = true;
- 
-    // Start is called before the first frame update
-    void Start()
+    public InventoryObject inventory;
+
+    public void OnTriggerEnter(Collider other)
     {
-        
+        Debug.Log("collided");
+        var item = other.GetComponent<Item>();
+        if (item)
+        {
+            inventory.AddItem(item.item, 1);
+            Destroy(other.gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnApplicationQuit()
     {
-        
+        inventory.Container.Clear();
     }
 }

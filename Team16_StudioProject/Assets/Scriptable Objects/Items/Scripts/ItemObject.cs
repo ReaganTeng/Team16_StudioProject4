@@ -6,6 +6,7 @@ public enum ItemType
 {
     Food,
     Equipment,
+    Collectible,
     Default
 }
 public abstract class ItemObject : ScriptableObject
