@@ -52,7 +52,7 @@ public class ProjectileScript : MonoBehaviour
             foreach (Transform child in enemies.transform)
             {
                 float distance = Vector3.Distance(child.position, pos);
-                if (distance < 1)
+                if (distance < 1.3f)
                 {
                     // Destroy the enemy
                     Destroy(child.gameObject);
