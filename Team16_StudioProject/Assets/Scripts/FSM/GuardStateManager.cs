@@ -19,7 +19,7 @@ public class GuardStateManager : MonoBehaviour
     public NavMeshAgent navMeshAgent;
     //
 
-    public GameObject player;
+    private GameObject player;
     Transform enemyPos;
 
     void Awake()
@@ -56,9 +56,8 @@ public class GuardStateManager : MonoBehaviour
     void Update()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
-
         enemyPos = GetComponent<Transform>();
+
         currentState.UpdateState(this);
     }
 
@@ -79,5 +78,10 @@ public class GuardStateManager : MonoBehaviour
     public Transform getgenemyPos()
     {
         return enemyPos;
+    }
+
+    public Transform getplayerPos()
+    {
+        return player.transform;
     }
 }
