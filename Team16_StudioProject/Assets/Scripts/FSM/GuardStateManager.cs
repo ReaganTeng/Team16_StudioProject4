@@ -21,6 +21,7 @@ public class GuardStateManager : MonoBehaviour
     public GameObject pov;
     public GameObject pov2;
 
+    private GameObject[] LadderObjects;
     private GameObject player;
     Transform enemyPos;
 
@@ -46,6 +47,9 @@ public class GuardStateManager : MonoBehaviour
 
         //Debug.Log("WAYPOINTS ARE: " + waypoints[0].position);
         currentState.EnterState(this, waypoints);
+
+        LadderObjects = GameObject.FindGameObjectsWithTag("Ladder");
+
     }
 
 
@@ -58,9 +62,9 @@ public class GuardStateManager : MonoBehaviour
     void Update()
     {
 
-       // player = GameObject.Find("PlayerArmature");
+        player = GameObject.Find("PlayerArmature");
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
         enemyPos = GetComponent<Transform>();
 
         currentState.UpdateState(this);
@@ -105,5 +109,20 @@ public class GuardStateManager : MonoBehaviour
     public GameObject getpov2()
     {
         return pov2;
+    }
+    void CheckForCollision()
+    {
+        foreach (GameObject ladder in LadderObjects)
+        {
+            float distance = Vector3.Distance(new Vector3(enemyPos.position.x, 0, enemyPos.position.z), new Vector3(ladder.transform.position.x, 0, ladder.transform.position.z));
+            if (distance < 1 && enemyPos.position.y < ladder.GetComponent<BoxCollider>().size.y + ladder.transform.position.y)
+            {
+                transform.Translate(Vector3.up * 10.0f * Time.deltaTime, Space.World);
+                //Debug.Log("Player Pos:" + transform.position.y);
+                //Debug.Log("Ladder Height:" + (ladder.GetComponent<BoxCollider>().size.y + ladder.transform.position.y));
+                //thirdPersonController.SetClimbing(true);
+            }
+
+        }
     }
 }

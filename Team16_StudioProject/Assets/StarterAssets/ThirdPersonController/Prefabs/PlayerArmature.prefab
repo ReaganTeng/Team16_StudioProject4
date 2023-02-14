@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 8002264680419333305}
   m_Layer: 0
   m_Name: Geometry
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1196,6 +1196,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimVirtualCamera: {fileID: 0}
+  normalSensitivity: 0
+  aimSensitivity: 0
+  aimColliderLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  debugTransform: {fileID: 0}
+  pos: {x: 0, y: 0, z: 0}
 --- !u!114 &4416926081852918493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1566,7 +1573,7 @@ GameObject:
   - component: {fileID: 272993188807782130}
   m_Layer: 0
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

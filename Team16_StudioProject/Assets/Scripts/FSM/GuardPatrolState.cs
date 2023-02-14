@@ -48,8 +48,6 @@ public class GuardPatrolState : GuardStateBase
 
     public override void UpdateState(GuardStateManager guard)
     {
-
-
         //if player and enemy distance is within 5, and there's no obstacle along the way according to raycast
         if (
             (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)

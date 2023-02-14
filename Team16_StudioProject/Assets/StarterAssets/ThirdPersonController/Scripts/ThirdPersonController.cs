@@ -294,6 +294,7 @@ namespace StarterAssets
                 {
                     _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
                                         new Vector3(0.0f, 2.0f, 0.0f) * Time.deltaTime);
+                    
                 }
                 else
                 {
