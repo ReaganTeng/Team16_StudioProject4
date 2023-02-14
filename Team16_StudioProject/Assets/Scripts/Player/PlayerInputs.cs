@@ -17,7 +17,7 @@ public class PlayerInputs : MonoBehaviour
     void Awake()
     {
         player = GameObject.Find("Player Character");
-        enemies = GameObject.Find("TestObjects");
+        enemies = GameObject.Find("Enemies");
         playerStats = GetComponent<PlayerStats>();
        //thirdPersonController = GetComponent<ThirdPersonController>();
 

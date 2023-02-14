@@ -60,7 +60,7 @@ public class GuardStateManager : MonoBehaviour
         //Debug.Log("POV " + pov.position);
         //Debug.Log("POV2 " + pov2.position);
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.Find("PlayerArmature");
         enemyPos = GetComponent<Transform>();
 
         currentState.UpdateState(this);
