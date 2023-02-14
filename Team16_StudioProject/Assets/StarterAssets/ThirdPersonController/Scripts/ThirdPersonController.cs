@@ -108,6 +108,8 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
         private bool rotateOnMove = true;
+        private bool Climbing = false;
+        private bool movement = false;
 
         private const float _threshold = 0.01f;
 
@@ -162,6 +164,7 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+            
         }
 
         private void LateUpdate()
@@ -223,11 +226,18 @@ namespace StarterAssets
 
             // note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is no input, set the target speed to 0
-            if (_input.move == Vector2.zero) targetSpeed = 0.0f;
+            if (_input.move == Vector2.zero)
+            {
+                movement = false;
+                targetSpeed = 0.0f;
+            }
+            else
+            {
+                movement = true;
+            }
 
             // a reference to the players current horizontal velocity
-            float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-
+            float currentHorizontalSpeed = currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;;
             float speedOffset = 0.1f;
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
@@ -272,11 +282,28 @@ namespace StarterAssets
 
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            if (!Climbing)
+            {
+                _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                                    new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            }
+            else
+            {
+                if (movement)
+                {
+                    _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                                        new Vector3(0.0f, 2.0f, 0.0f) * Time.deltaTime);
+                }
+                else
+                {
+                    _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                                        new Vector3(0.0f, -2.0f, 0.0f) * Time.deltaTime);
+                }
+            }
+            
 
+            
             // update animator if using character
             if (_hasAnimator)
             {
@@ -284,7 +311,6 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
         }
-
         private void JumpAndGravity()
         {
             if (Grounded)
@@ -381,6 +407,18 @@ namespace StarterAssets
         public void SetRotateOnMove(bool newRotateOnMove)
         {
             rotateOnMove = newRotateOnMove;
+        }
+        public void SetVerticalHeight(float newHeight)
+        {
+            _verticalVelocity = newHeight;
+        }
+        public void SetClimbing(bool isClimbing)
+        {
+            Climbing = isClimbing;
+        }
+        public bool GetMovement()
+        {
+            return movement;
         }
 
         private void OnFootstep(AnimationEvent animationEvent)
