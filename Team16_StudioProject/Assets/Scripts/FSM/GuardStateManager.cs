@@ -24,6 +24,7 @@ public class GuardStateManager : MonoBehaviour
 
     private GameObject player;
     Transform enemyPos;
+    public Rigidbody projectile;
 
     void Awake()
     {

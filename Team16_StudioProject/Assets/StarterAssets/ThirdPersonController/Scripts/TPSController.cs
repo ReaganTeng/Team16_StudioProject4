@@ -12,6 +12,7 @@ public class TPSController : MonoBehaviour
     [SerializeField] private float aimSensitivity;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform debugTransform;
+    private GameObject[] LadderObjects;
 
     public Vector3 pos;
 
@@ -22,11 +23,13 @@ public class TPSController : MonoBehaviour
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInput = GetComponent<StarterAssetsInputs>();
+        LadderObjects = GameObject.FindGameObjectsWithTag("Ladder");
     }
 
     // Update is called once per frame
     private void Update()
     {
+        //Debug.Log(transform.position.x + "," + transform.position.y + "," + transform.position.z);
         Vector3 mouseWorldPosition = Vector3.zero;
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
@@ -57,7 +60,25 @@ public class TPSController : MonoBehaviour
 
             // Debug.Log("CLOWN");
         }
-
+        CheckForCollision();
        
+    }
+    void CheckForCollision()
+    {
+        foreach (GameObject ladder in LadderObjects)
+        {
+            float distance = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(ladder.transform.position.x, 0, ladder.transform.position.z));
+            if (distance < 1 && transform.position.y < ladder.GetComponent<BoxCollider>().size.y + ladder.transform.position.y)
+            {
+                Debug.Log("Player Pos:" + transform.position.y);
+                Debug.Log("Ladder Height:" + (ladder.GetComponent<BoxCollider>().size.y + ladder.transform.position.y));
+                thirdPersonController.SetClimbing(true);
+            }
+            else
+            {
+                thirdPersonController.SetClimbing(false);
+            }
+
+        }
     }
 }
