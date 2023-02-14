@@ -9,7 +9,7 @@ public class ProjectileScript : MonoBehaviour
     float time;
     public GameObject enemies;
     private Vector3 pos;
-    private Rigidbody rb;
+
 
     // Start is called before the first frame update
 
@@ -25,6 +25,7 @@ public class ProjectileScript : MonoBehaviour
 
         // GameObjects that the projectile can collide with.
         enemies = GameObject.Find("TestObjects");
+
 
     }
 
