@@ -1,8 +1,8 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GuardSearchState : GuardStateBase
 {
-    float timer;
     private Transform[] wayp;
     int m_CurrentWaypointIndex;
     float detectiondistance;
@@ -10,7 +10,6 @@ public class GuardSearchState : GuardStateBase
     public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
         Debug.Log("SEARCH STATE");
-        timer = 0;
 
         //wayp[0].position = guard.waypoints[0].position;
         //wayp[1].position = guard.waypoints[1].position;
@@ -24,7 +23,7 @@ public class GuardSearchState : GuardStateBase
     public override void UpdateState(GuardStateManager guard)
     {
         //if player and enemy diatance is within 5
-        if (Vector3.Distance(guard.player.transform.position, guard.getgenemyPos().position) < detectiondistance)
+        if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
         {
             guard.SwitchState(guard.ChaseState);
         }

@@ -10,6 +10,29 @@ public class GuardPatrolState : GuardStateBase
     int m_CurrentWaypointIndex;
     float detectiondistance;
 
+    RaycastHit raycastHit;
+    RaycastHit raycastHit_2;
+
+    bool playerdetected = false;
+
+    void OnTriggerEnter(GuardStateManager guard)
+    {
+        if (guard.pov.transform.GetComponent<Collider>() == guard.getplayer()
+            || guard.pov2.transform.GetComponent<Collider>() == guard.getplayer())
+        {
+            playerdetected = true;
+        }
+    }
+
+    void OnTriggerExit(GuardStateManager guard)
+    {
+        if (guard.pov.transform.GetComponent<Collider>() == guard.getplayer()
+            || guard.pov2.transform.GetComponent<Collider>() == guard.getplayer())
+        {
+            playerdetected = false;
+        }
+    }
+
     public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
         Debug.Log("PATROL STATE");
@@ -21,19 +44,40 @@ public class GuardPatrolState : GuardStateBase
         //set first destination
         guard.navMeshAgent.SetDestination(guard.waypoints[0].position);
         detectiondistance = 5.0f;
-
     }
 
     public override void UpdateState(GuardStateManager guard)
     {
-        //if player and enemy diatance is within 5
-        if (Vector3.Distance(guard.player.transform.position, guard.getgenemyPos().position) < detectiondistance)
+
+
+        //if player and enemy distance is within 5, and there's no obstacle along the way according to raycast
+        if (
+            (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
+            )
         {
+            //if ((Physics.Raycast(ray_2, out raycastHit_2) && raycastHit_2.collider.transform == guard.getplayer())
+            //|| (Physics.Raycast(ray, out raycastHit) && raycastHit.collider.transform == guard.getplayer()))
+            //{
             guard.SwitchState(guard.ChaseState);
+            //}
         }
 
-        Debug.Log("DISTANCE POSITION " + Vector3.Distance(guard.getgenemyPos().position, guard.player.transform.position));
 
+        //if (playerdetected == true)
+        //{
+
+        //    Vector3 direction = guard.getplayerPos().position - guard.pov.transform.position + Vector3.up;
+        //    Ray ray = new Ray(guard.pov.transform.position, direction);
+
+        //    Vector3 direction_2 = guard.getplayerPos().position - guard.pov2.transform.position + Vector3.up;
+        //    Ray ray_2 = new Ray(guard.pov2.transform.position, direction_2);
+
+        //    if ((Physics.Raycast(ray_2, out raycastHit_2) && raycastHit_2.collider.transform == guard.getplayer())
+        //        || (Physics.Raycast(ray, out raycastHit) && raycastHit.collider.transform == guard.getplayer()))
+        //    {
+        //        Debug.Log("PLAYER DETECTED");
+        //    }
+        //}
 
         if (guard.navMeshAgent.remainingDistance < guard.navMeshAgent.stoppingDistance)
         {

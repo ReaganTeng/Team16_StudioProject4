@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 
 
@@ -8,19 +9,24 @@ public class PlayerInputs : MonoBehaviour
 {
     public Rigidbody projectile;
     private GameObject player;
+    private GameObject enemies;
     private Vector3 pos;
     private PlayerStats playerStats;
-
+    public TPSController thirdPersonController;
 
     void Awake()
     {
-        player = GameObject.Find("NestedParentArmature_Unpack");
+        player = GameObject.Find("Player Character");
+        enemies = GameObject.Find("Enemies");
         playerStats = GetComponent<PlayerStats>();
+       //thirdPersonController = GetComponent<ThirdPersonController>();
 
     }
 
     void Update()
     {
+                //thirdPersonController = GetComponent<TPSController>();
+        pos = thirdPersonController.pos;
         // Left click to shoot projectile
         if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0)
         {
@@ -33,8 +39,24 @@ public class PlayerInputs : MonoBehaviour
             //clone.position += Vector3.up * 1.0f;
             clone.position += Camera.main.transform.forward * 3.0f;
             clone.velocity = transform.TransformDirection(Camera.main.transform.forward * 40);
+            clone.MoveRotation(Camera.main.transform.rotation);
 
             playerStats.ammoCount--;
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+
+            foreach (Transform child in enemies.transform)
+            {
+                float distance = Vector3.Distance(child.position, pos);
+                if (distance < 1.5f)
+                {
+                    // Destroy the enemy
+                    Destroy(child.gameObject);
+                    break;
+                }
+            }
         }
 
     }

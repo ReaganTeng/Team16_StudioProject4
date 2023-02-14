@@ -19,23 +19,23 @@ public class GuardChaseState : GuardStateBase
     public override void UpdateState(GuardStateManager guard)
     {
         //if player and enemy distance is more than distance
-        if (Vector3.Distance(guard.player.transform.position, guard.getgenemyPos().position) > distfromPlayer)
+        if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > distfromPlayer)
         {
             guard.SwitchState(guard.SearchState);
         }
 
         //STOPPING DISTANCE
-       if (Vector3.Distance(guard.player.transform.position, guard.getgenemyPos().position) <= stoppingdistance)
+       if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) <= stoppingdistance)
         {
             guard.navMeshAgent.speed = 0.0f;
         }
-        else if (Vector3.Distance(guard.player.transform.position, guard.getgenemyPos().position) > stoppingdistance)
+        else if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > stoppingdistance)
         {
             guard.navMeshAgent.speed = 5.0f;
         }
 
         //CONTANTLY SET DESTINATION AS PLAYER'S CURRENT POSITION
-        guard.navMeshAgent.SetDestination(guard.player.transform.position);
+        guard.navMeshAgent.SetDestination(guard.getplayerPos().position);
     }
 
     public override void OnCollisionEnter(GuardStateManager guard, Collision collision)

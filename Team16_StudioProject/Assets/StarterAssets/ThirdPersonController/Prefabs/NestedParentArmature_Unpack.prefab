@@ -309,8 +309,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c228fcf8f0594324ba98f15004aa160d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 4393858458788388990, guid: 74f259af7dcb130468df9bd12285dfa2,
+  projectile: {fileID: 578568151510016866, guid: b231cb3d556515e4e9ed9a17fc6ebbff,
     type: 3}
+  thirdPersonController: {fileID: 974238578668270715}
 --- !u!114 &1297157364892201812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,6 +532,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3515378426657685153}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &974238578668270715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544,
+    type: 3}
+  m_PrefabInstance: {fileID: 3515378426657685153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26e54e5a728a9234ab24fcf1460ed8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4860276692040879404 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8338988566280778637, guid: 64dce48905ffd9b4293e595fa6941544,

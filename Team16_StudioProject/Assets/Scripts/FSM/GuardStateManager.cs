@@ -18,8 +18,10 @@ public class GuardStateManager : MonoBehaviour
     public Transform[] waypoints;
     public NavMeshAgent navMeshAgent;
     //
+    public GameObject pov;
+    public GameObject pov2;
 
-    public GameObject player;
+    private GameObject player;
     Transform enemyPos;
 
     void Awake()
@@ -55,10 +57,12 @@ public class GuardStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+       // player = GameObject.Find("PlayerArmature");
+
         player = GameObject.FindGameObjectWithTag("Player");
-
-
         enemyPos = GetComponent<Transform>();
+
         currentState.UpdateState(this);
     }
 
@@ -79,5 +83,27 @@ public class GuardStateManager : MonoBehaviour
     public Transform getgenemyPos()
     {
         return enemyPos;
+    }
+
+    public Transform getplayerPos()
+    {
+        return player.transform;
+    }
+
+    public GameObject getplayer()
+    {
+        return player;
+    }
+
+
+    public GameObject getpov1()
+    {
+        return pov;
+    }
+
+
+    public GameObject getpov2()
+    {
+        return pov2;
     }
 }
