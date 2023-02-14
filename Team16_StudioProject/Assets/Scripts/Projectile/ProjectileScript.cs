@@ -24,7 +24,7 @@ public class ProjectileScript : MonoBehaviour
         time = 1.0f;
 
         // GameObjects that the projectile can collide with.
-        enemies = GameObject.Find("TestObjects");
+        enemies = GameObject.Find("Enemies");
 
 
     }
@@ -61,8 +61,6 @@ public class ProjectileScript : MonoBehaviour
                     break;
                 }
             }
-
-
 
         }
         

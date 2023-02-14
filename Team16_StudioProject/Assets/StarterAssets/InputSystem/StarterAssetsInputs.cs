@@ -49,6 +49,7 @@ namespace StarterAssets
 		{
 			AimInput(value.isPressed);
 		}
+
 #endif
 
 

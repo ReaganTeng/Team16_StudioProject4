@@ -469,7 +469,7 @@ GameObject:
   - component: {fileID: 3540391287371809819}
   - component: {fileID: 6986812540457888193}
   m_Layer: 0
-  m_Name: Ghost
+  m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -530,8 +530,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   navMeshAgent: {fileID: 3540391287371809819}
-  pov: {fileID: 7547267221297624078}
-  pov2: {fileID: 9008578610460496421}
+  pov: {fileID: 7497166902168839598}
+  pov2: {fileID: 9057557556642972549}
+  projectile: {fileID: 4393858458788388990, guid: 74f259af7dcb130468df9bd12285dfa2,
+    type: 3}
 --- !u!136 &3751484280772504296
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1044,6 +1046,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a6f7024e2eb90140bdf570ef653bac8, type: 3}
+--- !u!1 &7497166902168839598 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4903280789943914309, guid: 8a6f7024e2eb90140bdf570ef653bac8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3170739150400547563}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7547267221297624078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4953394414445174501, guid: 8a6f7024e2eb90140bdf570ef653bac8,
@@ -1142,6 +1150,12 @@ PrefabInstance:
 --- !u!4 &9008578610460496421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4953394414445174501, guid: 8a6f7024e2eb90140bdf570ef653bac8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4159385956933602496}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9057557556642972549 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4903280789943914309, guid: 8a6f7024e2eb90140bdf570ef653bac8,
     type: 3}
   m_PrefabInstance: {fileID: 4159385956933602496}
   m_PrefabAsset: {fileID: 0}

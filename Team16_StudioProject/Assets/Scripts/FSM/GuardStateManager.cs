@@ -9,6 +9,7 @@ public class GuardStateManager : MonoBehaviour
     GuardStateBase currentState;
     public GuardPatrolState PatrolState = new GuardPatrolState();
     public GuardChaseState ChaseState = new GuardChaseState();
+    public GuardCoinState CoinState = new GuardCoinState();
     public GuardStationaryState StationState = new GuardStationaryState();
     public GuardSearchState SearchState = new GuardSearchState();
 
@@ -18,11 +19,12 @@ public class GuardStateManager : MonoBehaviour
     public Transform[] waypoints;
     public NavMeshAgent navMeshAgent;
     //
-    public Transform pov;
-    public Transform pov2;
+    public GameObject pov;
+    public GameObject pov2;
 
     private GameObject player;
     Transform enemyPos;
+    public Rigidbody projectile;
 
     void Awake()
     {
@@ -57,8 +59,8 @@ public class GuardStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("POV " + pov.position);
-        //Debug.Log("POV2 " + pov2.position);
+
+       // player = GameObject.Find("PlayerArmature");
 
         player = GameObject.FindGameObjectWithTag("Player");
         enemyPos = GetComponent<Transform>();
@@ -93,5 +95,17 @@ public class GuardStateManager : MonoBehaviour
     public GameObject getplayer()
     {
         return player;
+    }
+
+
+    public GameObject getpov1()
+    {
+        return pov;
+    }
+
+
+    public GameObject getpov2()
+    {
+        return pov2;
     }
 }
