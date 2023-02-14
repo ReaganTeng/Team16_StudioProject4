@@ -10,6 +10,10 @@ public class GuardPatrolState : GuardStateBase
     int m_CurrentWaypointIndex;
     float detectiondistance;
 
+    RaycastHit raycastHit;
+    RaycastHit raycastHit_2;
+
+
     public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
         Debug.Log("PATROL STATE");
@@ -21,19 +25,34 @@ public class GuardPatrolState : GuardStateBase
         //set first destination
         guard.navMeshAgent.SetDestination(guard.waypoints[0].position);
         detectiondistance = 5.0f;
-
     }
 
     public override void UpdateState(GuardStateManager guard)
     {
-        //if player and enemy diatance is within 5
-        if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
+        Vector3 direction = guard.getplayerPos().position - guard.pov.position + Vector3.up ;
+        Ray ray = new Ray(guard.pov.position, direction);
+
+        Vector3 direction_2 = guard.getplayerPos().position - guard.pov2.position + Vector3.up;
+        Ray ray_2 = new Ray(guard.pov2.position, direction_2);
+
+        //if player and enemy distance is within 5, and there's no obstacle along the way according to raycast
+       /* if (
+            (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
+            )
         {
-            guard.SwitchState(guard.ChaseState);
+            //if ((Physics.Raycast(ray_2, out raycastHit_2) && raycastHit_2.collider.transform == guard.getplayer())
+            //|| (Physics.Raycast(ray, out raycastHit) && raycastHit.collider.transform == guard.getplayer()))
+            //{
+              guard.SwitchState(guard.ChaseState);
+            //}
+        }*/
+        if ((Physics.Raycast(ray_2, out raycastHit_2) && raycastHit_2.collider.transform == guard.getplayer())
+               || (Physics.Raycast(ray, out raycastHit) && raycastHit.collider.transform == guard.getplayer()))
+        {
+            Debug.Log("PLAYER DETECTED");
         }
 
-
-        if (guard.navMeshAgent.remainingDistance < guard.navMeshAgent.stoppingDistance)
+            if (guard.navMeshAgent.remainingDistance < guard.navMeshAgent.stoppingDistance)
         {
             m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % guard.waypoints.Length;
             guard.navMeshAgent.SetDestination(guard.waypoints[m_CurrentWaypointIndex].position);

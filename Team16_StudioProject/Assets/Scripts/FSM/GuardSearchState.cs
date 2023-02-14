@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class GuardSearchState : GuardStateBase
 {
-    float timer;
     private Transform[] wayp;
     int m_CurrentWaypointIndex;
     float detectiondistance;
@@ -11,7 +10,6 @@ public class GuardSearchState : GuardStateBase
     public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
         Debug.Log("SEARCH STATE");
-        timer = 0;
 
         //wayp[0].position = guard.waypoints[0].position;
         //wayp[1].position = guard.waypoints[1].position;
