@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 
 
@@ -10,12 +11,13 @@ public class PlayerInputs : MonoBehaviour
     private GameObject player;
     private Vector3 pos;
     private PlayerStats playerStats;
-
+    private ThirdPersonController thirdPersonController;
 
     void Awake()
     {
         player = GameObject.Find("NestedParentArmature_Unpack");
         playerStats = GetComponent<PlayerStats>();
+        thirdPersonController = GetComponent<ThirdPersonController>();
 
     }
 
@@ -33,6 +35,7 @@ public class PlayerInputs : MonoBehaviour
             //clone.position += Vector3.up * 1.0f;
             clone.position += Camera.main.transform.forward * 3.0f;
             clone.velocity = transform.TransformDirection(Camera.main.transform.forward * 40);
+            clone.MoveRotation(Camera.main.transform.rotation);
 
             playerStats.ammoCount--;
         }
