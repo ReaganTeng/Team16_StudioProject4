@@ -267,7 +267,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2119775930974504096}
   - component: {fileID: 3619616415269850521}
-  - component: {fileID: 1297157364892201812}
   m_Layer: 0
   m_Name: NestedParentArmature_Unpack
   m_TagString: Player
@@ -311,22 +310,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 578568151510016866, guid: b231cb3d556515e4e9ed9a17fc6ebbff,
     type: 3}
+  coin: {fileID: 0}
   thirdPersonController: {fileID: 0}
---- !u!114 &1297157364892201812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8047161636021232021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d596ad2fccf43a3479f58e2762f4ab53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  ammoCount: 10
-  shootPistol: 1
 --- !u!1001 &3515378425540693942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -532,6 +517,28 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 3515378426657685153}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &974238578668270704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4416926081852918481, guid: 64dce48905ffd9b4293e595fa6941544,
+    type: 3}
+  m_PrefabInstance: {fileID: 3515378426657685153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8204228081595297737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974238578668270704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d596ad2fccf43a3479f58e2762f4ab53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  ammoCount: 10
+  shootPistol: 1
+  inventory: {fileID: 11400000, guid: fe7c0117d9f49b247b262d31b99e1bf4, type: 2}
 --- !u!4 &4860276692040879404 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8338988566280778637, guid: 64dce48905ffd9b4293e595fa6941544,
@@ -548,7 +555,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: field of view
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
@@ -573,12 +580,12 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.445
+      value: 0.695
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
