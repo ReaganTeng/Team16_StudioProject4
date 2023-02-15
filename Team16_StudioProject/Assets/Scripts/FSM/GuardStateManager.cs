@@ -12,6 +12,7 @@ public class GuardStateManager : MonoBehaviour
     public GuardCoinState CoinState = new GuardCoinState();
     public GuardStationaryState StationState = new GuardStationaryState();
     public GuardSearchState SearchState = new GuardSearchState();
+    public GuardAlarmedState AlarmedState = new GuardAlarmedState();
 
 
     //REINITIALISE VALUE
@@ -46,7 +47,7 @@ public class GuardStateManager : MonoBehaviour
     void Start()
     {
         //WHEN GUARD IS FIRST INSTANTIATED, MAKE IT PATROL
-        currentState = PatrolState;
+        currentState = SearchState;
         //
 
         //Debug.Log("WAYPOINTS ARE: " + waypoints[0].position);

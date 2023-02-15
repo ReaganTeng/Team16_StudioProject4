@@ -24,4 +24,8 @@ public class PlayerStats : MonoBehaviour
     {
         inventory.Container.Clear();
     }
+    public int GetHealth()
+    {
+        return health;
+    }
 }

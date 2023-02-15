@@ -35,11 +35,13 @@ public class TPSController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
         pos = thirdPersonController.transform.position;
+        // DO NOT UNCOMMENT THIS CODE
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
         {
             //debugTransform.position = raycastHit.point;
             mouseWorldPosition = raycastHit.point;
         }
+        ////////////////////////////////////////////////////////////////////////////////////
         if (starterAssetsInput.aim)
         {
             aimVirtualCamera.gameObject.SetActive(true);

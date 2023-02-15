@@ -6,6 +6,7 @@ public class GuardSearchState : GuardStateBase
     private Transform[] wayp;
     int m_CurrentWaypointIndex;
     float detectiondistance;
+    int numberOfWaypoints;
 
     public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
@@ -18,6 +19,8 @@ public class GuardSearchState : GuardStateBase
         guard.navMeshAgent.SetDestination(guard.waypoints[0].position);
         guard.navMeshAgent.speed = 5.0f;
         detectiondistance = 5.0f;
+        numberOfWaypoints = wp.Length;
+        Debug.Log(numberOfWaypoints);
     }
 
     public override void UpdateState(GuardStateManager guard)
@@ -25,7 +28,7 @@ public class GuardSearchState : GuardStateBase
         //if player and enemy diatance is within 5
         //if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
         //{
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < numberOfWaypoints; i++)
         {
             if (guard.returnObserver(i) == true
                 && (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance))

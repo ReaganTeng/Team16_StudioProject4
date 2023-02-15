@@ -6,7 +6,9 @@ public class GuardChaseState : GuardStateBase
     float distfromPlayer;
     float stoppingdistance;
     float timer_between_shots;
-
+    private float gracePeriod = 5.0f; // Time before all guards within a specific radius will enter chase state
+    PlayerStats pStats;
+    AlarmEvent alarm;
 
     public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
@@ -19,6 +21,24 @@ public class GuardChaseState : GuardStateBase
 
     public override void UpdateState(GuardStateManager guard)
     {
+        if (gracePeriod > 0.0f)
+        {
+            gracePeriod -= Time.deltaTime;
+        }
+        else
+        {
+            Debug.Log("ALARM");
+            EventManager.AlarmEvent.StartAlarm();
+            //if (pStats.GetHealth() > 0)
+            //{
+            //    Debug.Log("L");
+            //    return;
+            //}
+            // Grace Period is over call the alarm event
+           // alarm.Alarmed = true;
+
+        }
+
         //if player and enemy distance is more than distance
         if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > distfromPlayer)
         {
