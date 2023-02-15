@@ -20,7 +20,7 @@ public class GuardSearchState : GuardStateBase
         guard.navMeshAgent.speed = 5.0f;
         detectiondistance = 5.0f;
         numberOfWaypoints = wp.Length;
-        Debug.Log(numberOfWaypoints);
+        //Debug.Log(numberOfWaypoints);
     }
 
     public override void UpdateState(GuardStateManager guard)

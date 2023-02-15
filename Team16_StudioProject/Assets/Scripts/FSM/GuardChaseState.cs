@@ -8,7 +8,6 @@ public class GuardChaseState : GuardStateBase
     float timer_between_shots;
     private float gracePeriod = 5.0f; // Time before all guards within a specific radius will enter chase state
     PlayerStats pStats;
-    AlarmEvent alarm;
 
     public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
@@ -27,15 +26,19 @@ public class GuardChaseState : GuardStateBase
         }
         else
         {
-            Debug.Log("ALARM");
-            EventManager.AlarmEvent.StartAlarm();
+            //Debug.Log("ALARM");
+            if (EventManager.Event.GetActiveBool() == false)
+            {
+                EventManager.Event.StartAlarm();
+                EventManager.Event.CheckForEnemies();
+            }
             //if (pStats.GetHealth() > 0)
             //{
             //    Debug.Log("L");
             //    return;
             //}
             // Grace Period is over call the alarm event
-           // alarm.Alarmed = true;
+            // alarm.Alarmed = true;
 
         }
 

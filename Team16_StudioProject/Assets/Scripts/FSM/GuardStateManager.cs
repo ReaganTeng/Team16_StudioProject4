@@ -6,18 +6,19 @@ using UnityEngine;
 
 public class GuardStateManager : MonoBehaviour
 {
-    GuardStateBase currentState;
+    public GuardStateBase currentState;
     public GuardPatrolState PatrolState = new GuardPatrolState();
     public GuardChaseState ChaseState = new GuardChaseState();
     public GuardCoinState CoinState = new GuardCoinState();
     public GuardStationaryState StationState = new GuardStationaryState();
     public GuardSearchState SearchState = new GuardSearchState();
-    public GuardAlarmedState AlarmedState = new GuardAlarmedState();
+    public GuardSecurityState SecurityState = new GuardSecurityState();
 
 
     //REINITIALISE VALUE
     //FOR GUARDPATROLSTATE
     public Transform[] waypoints;
+    public Vector3 targetPosition;
     public NavMeshAgent navMeshAgent;
     //
     private GameObject pov;
@@ -27,8 +28,11 @@ public class GuardStateManager : MonoBehaviour
     Transform enemyPos;
     public Rigidbody projectile;
 
+    public string curstate;
 
     private Observer[] childscript;
+
+
 
     void Awake()
     {
@@ -47,19 +51,29 @@ public class GuardStateManager : MonoBehaviour
     void Start()
     {
         //WHEN GUARD IS FIRST INSTANTIATED, MAKE IT PATROL
-        currentState = SearchState;
+        currentState = PatrolState;
+        if (curstate == "Station")
+        {
+            currentState = StationState;
+        }
+        else/* if (curstate == "Station")*/
+        {
+            currentState = PatrolState;
+        }
         //
+
+
 
         //Debug.Log("WAYPOINTS ARE: " + waypoints[0].position);
         currentState.EnterState(this, waypoints);
-         
+
 
         childscript = gameObject.GetComponentsInChildren<Observer>();
 
     }
 
 
-    
+
     public bool returnObserver(int i)
     {
         return childscript[i].getdetected();
@@ -72,7 +86,7 @@ public class GuardStateManager : MonoBehaviour
     void Update()
     {
 
-       player = GameObject.Find("PlayerArmature");
+        player = GameObject.Find("PlayerArmature");
 
         //player = GameObject.FindGameObjectWithTag("Player");
         enemyPos = GetComponent<Transform>();
@@ -94,6 +108,12 @@ public class GuardStateManager : MonoBehaviour
         state.EnterState(this, waypoints);
     }
 
+
+
+    public Vector3 gettargetpos()
+    {
+        return targetPosition;
+    }
 
     public Transform getgenemyPos()
     {

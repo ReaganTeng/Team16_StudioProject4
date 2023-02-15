@@ -5,19 +5,23 @@ using System;
 
 public class EventManager : MonoBehaviour
 {
-    public static EventManager AlarmEvent;
+    public static EventManager Event;
 
     public event Action SetOffAlarm;
-    public event Action Check;
+    public event Action NoEnemiesNearBy;
+    public bool isActive = false;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        if (AlarmEvent == null)
+        if (Event == null)
         {
-            AlarmEvent = this;
+            Event = this;
         }
         else
+        {
             Destroy(gameObject);
+        }
 
 
         DontDestroyOnLoad(gameObject);
@@ -34,6 +38,14 @@ public class EventManager : MonoBehaviour
     }
     public void CheckForEnemies()
     {
-        Check?.Invoke();
+        NoEnemiesNearBy?.Invoke();
+    }
+    public bool GetActiveBool()
+    {
+        return isActive;
+    }
+    public void SetActiveBool(bool boolean)
+    {
+        isActive = boolean;
     }
 }

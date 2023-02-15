@@ -26,7 +26,7 @@ public class EnemyProjectile : MonoBehaviour
 
         // GameObjects that the projectile can collide with.
         players = GameObject.Find("PlayerArmature");
-        playerStats = GameObject.Find("Player Character");
+        //playerStats = GameObject.Find("Player Character");
     }
 
 
@@ -57,9 +57,9 @@ public class EnemyProjectile : MonoBehaviour
                     // Destroy the enemy
                     //Destroy(child.gameObject);
                     Destroy(gameObject);
-                    playerStats.GetComponent<PlayerStats>().health -= 10;
+                    players.GetComponent<PlayerStats>().health -= 10;
 
-                    Debug.Log(playerStats.GetComponent<PlayerStats>().health);
+                    Debug.Log(players.GetComponent<PlayerStats>().health);
 
                     break;
                 }
