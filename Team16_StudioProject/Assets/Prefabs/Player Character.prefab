@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 1402610105811064357}
   - component: {fileID: 4334313854008844060}
   - component: {fileID: 2025928582600794577}
+  - component: {fileID: 3507535882080294255}
   m_Layer: 0
   m_Name: Player Character
   m_TagString: Player
@@ -328,7 +329,20 @@ MonoBehaviour:
   health: 100
   ammoCount: 10
   shootPistol: 1
+  equippedWeapon: 0
   inventory: {fileID: 0}
+--- !u!114 &3507535882080294255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7039306883754570512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f0fcaf6ed0390e4a9eb9b2c833cc83a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4527459588409519140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -575,7 +589,7 @@ PrefabInstance:
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.525
+      value: 0.69500005
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
