@@ -20,14 +20,14 @@ public class PlayerInputs : MonoBehaviour
         player = GameObject.Find("Player Character");
         enemies = GameObject.Find("Enemies");
         playerStats = GetComponent<PlayerStats>();
-       //thirdPersonController = GetComponent<ThirdPersonController>();
+            //thirdPersonController = GetComponent<ThirdPersonController>();
 
     }
 
     void Update()
     {
                 //thirdPersonController = GetComponent<TPSController>();
-        pos = thirdPersonController.pos;
+       // pos = thirdPersonController.pos;
         // Left click to shoot projectile
         if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0)
         {

@@ -6,17 +6,19 @@ using UnityEngine;
 
 public class GuardStateManager : MonoBehaviour
 {
-    GuardStateBase currentState;
+    public GuardStateBase currentState;
     public GuardPatrolState PatrolState = new GuardPatrolState();
     public GuardChaseState ChaseState = new GuardChaseState();
     public GuardCoinState CoinState = new GuardCoinState();
     public GuardStationaryState StationState = new GuardStationaryState();
     public GuardSearchState SearchState = new GuardSearchState();
+    public GuardSecurityState SecurityState = new GuardSecurityState();
 
 
     //REINITIALISE VALUE
     //FOR GUARDPATROLSTATE
     public Transform[] waypoints;
+    public Vector3 targetPosition;
     public NavMeshAgent navMeshAgent;
     //
     private GameObject pov;
@@ -93,6 +95,12 @@ public class GuardStateManager : MonoBehaviour
         state.EnterState(this, waypoints);
     }
 
+
+
+    public Vector3 gettargetpos()
+    {
+        return targetPosition;
+    }
 
     public Transform getgenemyPos()
     {
