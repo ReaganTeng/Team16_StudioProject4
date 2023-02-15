@@ -532,6 +532,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 3540391287371809819}
   projectile: {fileID: 578568151510016866, guid: a02a93585f7d4f7458dd5e3d5144691a,
     type: 3}
+  coin: {fileID: -223612317384367091, guid: 8becd3c1a546ff144ae090a85b522e76, type: 3}
 --- !u!136 &3751484280772504296
 CapsuleCollider:
   m_ObjectHideFlags: 0

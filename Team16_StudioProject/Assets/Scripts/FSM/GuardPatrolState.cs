@@ -31,34 +31,6 @@ public class GuardPatrolState : GuardStateBase
 
     public override void UpdateState(GuardStateManager guard)
     {
-        //if player and enemy distance is within 5, and there's no obstacle along the way according to raycast
-        //if (
-        //    (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
-        //    )
-        //{
-        //    //if ((Physics.Raycast(ray_2, out raycastHit_2) && raycastHit_2.collider.transform == guard.getplayer())
-        //    //|| (Physics.Raycast(ray, out raycastHit) && raycastHit.collider.transform == guard.getplayer()))
-        //    //{
-        //    guard.SwitchState(guard.ChaseState);
-        //    //}
-        //}
-
-
-        //if (playerdetected == true)
-        //{
-
-        //Vector3 direction = guard.getplayerPos().position - guard.pov.transform.position + Vector3.up;
-        //Ray ray = new Ray(guard.pov.transform.position, direction);
-
-        //Vector3 direction_2 = guard.getplayerPos().position - guard.pov2.transform.position + Vector3.up;
-        //Ray ray_2 = new Ray(guard.pov2.transform.position, direction_2);
-
-        //if ((Physics.Raycast(ray_2, out raycastHit_2) && raycastHit_2./*collider.*/transform == guard.getplayer())
-        //    || (Physics.Raycast(ray, out raycastHit) && raycastHit./*collider.*/transform == guard.getplayer()))
-        //{
-        //    Debug.Log("PLAYER DETECTED");
-        //}
-        //}
 
         for (int i = 0; i < 2; i++)
         {
