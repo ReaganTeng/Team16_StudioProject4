@@ -39,7 +39,7 @@ public class GuardChaseState : GuardStateBase
         timer_between_shots += 1.0f * Time.deltaTime;
 
 
-        if (timer_between_shots >= 3.0f)
+        if (timer_between_shots >= 1.0f)
         {
             // Instantiate the projectile at the position and rotation of this transform
             Rigidbody clone;

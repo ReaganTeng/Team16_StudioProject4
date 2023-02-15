@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
+    [SerializeField] public int health = 100;
     [SerializeField] public int ammoCount = 10;
     [SerializeField] private bool shootPistol = true;
     public InventoryObject inventory;
