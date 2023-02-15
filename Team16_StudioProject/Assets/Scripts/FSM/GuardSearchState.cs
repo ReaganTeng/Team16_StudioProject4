@@ -11,9 +11,6 @@ public class GuardSearchState : GuardStateBase
     {
         Debug.Log("SEARCH STATE");
 
-        //wayp[0].position = guard.waypoints[0].position;
-        //wayp[1].position = guard.waypoints[1].position;
-
         //set first destination
         guard.navMeshAgent.SetDestination(guard.waypoints[0].position);
         guard.navMeshAgent.speed = 5.0f;
@@ -22,9 +19,7 @@ public class GuardSearchState : GuardStateBase
 
     public override void UpdateState(GuardStateManager guard)
     {
-        //if player and enemy diatance is within 5
-        //if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
-        //{
+        
         for (int i = 0; i < 2; i++)
         {
             if (guard.returnObserver(i) == true

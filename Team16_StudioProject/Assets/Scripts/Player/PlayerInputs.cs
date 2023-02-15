@@ -27,7 +27,7 @@ public class PlayerInputs : MonoBehaviour
     void Update()
     {
                 //thirdPersonController = GetComponent<TPSController>();
-        pos = thirdPersonController.pos;
+        //pos = thirdPersonController.pos;
         // Left click to shoot projectile
         if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0)
         {
@@ -62,7 +62,6 @@ public class PlayerInputs : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-
             // Instantiate the projectile at the position and rotation of this transform
             Rigidbody clone;
             clone = Instantiate(coin, transform.position, transform.rotation);

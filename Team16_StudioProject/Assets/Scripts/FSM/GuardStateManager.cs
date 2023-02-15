@@ -26,8 +26,9 @@ public class GuardStateManager : MonoBehaviour
     Transform enemyPos;
     public Rigidbody projectile;
 
-
     private Observer[] childscript;
+
+    Rigidbody rb;
 
     void Awake()
     {
@@ -71,13 +72,12 @@ public class GuardStateManager : MonoBehaviour
     void Update()
     {
 
-       player = GameObject.Find("PlayerArmature");
-
+        
+        player = GameObject.Find("PlayerArmature");
         //player = GameObject.FindGameObjectWithTag("Player");
         enemyPos = GetComponent<Transform>();
 
         currentState.UpdateState(this);
-
     }
 
     public void SwitchState(GuardStateBase state)
@@ -92,6 +92,7 @@ public class GuardStateManager : MonoBehaviour
         currentState = state;
         state.EnterState(this, waypoints);
     }
+
 
 
     public Transform getgenemyPos()
