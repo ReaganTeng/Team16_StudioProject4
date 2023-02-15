@@ -27,7 +27,7 @@ public class GuardStateManager : MonoBehaviour
     private GameObject player;
     Transform enemyPos;
     public Rigidbody projectile;
-
+    public string curstate;
 
     private Observer[] childscript;
 
@@ -50,8 +50,17 @@ public class GuardStateManager : MonoBehaviour
     void Start()
     {
         //WHEN GUARD IS FIRST INSTANTIATED, MAKE IT PATROL
-        currentState = PatrolState;
+        if (curstate == "Station")
+        {
+            currentState = StationState;
+        }
+        else/* if (curstate == "Station")*/
+        {
+            currentState = PatrolState;
+        }
         //
+
+
 
         //Debug.Log("WAYPOINTS ARE: " + waypoints[0].position);
         currentState.EnterState(this, waypoints);
