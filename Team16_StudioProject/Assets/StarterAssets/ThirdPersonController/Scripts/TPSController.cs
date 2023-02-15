@@ -68,7 +68,7 @@ public class TPSController : MonoBehaviour
         foreach (GameObject ladder in LadderObjects)
         {
             float distance = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(ladder.transform.position.x, 0, ladder.transform.position.z));
-            if (distance < 1 && transform.position.y < ladder.GetComponent<BoxCollider>().size.y + ladder.transform.position.y)
+            if (distance < 1 && transform.position.y < ladder.GetComponent<BoxCollider>().size.y + ladder.transform.position.y + ladder.transform.localScale.y)
             {
                 Debug.Log("Player Pos:" + transform.position.y);
                 Debug.Log("Ladder Height:" + (ladder.GetComponent<BoxCollider>().size.y + ladder.transform.position.y));
