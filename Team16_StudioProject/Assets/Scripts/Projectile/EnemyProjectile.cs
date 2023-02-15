@@ -9,6 +9,7 @@ public class EnemyProjectile : MonoBehaviour
     float time;
     private GameObject players;
     private Vector3 pos;
+    private GameObject playerStats;
 
 
     // Start is called before the first frame update
@@ -25,6 +26,7 @@ public class EnemyProjectile : MonoBehaviour
 
         // GameObjects that the projectile can collide with.
         players = GameObject.Find("PlayerArmature");
+        playerStats = GameObject.Find("Player Character");
     }
 
 
@@ -50,12 +52,14 @@ public class EnemyProjectile : MonoBehaviour
             foreach (Transform child in players.transform)
             {
                 float distance = Vector3.Distance(child.position, pos);
-                if (distance < 1.3f)
+                if (distance < 1.7f)
                 {
                     // Destroy the enemy
                     //Destroy(child.gameObject);
                     Destroy(gameObject);
-                    Debug.Log("YOURE SHOT");
+                    playerStats.GetComponent<PlayerStats>().health -= 10;
+
+                    Debug.Log(playerStats.GetComponent<PlayerStats>().health);
 
                     break;
                 }

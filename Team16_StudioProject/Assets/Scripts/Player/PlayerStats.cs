@@ -4,10 +4,26 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
+
+    public enum EquippedWeapon
+    {
+        Shiv,
+        Pistol,
+        NUM_TYPES
+    }
+
+    [SerializeField] public int health = 100;
     [SerializeField] public int ammoCount = 10;
     [SerializeField] private bool shootPistol = true;
+    public EquippedWeapon equippedWeapon;
+    private GameObject healthBar;
+
     public InventoryObject inventory;
+
+    void Start()
+    {
+        healthBar = GameObject.Find("Health Bar");
+    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -17,6 +33,18 @@ public class PlayerStats : MonoBehaviour
         {
             inventory.AddItem(item.item, 1);
             Destroy(other.gameObject);
+        }
+    }
+
+    void Update()
+    {
+        if(Input.GetAxis("Mouse ScrollWheel") > 0 && equippedWeapon < EquippedWeapon.NUM_TYPES - 1)
+        {
+            equippedWeapon++;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && equippedWeapon > 0)
+        {
+            equippedWeapon--;
         }
     }
 

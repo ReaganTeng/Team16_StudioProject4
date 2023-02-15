@@ -59,17 +59,12 @@ public class GuardChaseState : GuardStateBase
         timer_between_shots += 1.0f * Time.deltaTime;
 
 
-        if (timer_between_shots >= 3.0f)
+        if (timer_between_shots >= 1.0f)
         {
             // Instantiate the projectile at the position and rotation of this transform
             Rigidbody clone;
             clone = GameObject.Instantiate(guard.projectile, guard.getgenemyPos().position, guard.getgenemyPos().rotation);
-            //pos = guard.getgenemyPos().position;
-
-            //clone.position = Camera.main.transform.position;
-            //clone.position += Vector3.up * 1.0f;
-            //clone.position += Camera.main.transform.forward * 3.0f;
-            clone.velocity = guard.getgenemyPos()/*.TransformDirection(guard.getgenemyPos().transform*/.forward * 40/*)*/;
+            clone.velocity = guard.getgenemyPos().forward * 40;
             clone.MoveRotation(guard.getgenemyPos().rotation);
 
             timer_between_shots = 0;
