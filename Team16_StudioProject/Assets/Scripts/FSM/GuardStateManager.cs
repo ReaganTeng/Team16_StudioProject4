@@ -31,6 +31,8 @@ public class GuardStateManager : MonoBehaviour
 
     private Observer[] childscript;
 
+   
+
     void Awake()
     {
         //FOR GUARDPATROLSTATE
@@ -54,9 +56,7 @@ public class GuardStateManager : MonoBehaviour
         //Debug.Log("WAYPOINTS ARE: " + waypoints[0].position);
         currentState.EnterState(this, waypoints);
          
-
         childscript = gameObject.GetComponentsInChildren<Observer>();
-
     }
 
 
