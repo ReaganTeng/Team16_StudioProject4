@@ -48,6 +48,13 @@ public class ProjectileScript : MonoBehaviour
         foreach (ContactPoint contact in collision.contacts)
         {
             int i = 0;
+
+            if (collision.gameObject.tag != "Enemy")
+            {
+                Destroy(gameObject);
+                break;
+            }
+
             foreach (GameObject child in EnemyManager.enemyManager.GetNumberOfEnemies())
             {
                 float distance = Vector3.Distance(child.transform.position, pos);
@@ -74,10 +81,9 @@ public class ProjectileScript : MonoBehaviour
                     break;
                 }
                 i++;
-
+                
             }
-
-
+            
         }
         
 

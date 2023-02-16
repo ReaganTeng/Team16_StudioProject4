@@ -16,13 +16,14 @@ public class WeaponUI : MonoBehaviour
     private GameObject weaponUI;
 
     private int ammo;
+    private int clipCount;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
+        playerStats = GameObject.Find("Player Character").GetComponent<PlayerStats>();
 
     }
 
@@ -30,8 +31,10 @@ public class WeaponUI : MonoBehaviour
     void Update()
     {
 
-        ammo = playerStats.ammoCount;
-        Numberofammo.SetText(ammo.ToString());
+      ammo = GameObject.Find("Player Character").GetComponent<PlayerStats>().ammoCount;
+      clipCount = GameObject.Find("Player Character").GetComponent<PlayerStats>().clipCount;
+
+        Numberofammo.SetText(ammo.ToString() + "/" + clipCount.ToString());
 
         switch (playerStats.equippedWeapon)
         {

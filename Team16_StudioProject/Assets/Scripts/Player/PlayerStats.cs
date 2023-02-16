@@ -14,6 +14,8 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] public int health = 100;
     [SerializeField] public int ammoCount = 10;
+    [SerializeField] public int clipCount = 1;
+    public int maxAmmoCount;
     [SerializeField] private bool shootPistol = true;
 
     [SerializeField] public int Numberofkeys = 1;
@@ -22,28 +24,20 @@ public class PlayerStats : MonoBehaviour
     private GameObject healthBar;
 
     public InventoryObject inventory;
-    public CollectibleObject firstaid;
-
 
     void Start()
     {
         healthBar = GameObject.Find("Health Bar");
-
+        maxAmmoCount = ammoCount;
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("collided");
+        Debug.Log("collided");
         var item = other.GetComponent<Item>();
         if (item)
         {
             inventory.AddItem(item.item, 1);
-
-            if (item.item == firstaid)
-            {
-                health += 20;
-            }
-
             Destroy(other.gameObject);
         }
     }
@@ -58,8 +52,6 @@ public class PlayerStats : MonoBehaviour
         {
             equippedWeapon--;
         }
-
-
     }
 
     private void OnApplicationQuit()
