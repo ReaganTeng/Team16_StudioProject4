@@ -12,10 +12,10 @@ public class WeaponUI : MonoBehaviour
 
     private PlayerStats playerStats;
     [SerializeField] TextMeshProUGUI  textMessage;
-    [SerializeField] TextMeshProUGUI Numberofclips;
+    [SerializeField] TextMeshProUGUI Numberofammo;
     private GameObject weaponUI;
 
-    private int clips;
+    private int ammo;
 
 
 
@@ -32,7 +32,7 @@ public class WeaponUI : MonoBehaviour
 
        clips = GameObject.Find("Player Character").GetComponent<PlayerStats>().ammoCount;
 
-        Numberofclips.SetText(clips.ToString());
+        Numberofammo.SetText(ammo.ToString());
 
         switch (playerStats.equippedWeapon)
         {
