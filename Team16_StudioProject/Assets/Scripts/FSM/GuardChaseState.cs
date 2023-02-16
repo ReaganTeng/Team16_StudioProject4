@@ -29,11 +29,13 @@ public class GuardChaseState : GuardStateBase
             //Debug.Log("ALARM");
             if (EventManager.Event.GetActiveBool() == false)
             {
-               // Debug.Log("Event Active");
+                // Debug.Log("Event Active");
                 EventManager.Event.StartAlarm();
                 EventManager.Event.CheckForEnemies();
 
             }
+            EventManager.Event.AlarmCountDown();
+
             //if (pStats.GetHealth() > 0)
             //{
             //    Debug.Log("L");

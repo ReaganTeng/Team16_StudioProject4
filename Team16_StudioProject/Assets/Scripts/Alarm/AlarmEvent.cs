@@ -8,7 +8,7 @@ public class AlarmEvent : MonoBehaviour
     private GameObject[] Enemies;
     AudioSource m_AudioSource;
     [SerializeField] private float AlarmRadius = 20.0f;
-    // public static event Action Alarm;
+    [SerializeField] private float AlarmDuration = 20.0f;
     // Update is called once per frame
     public void Start()
     {
@@ -30,7 +30,7 @@ public class AlarmEvent : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (EventManager.Event.GetActiveBool() == true)
+        if (EventManager.Event.GetActiveBool() == true && AlarmDuration > 0.0f)
         {
             if (!m_AudioSource.isPlaying)
             {
@@ -73,10 +73,27 @@ public class AlarmEvent : MonoBehaviour
             if (Vector3.Distance(nearbyEnemies.transform.position, transform.position) < AlarmRadius)
             {
                 EventManager.Event.SetActiveBool(true);
+                EventManager.Event.StartCountDown += AlarmTimer;
                 return;
             }
         }
         Debug.Log("False");
-        EventManager.Event.SetActiveBool(false);
+    }
+    private void AlarmTimer()
+    {
+        if (AlarmDuration > 0.0f)
+        {
+            AlarmDuration -= Time.deltaTime;
+            Debug.Log(AlarmDuration);
+
+        }
+        else
+        {
+            EventManager.Event.SetActiveBool(false);
+            AlarmDuration = 20.0f;
+            EventManager.Event.StartCountDown -= AlarmTimer;
+
+        }
+
     }
 }

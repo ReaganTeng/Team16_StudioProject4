@@ -9,6 +9,7 @@ public class EventManager : MonoBehaviour
 
     public event Action SetOffAlarm;
     public event Action NoEnemiesNearBy;
+    public event Action StartCountDown;
     public bool isActive = false;
 
     // Start is called before the first frame update
@@ -39,6 +40,10 @@ public class EventManager : MonoBehaviour
     public void CheckForEnemies()
     {
         NoEnemiesNearBy?.Invoke();
+    }
+    public void AlarmCountDown()
+    {
+        StartCountDown?.Invoke();
     }
     public bool GetActiveBool()
     {

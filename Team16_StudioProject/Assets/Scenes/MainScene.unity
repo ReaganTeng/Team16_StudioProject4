@@ -881,6 +881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMessage: {fileID: 574196922}
+  Numberofammo: {fileID: 0}
 --- !u!1001 &622773491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1761,6 +1762,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5126405232604862220, guid: 0c17b09221ca4f344a7421d91732dd93,
         type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126405232604862220, guid: 0c17b09221ca4f344a7421d91732dd93,
+        type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 0be0b7155b84c8c4db294a443555edad, type: 3}
@@ -1792,12 +1798,12 @@ PrefabInstance:
     - target: {fileID: 6915802265421393093, guid: 0c17b09221ca4f344a7421d91732dd93,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.5
+      value: -20.4
       objectReference: {fileID: 0}
     - target: {fileID: 6915802265421393093, guid: 0c17b09221ca4f344a7421d91732dd93,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8
+      value: 9.03
       objectReference: {fileID: 0}
     - target: {fileID: 6915802265421393093, guid: 0c17b09221ca4f344a7421d91732dd93,
         type: 3}
@@ -2197,12 +2203,12 @@ PrefabInstance:
     - target: {fileID: 4824602385298448370, guid: 8566fc692908c3340a3dd7b3e6b81316,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.46
+      value: -9.71
       objectReference: {fileID: 0}
     - target: {fileID: 4824602385298448370, guid: 8566fc692908c3340a3dd7b3e6b81316,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.935
+      value: 2.185
       objectReference: {fileID: 0}
     - target: {fileID: 4824602385298448370, guid: 8566fc692908c3340a3dd7b3e6b81316,
         type: 3}
@@ -2212,7 +2218,7 @@ PrefabInstance:
     - target: {fileID: 4824602385298448373, guid: 8566fc692908c3340a3dd7b3e6b81316,
         type: 3}
       propertyPath: field of view
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5865807528554007492, guid: 8566fc692908c3340a3dd7b3e6b81316,
         type: 3}
