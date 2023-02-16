@@ -30,7 +30,7 @@ public class WeaponUI : MonoBehaviour
     void Update()
     {
 
-       clips = GameObject.Find("Player Character").GetComponent<PlayerStats>().ammoCount;
+      ammo = GameObject.Find("Player Character").GetComponent<PlayerStats>().ammoCount;
 
         Numberofammo.SetText(ammo.ToString());
 
