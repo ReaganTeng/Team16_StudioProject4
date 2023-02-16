@@ -22,7 +22,7 @@ public class WeaponUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = GameObject.Find("Player Character").GetComponent<PlayerStats>();
+        playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
 
     }
 
@@ -30,8 +30,7 @@ public class WeaponUI : MonoBehaviour
     void Update()
     {
 
-      ammo = GameObject.Find("Player Character").GetComponent<PlayerStats>().ammoCount;
-
+        ammo = playerStats.ammoCount;
         Numberofammo.SetText(ammo.ToString());
 
         switch (playerStats.equippedWeapon)
