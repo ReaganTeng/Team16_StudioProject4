@@ -16,6 +16,7 @@ public class WeaponUI : MonoBehaviour
     private GameObject weaponUI;
 
     private int ammo;
+    private int clipCount;
 
 
 
@@ -31,8 +32,9 @@ public class WeaponUI : MonoBehaviour
     {
 
       ammo = GameObject.Find("Player Character").GetComponent<PlayerStats>().ammoCount;
+      clipCount = GameObject.Find("Player Character").GetComponent<PlayerStats>().clipCount;
 
-        Numberofammo.SetText(ammo.ToString());
+        Numberofammo.SetText(ammo.ToString() + "/" + clipCount.ToString());
 
         switch (playerStats.equippedWeapon)
         {

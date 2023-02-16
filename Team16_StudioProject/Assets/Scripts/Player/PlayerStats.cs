@@ -14,6 +14,8 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] public int health = 100;
     [SerializeField] public int ammoCount = 10;
+    [SerializeField] public int clipCount = 1;
+    public int maxAmmoCount;
     [SerializeField] private bool shootPistol = true;
 
     [SerializeField] public int Numberofkeys = 1;
@@ -26,6 +28,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         healthBar = GameObject.Find("Health Bar");
+        maxAmmoCount = ammoCount;
     }
 
     public void OnTriggerEnter(Collider other)
