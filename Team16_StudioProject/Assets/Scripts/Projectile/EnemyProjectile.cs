@@ -10,7 +10,6 @@ public class EnemyProjectile : MonoBehaviour
     private GameObject players;
     private Vector3 pos;
     private GameObject playerStats;
-    private GameObject renderHurtImage;
 
 
     // Start is called before the first frame update
@@ -27,7 +26,6 @@ public class EnemyProjectile : MonoBehaviour
 
         // GameObjects that the projectile can collide with.
         players = GameObject.Find("PlayerArmature");
-        renderHurtImage = GameObject.Find("HurtDirection");
         //playerStats = GameObject.Find("Player Character");
     }
 
@@ -61,9 +59,7 @@ public class EnemyProjectile : MonoBehaviour
                     Destroy(gameObject);
                     players.GetComponent<PlayerStats>().health -= 10;
 
-                    renderHurtImage.GetComponent<PlayerHurtScript>().SetEnabled(true);
-                    renderHurtImage.GetComponent<PlayerHurtScript>().time = 2;
-                    renderHurtImage.GetComponent<PlayerHurtScript>().hurtPos = pos;
+
                     break;
                 }
             }

@@ -13,7 +13,7 @@ public class GuardChaseState : GuardStateBase
     {
         Debug.Log("CHASE STATE");
 
-        guard.navMeshAgent.speed = 5.0f;
+        guard.navMeshAgent.speed = 2.0f;
         distfromPlayer = 10.0f;
         stoppingdistance = 3.0f;
     }
@@ -29,8 +29,10 @@ public class GuardChaseState : GuardStateBase
             //Debug.Log("ALARM");
             if (EventManager.Event.GetActiveBool() == false)
             {
+               // Debug.Log("Event Active");
                 EventManager.Event.StartAlarm();
                 EventManager.Event.CheckForEnemies();
+
             }
             //if (pStats.GetHealth() > 0)
             //{
@@ -39,12 +41,12 @@ public class GuardChaseState : GuardStateBase
             //}
             // Grace Period is over call the alarm event
             // alarm.Alarmed = true;
-
         }
 
         //if player and enemy distance is more than distance
         if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > distfromPlayer)
         {
+            gracePeriod = 5.0f;
             guard.SwitchState(guard.SearchState);
         }
 
@@ -55,7 +57,7 @@ public class GuardChaseState : GuardStateBase
         }
         else if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > stoppingdistance)
         {
-            guard.navMeshAgent.speed = 5.0f;
+            guard.navMeshAgent.speed = 2.0f;
         }
 
 

@@ -22,8 +22,6 @@ public class PlayerInputs : MonoBehaviour
         playerModel = GameObject.Find("PlayerArmature");
         enemies = GameObject.Find("Enemies");
         playerStats = GetComponent<PlayerStats>();
-
-
     }
 
     void Update()
@@ -71,7 +69,6 @@ public class PlayerInputs : MonoBehaviour
         {
             case PlayerStats.EquippedWeapon.Shiv:
                        
-                // Debug.Log("Shiv"); 
 
                 pos = playerModel.transform.position;
 
@@ -94,7 +91,6 @@ public class PlayerInputs : MonoBehaviour
                 break;
             case PlayerStats.EquippedWeapon.Pistol:
                         
-                        // Debug.Log("Pistol");       
 
                 if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0)
                 {

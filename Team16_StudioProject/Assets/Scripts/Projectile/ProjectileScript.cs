@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 public class ProjectileScript : MonoBehaviour
 {
 
     float time;
-    private GameObject enemies;
+    private GameObject[] enemies;
     private Vector3 pos;
 
 
@@ -24,7 +24,7 @@ public class ProjectileScript : MonoBehaviour
         time = 1.0f;
 
         // GameObjects that the projectile can collide with.
-        enemies = GameObject.Find("Enemies");
+        //enemies = EnemyManager.enemyManager.GetNumberOfEnemies();
     }
 
 
@@ -47,18 +47,36 @@ public class ProjectileScript : MonoBehaviour
     {
         foreach (ContactPoint contact in collision.contacts)
         {
-            foreach (Transform child in enemies.transform)
+            int i = 0;
+            foreach (GameObject child in EnemyManager.enemyManager.GetNumberOfEnemies())
             {
-                float distance = Vector3.Distance(child.position, pos);
+                float distance = Vector3.Distance(child.transform.position, pos);
                 if (distance < 1.3f)
                 {
+                   // Debug.Log(i);
+
                     // Destroy the enemy
-                    Destroy(child.gameObject);
+                    Destroy(child);
+                    child.SetActive(false);
                     Destroy(gameObject);
+
+                    List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
+                    //ArrayList enemyArr = new ArrayList(EnemyManager.enemyManager.GetNumberOfEnemies());
+                    // GameObject enemyToRemove = child;
+                    // int numIndex = enemyArr.IndexOf(enemyArr, i);
+
+                    tmp.RemoveAt(i);
+                   // enemyArr.RemoveAt(i);
+                    EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
+                    EventManager.Event.CheckForEnemies();
+
 
                     break;
                 }
+                i++;
+
             }
+
 
         }
         
