@@ -21,7 +21,7 @@ public class PlayerInputs : MonoBehaviour
         player = GameObject.Find("Player Character");
         playerModel = GameObject.Find("PlayerArmature");
         enemies = GameObject.Find("Enemies");
-        playerStats = GetComponent<PlayerStats>();
+        playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
     }
 
     void Update()
@@ -43,6 +43,8 @@ public class PlayerInputs : MonoBehaviour
         //     }
         // }
 
+
+        // Throw a coin
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
 
@@ -61,7 +63,7 @@ public class PlayerInputs : MonoBehaviour
         }
 
     
-        // Change this to swtich state using enum from playerstats
+        // Left click 
 
         switch (playerStats.equippedWeapon)
         {
@@ -95,7 +97,7 @@ public class PlayerInputs : MonoBehaviour
                     // Instantiate the projectile at the position and rotation of this transform
                     Rigidbody clone;
                     clone = Instantiate(projectile, transform.position, transform.rotation);
-                    pos = transform.position;
+                    pos = transform.position;   
 
                     clone.position = Camera.main.transform.position;
                     //clone.position += Vector3.up * 1.0f;
@@ -104,6 +106,13 @@ public class PlayerInputs : MonoBehaviour
                     clone.MoveRotation(Camera.main.transform.rotation);
 
                     playerStats.ammoCount--;
+                }
+
+                // Reloading pistol
+                if (Input.GetKeyDown(KeyCode.R) && playerStats.clipCount > 0)
+                {
+                    playerStats.ammoCount = playerStats.maxAmmoCount;
+                    playerStats.clipCount--;
                 }
 
                 break;
