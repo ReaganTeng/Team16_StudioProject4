@@ -25,6 +25,10 @@ public class PlayerStats : MonoBehaviour
 
     public InventoryObject inventory;
 
+    public CollectibleObject firstaid;
+    public CollectibleObject ammoclip;
+
+
     void Start()
     {
         healthBar = GameObject.Find("Health Bar");
@@ -38,6 +42,17 @@ public class PlayerStats : MonoBehaviour
         if (item)
         {
             inventory.AddItem(item.item, 1);
+
+            if(item.item == firstaid)
+            {
+                health += 20;
+            }
+            else if (item.item == ammoclip)
+            {
+                clipCount += 1;
+            }
+
+
             Destroy(other.gameObject);
         }
     }
