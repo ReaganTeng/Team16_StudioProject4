@@ -59,7 +59,6 @@ public class EnemyProjectile : MonoBehaviour
                     Destroy(gameObject);
                     players.GetComponent<PlayerStats>().health -= 10;
 
-                    Debug.Log(players.GetComponent<PlayerStats>().health);
 
                     break;
                 }

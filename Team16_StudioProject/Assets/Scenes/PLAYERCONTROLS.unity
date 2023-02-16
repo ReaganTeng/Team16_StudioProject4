@@ -666,6 +666,7 @@ MonoBehaviour:
   health: 100
   ammoCount: 10
   shootPistol: 1
+  equippedWeapon: 0
   inventory: {fileID: 11400000, guid: fe7c0117d9f49b247b262d31b99e1bf4, type: 2}
 --- !u!1 &1333014894 stripped
 GameObject:
