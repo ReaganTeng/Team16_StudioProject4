@@ -13,6 +13,7 @@ public class WeaponUI : MonoBehaviour
     private PlayerStats playerStats;
     [SerializeField] TextMeshProUGUI  textMessage;
     [SerializeField] TextMeshProUGUI Numberofammo;
+
     private GameObject weaponUI;
 
     private int ammo;
@@ -23,16 +24,15 @@ public class WeaponUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = GameObject.Find("Player Character").GetComponent<PlayerStats>();
-
+        playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame
     void Update()
     {
 
-      ammo = GameObject.Find("Player Character").GetComponent<PlayerStats>().ammoCount;
-      clipCount = GameObject.Find("Player Character").GetComponent<PlayerStats>().clipCount;
+      ammo = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().ammoCount;
+      clipCount = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().clipCount;
 
         Numberofammo.SetText(ammo.ToString() + "/" + clipCount.ToString());
 
