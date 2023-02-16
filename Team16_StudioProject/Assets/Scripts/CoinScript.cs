@@ -13,7 +13,7 @@ public class CoinScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemies = GameObject.Find("Enemies");
+        //enemies = GameObject.Find("Enemies");
         timer = 3.0f;
     }
 
@@ -22,7 +22,7 @@ public class CoinScript : MonoBehaviour
     {
         // rb.velocity.x--;  
         //Debug.Log(transform.position);
-
+        enemies = GameObject.Find("Enemies");
 
         timer -= Time.deltaTime;
 
@@ -30,7 +30,6 @@ public class CoinScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     void OnCollisionEnter(Collision collision)

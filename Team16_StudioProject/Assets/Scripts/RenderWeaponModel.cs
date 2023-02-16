@@ -13,7 +13,7 @@ public class RenderWeaponModel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerStats = GameObject.Find("Player Character").GetComponent<PlayerStats>();
+        playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
         shivModel = GameObject.Find("Shiv Model");
         pistolModel = GameObject.Find("Pistol Model");
 

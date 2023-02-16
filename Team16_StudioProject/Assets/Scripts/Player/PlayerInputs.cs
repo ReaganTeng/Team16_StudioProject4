@@ -21,7 +21,7 @@ public class PlayerInputs : MonoBehaviour
         player = GameObject.Find("Player Character");
         playerModel = GameObject.Find("PlayerArmature");
         enemies = GameObject.Find("Enemies");
-        playerStats = GetComponent<PlayerStats>();
+        playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
     }
 
     void Update()
