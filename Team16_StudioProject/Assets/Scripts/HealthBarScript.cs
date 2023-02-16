@@ -24,5 +24,7 @@ public class HealthBarScript : MonoBehaviour
     void Update()
     {
         healthBar.value = playerStats.GetComponent<PlayerStats>().health;
+        Debug.Log(playerStats.GetComponent<PlayerStats>().health);
+
     }
 }

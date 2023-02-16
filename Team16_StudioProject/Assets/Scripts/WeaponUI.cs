@@ -12,7 +12,12 @@ public class WeaponUI : MonoBehaviour
 
     private PlayerStats playerStats;
     [SerializeField] TextMeshProUGUI  textMessage;
+    [SerializeField] TextMeshProUGUI Numberofammo;
     private GameObject weaponUI;
+
+    private int ammo;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +29,11 @@ public class WeaponUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+      ammo = GameObject.Find("Player Character").GetComponent<PlayerStats>().ammoCount;
+
+        Numberofammo.SetText(ammo.ToString());
+
         switch (playerStats.equippedWeapon)
         {
             case PlayerStats.EquippedWeapon.Shiv:

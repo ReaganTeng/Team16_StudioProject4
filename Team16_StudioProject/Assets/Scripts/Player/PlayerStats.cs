@@ -15,6 +15,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int health = 100;
     [SerializeField] public int ammoCount = 10;
     [SerializeField] private bool shootPistol = true;
+
+    [SerializeField] public int Numberofkeys = 1;
+
     public EquippedWeapon equippedWeapon;
     private GameObject healthBar;
 
