@@ -34,7 +34,7 @@ public class GuardChaseState : GuardStateBase
                 EventManager.Event.CheckForEnemies();
 
             }
-            EventManager.Event.AlarmCountDown();
+            //EventManager.Event.AlarmCountDown();
 
             //if (pStats.GetHealth() > 0)
             //{

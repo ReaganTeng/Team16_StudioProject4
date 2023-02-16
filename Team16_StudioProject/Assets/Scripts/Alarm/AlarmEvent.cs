@@ -7,6 +7,7 @@ public class AlarmEvent : MonoBehaviour
 {
     private GameObject[] Enemies;
     AudioSource m_AudioSource;
+    Animator m_Animator;
     [SerializeField] private float AlarmRadius = 20.0f;
     [SerializeField] private float AlarmDuration = 20.0f;
     // Update is called once per frame
@@ -15,12 +16,12 @@ public class AlarmEvent : MonoBehaviour
         EventManager.Event.SetOffAlarm += CheckForNearbyEnemies;
         EventManager.Event.NoEnemiesNearBy += EnemiesWithinRadius;
         //Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
         //EventManager.AlarmEvent.Check += EnemiesWithinRadius;
     }
     public void Awake()
     {
         m_AudioSource = GetComponent<AudioSource>();
+        m_Animator = GetComponentInChildren<Animator>();
     }
     public void OnDisable()
     {
@@ -36,11 +37,30 @@ public class AlarmEvent : MonoBehaviour
             {
                 Debug.Log("Playing Sound");
                 m_AudioSource.Play();
+                AlarmFlickering.LightSource.flickeringLight.enabled = true;
+                m_Animator.enabled = true;
             }
         }
         else
         {
             m_AudioSource.Stop();
+            m_Animator.enabled = false;
+            AlarmFlickering.LightSource.flickeringLight.enabled = false;
+
+
+        }
+    }
+    public void Update()
+    {
+        if (EventManager.Event.GetActiveBool() == true && AlarmDuration > 0.0f)
+        {
+            AlarmDuration -= Time.deltaTime;
+            Debug.Log(AlarmDuration);
+        }
+        else
+        {
+            AlarmDuration = 20.0f;
+            EventManager.Event.SetActiveBool(false);
         }
     }
     private void CheckForNearbyEnemies()
@@ -73,27 +93,9 @@ public class AlarmEvent : MonoBehaviour
             if (Vector3.Distance(nearbyEnemies.transform.position, transform.position) < AlarmRadius)
             {
                 EventManager.Event.SetActiveBool(true);
-                EventManager.Event.StartCountDown += AlarmTimer;
                 return;
             }
         }
         Debug.Log("False");
-    }
-    private void AlarmTimer()
-    {
-        if (AlarmDuration > 0.0f)
-        {
-            AlarmDuration -= Time.deltaTime;
-            Debug.Log(AlarmDuration);
-
-        }
-        else
-        {
-            EventManager.Event.SetActiveBool(false);
-            AlarmDuration = 20.0f;
-            EventManager.Event.StartCountDown -= AlarmTimer;
-
-        }
-
     }
 }
