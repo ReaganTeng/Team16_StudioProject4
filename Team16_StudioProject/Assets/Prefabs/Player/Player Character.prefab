@@ -267,6 +267,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1402610105811064357}
   - component: {fileID: 4334313854008844060}
+  - component: {fileID: 7558469485354155222}
+  - component: {fileID: 4447872278232064039}
+  - component: {fileID: 325776233585559330}
   m_Layer: 0
   m_Name: Player Character
   m_TagString: Player
@@ -310,8 +313,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 578568151510016866, guid: b231cb3d556515e4e9ed9a17fc6ebbff,
     type: 3}
-  coin: {fileID: 0}
+  coin: {fileID: -223612317384367091, guid: 8becd3c1a546ff144ae090a85b522e76, type: 3}
   thirdPersonController: {fileID: 0}
+--- !u!114 &7558469485354155222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7039306883754570512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ed0b11850145c4995dd76170bb2500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4447872278232064039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7039306883754570512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f0fcaf6ed0390e4a9eb9b2c833cc83a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &325776233585559330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7039306883754570512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d596ad2fccf43a3479f58e2762f4ab53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  ammoCount: 10
+  shootPistol: 1
+  equippedWeapon: 0
+  inventory: {fileID: 0}
 --- !u!1001 &4527459588409519140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -437,6 +481,7 @@ MonoBehaviour:
   health: 100
   ammoCount: 10
   shootPistol: 1
+  equippedWeapon: 0
   inventory: {fileID: 11400000, guid: fe7c0117d9f49b247b262d31b99e1bf4, type: 2}
 --- !u!4 &635859600530603087 stripped
 Transform:
