@@ -9,6 +9,7 @@ TagManager:
   - Ladder
   - Alarm
   - Enemy
+  - waypoint
   layers:
   - Default
   - TransparentFX
