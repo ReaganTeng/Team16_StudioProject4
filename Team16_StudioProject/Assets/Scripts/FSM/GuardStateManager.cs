@@ -13,6 +13,8 @@ public class GuardStateManager : MonoBehaviour
     public GuardStationaryState StationState = new GuardStationaryState();
     public GuardSearchState SearchState = new GuardSearchState();
     public GuardSecurityState SecurityState = new GuardSecurityState();
+    public GuardAlarmedState AlarmedState = new GuardAlarmedState();
+    public GuardGunshotSoundState GunshotSoundState = new GuardGunshotSoundState();
 
 
     //REINITIALISE VALUE
@@ -106,6 +108,11 @@ public class GuardStateManager : MonoBehaviour
 
         currentState = state;
         state.EnterState(this, waypoints);
+    }
+    public void SwitchState(GuardStateBase state, Transform[] newWP)
+    {
+        currentState = state;
+        state.EnterState(this, newWP);
     }
 
 

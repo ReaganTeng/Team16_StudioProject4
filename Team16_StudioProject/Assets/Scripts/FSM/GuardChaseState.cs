@@ -20,6 +20,15 @@ public class GuardChaseState : GuardStateBase
 
     public override void UpdateState(GuardStateManager guard)
     {
+
+        var lookpos = guard.getplayerPos().position - guard.getgenemyPos().position;
+        lookpos.y = 0;
+        var rotation = Quaternion.LookRotation(lookpos);
+        guard.getgenemyPos().rotation = Quaternion.Slerp(
+            guard.getgenemyPos().rotation, rotation, Time.deltaTime * 3
+            );
+
+
         if (gracePeriod > 0.0f)
         {
             gracePeriod -= Time.deltaTime;
@@ -34,6 +43,11 @@ public class GuardChaseState : GuardStateBase
                 EventManager.Event.CheckForEnemies();
 
             }
+
+
+
+
+
             //EventManager.Event.AlarmCountDown();
 
             //if (pStats.GetHealth() > 0)

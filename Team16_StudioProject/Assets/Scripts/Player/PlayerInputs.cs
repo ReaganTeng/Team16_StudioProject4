@@ -56,7 +56,12 @@ public class PlayerInputs : MonoBehaviour
             return;
         }
 
-
+        foreach (Transform child in enemies.transform)
+        {
+            float distance = Vector3.Distance(child.position, transform.position);
+            if (distance < 20)
+                child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
+        }
 
         // Throw a coin
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -89,18 +94,25 @@ public class PlayerInputs : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0) && playerStats.shivDurability > 0)
                 {
-
+                    int i = 0;
                     foreach (Transform child in enemies.transform)
                     {
                         float distance = Vector3.Distance(child.position, pos);
                         if (distance < 1.5f)
                         {
                             // Destroy the enemy
+                            Destroy(child.gameObject);
+                            List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
+
+                            tmp.RemoveAt(i);
+                            EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
+                            EventManager.Event.CheckForEnemies();
                             child.gameObject.SetActive(false);
 
                             playerStats.shivDurability--;
                             break;
                         }
+                        i++;
                     }
                 }
 

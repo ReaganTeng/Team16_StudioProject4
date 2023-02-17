@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class GuardSearchState : GuardStateBase
 {
     private Transform[] wayp;
-    int m_CurrentWaypointIndex;
+    int m_CurrentWaypointIndex = 0;
     float detectiondistance;
     int numberOfWaypoints;
 
@@ -19,7 +19,9 @@ public class GuardSearchState : GuardStateBase
         guard.navMeshAgent.SetDestination(guard.waypoints[0].position);
         guard.navMeshAgent.speed = 5.0f;
         detectiondistance = 5.0f;
+        guard.waypoints = wp;
         numberOfWaypoints = wp.Length;
+        //Debug.Log(wp.Length);
         //Debug.Log(numberOfWaypoints);
     }
 
@@ -28,7 +30,7 @@ public class GuardSearchState : GuardStateBase
         //if player and enemy diatance is within 5
         //if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance)
         //{
-        for (int i = 0; i < numberOfWaypoints; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (guard.returnObserver(i) == true
                 && (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < detectiondistance))
@@ -39,8 +41,10 @@ public class GuardSearchState : GuardStateBase
 
         if (guard.navMeshAgent.remainingDistance < guard.navMeshAgent.stoppingDistance)
         {
+           
             m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % guard.waypoints.Length;
             guard.navMeshAgent.SetDestination(guard.waypoints[m_CurrentWaypointIndex].position);
+            
         }
     }
 
