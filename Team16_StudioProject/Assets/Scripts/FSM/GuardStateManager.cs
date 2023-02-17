@@ -13,7 +13,7 @@ public class GuardStateManager : MonoBehaviour
     public GuardStationaryState StationState = new GuardStationaryState();
     public GuardSearchState SearchState = new GuardSearchState();
     public GuardSecurityState SecurityState = new GuardSecurityState();
-    public GuardGunshotSoundState GunshotSoundState = new GuardGunshotSoundState();
+
 
     //REINITIALISE VALUE
     //FOR GUARDPATROLSTATE
@@ -21,7 +21,8 @@ public class GuardStateManager : MonoBehaviour
     public Vector3 targetPosition;
     public NavMeshAgent navMeshAgent;
     //
-    
+    private GameObject pov;
+    private GameObject pov2;
 
     private GameObject player;
     Transform enemyPos;
@@ -130,5 +131,14 @@ public class GuardStateManager : MonoBehaviour
     }
 
 
-    
+    public GameObject getpov1()
+    {
+        return pov;
+    }
+
+
+    public GameObject getpov2()
+    {
+        return pov2;
+    }
 }

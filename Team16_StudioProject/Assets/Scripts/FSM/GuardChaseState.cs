@@ -45,20 +45,6 @@ public class GuardChaseState : GuardStateBase
             // alarm.Alarmed = true;
         }
 
-        //Vector3 direction_to_model = guard.getplayerPos().position - guard.getgenemyPos().position;
-        //Quaternion rotation = Quaternion.LookRotation(direction_to_model, Vector3.up);
-
-
-        var lookpos = guard.getplayerPos().position - guard.getgenemyPos().position;
-        lookpos.y = 0;
-        var rotation = Quaternion.LookRotation(lookpos);
-        guard.getgenemyPos().rotation = Quaternion.Slerp(
-            guard.getgenemyPos().rotation, rotation, Time.deltaTime * 3
-            );
-        //guard.getgenemyPos().Rotate(0, 10, 0);
-
-
-
         //if player and enemy distance is more than distance
         if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > distfromPlayer)
         {
