@@ -11,13 +11,17 @@ public class WeaponUI : MonoBehaviour
     // then bind your desired Text Gameobject in Unity
 
     private PlayerStats playerStats;
-    [SerializeField] TextMeshProUGUI  textMessage;
-    [SerializeField] TextMeshProUGUI Numberofammo;
+    [SerializeField] TextMeshProUGUI numberOfAmmo;
 
     private GameObject weaponUI;
 
+    private GameObject pistolImage;
+    private GameObject shivImage;
+
     private int ammo;
     private int clipCount;
+
+    private int shivCount;
 
 
 
@@ -25,6 +29,9 @@ public class WeaponUI : MonoBehaviour
     void Start()
     {
         playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
+        shivImage = GameObject.Find("Shiv Image");
+        pistolImage =  GameObject.Find("Pistol Image");
+        numberOfAmmo = GameObject.Find("Weapon Use Text").GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -33,19 +40,26 @@ public class WeaponUI : MonoBehaviour
 
       ammo = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().ammoCount;
       clipCount = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().clipCount;
+      shivCount = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().shivDurability;
 
-        Numberofammo.SetText(ammo.ToString() + "/" + clipCount.ToString());
 
         switch (playerStats.equippedWeapon)
         {
             case PlayerStats.EquippedWeapon.Shiv:
                        
-                textMessage.text = "Shiv Equipped";
+                shivImage.GetComponent<RawImage>().enabled = true;
+                pistolImage.GetComponent<RawImage>().enabled = false;
+
+
+                numberOfAmmo.SetText("  " + shivCount.ToString());
                 break;
             case PlayerStats.EquippedWeapon.Pistol:
-                        
+                
+                pistolImage.GetComponent<RawImage>().enabled = true;
+                shivImage.GetComponent<RawImage>().enabled = false;
 
-                textMessage.text = "Pistol Equipped";
+
+                numberOfAmmo.SetText(ammo.ToString() + "/" + clipCount.ToString());
                 break;
         }
 

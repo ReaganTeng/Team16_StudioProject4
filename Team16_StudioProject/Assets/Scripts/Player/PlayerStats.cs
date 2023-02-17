@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int health = 100;
     [SerializeField] public int ammoCount = 10;
     [SerializeField] public int clipCount = 1;
+    [SerializeField] public int shivDurability = 2;
     public int maxAmmoCount;
     [SerializeField] private bool shootPistol = true;
 
