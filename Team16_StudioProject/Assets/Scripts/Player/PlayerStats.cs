@@ -76,6 +76,9 @@ public class PlayerStats : MonoBehaviour
         {
             equippedWeapon--;
         }
+
+
+
     }
 
     private void OnApplicationQuit()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using StarterAssets;
 
 
@@ -12,6 +13,8 @@ public class PlayerInputs : MonoBehaviour
     private GameObject player;
     private GameObject playerModel;
     private GameObject enemies;
+
+    private GameObject gameOverDialog;
     private Vector3 pos;
     private PlayerStats playerStats;
     public ThirdPersonController thirdPersonController;
@@ -22,26 +25,37 @@ public class PlayerInputs : MonoBehaviour
         playerModel = GameObject.Find("PlayerArmature");
         enemies = GameObject.Find("Enemies");
         playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
+        gameOverDialog = GameObject.Find("Gameover Dialog");
+        gameOverDialog.SetActive(false);
     }
 
     void Update()
     {
-        // Left click to shoot projectile
 
-        // if (Input.GetButtonDown("Fire1"))
-        // {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            playerStats.health-= 10;
+        }
 
-        //     foreach (Transform child in enemies.transform)
-        //     {
-        //         float distance = Vector3.Distance(child.position, pos);
-        //         if (distance < 1.5f)
-        //         {
-        //             // Destroy the enemy
-        //             Destroy(child.gameObject);
-        //             break;
-        //         }
-        //     }
-        // }
+        if (playerStats.health <= 0)
+        {
+            // Disables player controls
+            var controller = GameObject.Find("PlayerArmature").GetComponent<TPSController>();
+            controller.enabled = false;
+            var playerController = GameObject.Find("PlayerArmature").GetComponent<ThirdPersonController>();
+            playerController.enabled = false;
+
+            // Display the Gameover dialog
+            gameOverDialog.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                // Restarts the scene.
+                Scene scene = SceneManager.GetActiveScene(); 
+                SceneManager.LoadScene(scene.name);
+            }
+            return;
+        }
+
 
 
         // Throw a coin
@@ -62,6 +76,7 @@ public class PlayerInputs : MonoBehaviour
 
         }
 
+   
     
         // Left click 
 
@@ -81,7 +96,7 @@ public class PlayerInputs : MonoBehaviour
                         if (distance < 1.5f)
                         {
                             // Destroy the enemy
-                            Destroy(child.gameObject);
+                            child.gameObject.SetActive(false);
 
                             playerStats.shivDurability--;
                             break;
