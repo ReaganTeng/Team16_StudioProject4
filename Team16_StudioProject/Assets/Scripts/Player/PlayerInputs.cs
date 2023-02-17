@@ -74,7 +74,7 @@ public class PlayerInputs : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
-
+                    int i = 0;
                     foreach (Transform child in enemies.transform)
                     {
                         float distance = Vector3.Distance(child.position, pos);
@@ -82,8 +82,14 @@ public class PlayerInputs : MonoBehaviour
                         {
                             // Destroy the enemy
                             Destroy(child.gameObject);
+                            List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
+
+                            tmp.RemoveAt(i);
+                            EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
+                            EventManager.Event.CheckForEnemies();
                             break;
                         }
+                        i++;
                     }
                 }
 

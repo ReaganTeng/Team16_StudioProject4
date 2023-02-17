@@ -5,7 +5,7 @@ using UnityEngine;
 public class GuardSecurityState : GuardStateBase
 {
 
-     float distfromPlayer;
+    float distfromPlayer;
     float stoppingdistance;
     private GameObject target;
     private float time;

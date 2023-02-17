@@ -10,11 +10,15 @@ public class AlarmEvent : MonoBehaviour
     Animator m_Animator;
     [SerializeField] private float AlarmRadius = 20.0f;
     [SerializeField] private float AlarmDuration = 20.0f;
+    private Transform AlarmPos;
+    private Transform[] temp;
+
     // Update is called once per frame
     public void Start()
     {
         EventManager.Event.SetOffAlarm += CheckForNearbyEnemies;
         EventManager.Event.NoEnemiesNearBy += EnemiesWithinRadius;
+
         //Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         //EventManager.AlarmEvent.Check += EnemiesWithinRadius;
     }
@@ -22,6 +26,10 @@ public class AlarmEvent : MonoBehaviour
     {
         m_AudioSource = GetComponent<AudioSource>();
         m_Animator = GetComponentInChildren<Animator>();
+        AlarmPos = GameObject.Find("AlarmPosition").transform;
+        temp = new Transform[1];
+        temp[0] = AlarmPos;
+
     }
     public void OnDisable()
     {
@@ -55,7 +63,7 @@ public class AlarmEvent : MonoBehaviour
         if (EventManager.Event.GetActiveBool() == true && AlarmDuration > 0.0f)
         {
             AlarmDuration -= Time.deltaTime;
-            Debug.Log(AlarmDuration);
+           // Debug.Log(AlarmDuration);
         }
         else
         {
@@ -72,15 +80,9 @@ public class AlarmEvent : MonoBehaviour
             if (Vector3.Distance(nearbyEnemies.transform.position, transform.position) < AlarmRadius)
             {
                 //Debug.Log("Alarm:Chase the player");
-                nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().ChaseState);
+                nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().AlarmedState, temp);
                 //GSM.SwitchState(GSM.ChaseState);
 
-            }
-            else
-            {
-               // Debug.Log("Alarm:Search for the player");
-                nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().SearchState);
-                //GSM.SwitchState(GSM.SearchState);
             }
         }
     }
