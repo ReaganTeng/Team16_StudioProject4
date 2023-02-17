@@ -28,6 +28,7 @@ public class PlayerStats : MonoBehaviour
 
     public CollectibleObject firstaid;
     public CollectibleObject ammoclip;
+    public EquipmentObject shiv;
 
 
     void Start()
@@ -47,14 +48,21 @@ public class PlayerStats : MonoBehaviour
             if(item.item == firstaid)
             {
                 health += 20;
+                Destroy(other.gameObject);
             }
             else if (item.item == ammoclip)
             {
                 clipCount += 1;
+                Destroy(other.gameObject);
+            }
+            else if (item.item == shiv
+                && shivDurability <= 0)
+            {
+                shivDurability = 2;
+                Destroy(other.gameObject);
             }
 
 
-            Destroy(other.gameObject);
         }
     }
 
