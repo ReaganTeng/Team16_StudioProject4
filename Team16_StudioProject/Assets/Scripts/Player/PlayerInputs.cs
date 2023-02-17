@@ -122,6 +122,16 @@ public class PlayerInputs : MonoBehaviour
                     clone.velocity = transform.TransformDirection(Camera.main.transform.forward * 40);
                     clone.MoveRotation(Camera.main.transform.rotation);
 
+
+                    foreach (Transform child in enemies.transform)
+                    {
+                        float distance = Vector3.Distance(child.position, transform.position);
+                        if (distance < 20)
+                            child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
+                    }
+
+
+
                     playerStats.ammoCount--;
                 }
 
