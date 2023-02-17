@@ -72,7 +72,7 @@ public class PlayerInputs : MonoBehaviour
 
                 pos = playerModel.transform.position;
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && playerStats.shivDurability > 0)
                 {
 
                     foreach (Transform child in enemies.transform)
@@ -82,6 +82,8 @@ public class PlayerInputs : MonoBehaviour
                         {
                             // Destroy the enemy
                             Destroy(child.gameObject);
+
+                            playerStats.shivDurability--;
                             break;
                         }
                     }
