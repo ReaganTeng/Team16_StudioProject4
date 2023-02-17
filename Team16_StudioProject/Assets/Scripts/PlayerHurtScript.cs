@@ -58,11 +58,8 @@ public class PlayerHurtScript : MonoBehaviour
         newPosition.x += x;
         newPosition.y += y;
 
-
-
         transform.rotation = Quaternion.Euler(0, 0, angle * 2);
         transform.position = newPosition;
-
 
         time -= Time.deltaTime;
         if (time <= 0)

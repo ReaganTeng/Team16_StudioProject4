@@ -53,13 +53,10 @@ public class DoorTrigger : MonoBehaviour
             if (Physics.Raycast (ray, out raycastHit))
             {
                 if (raycastHit.collider.transform == player.transform
-                    && playerInventory.GetComponent<PlayerStats>().Numberofkeys > 0)
+                    && player.GetComponent<PlayerStats>().Numberofkeys > 0)
                 {
-                    playerInventory.GetComponent<PlayerStats>().Numberofkeys -= 1;
-                    Debug.Log("NUMBER OF KEYS " + playerInventory.GetComponent<PlayerStats>().Numberofkeys);
-
-
-
+                    player.GetComponent<PlayerStats>().Numberofkeys -= 1;
+                    //Debug.Log("NUMBER OF KEYS " + player.GetComponent<PlayerStats>().Numberofkeys);
 
                     m_IsDetected = true;
                 }

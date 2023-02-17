@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int health = 100;
     [SerializeField] public int ammoCount = 10;
     [SerializeField] public int clipCount = 1;
+    [SerializeField] public int shivDurability = 2;
     public int maxAmmoCount;
     [SerializeField] private bool shootPistol = true;
 
@@ -27,6 +28,7 @@ public class PlayerStats : MonoBehaviour
 
     public CollectibleObject firstaid;
     public CollectibleObject ammoclip;
+    public EquipmentObject shiv;
 
 
     void Start()
@@ -46,14 +48,21 @@ public class PlayerStats : MonoBehaviour
             if(item.item == firstaid)
             {
                 health += 20;
+                Destroy(other.gameObject);
             }
             else if (item.item == ammoclip)
             {
                 clipCount += 1;
+                Destroy(other.gameObject);
+            }
+            else if (item.item == shiv
+                && shivDurability <= 0)
+            {
+                shivDurability = 2;
+                Destroy(other.gameObject);
             }
 
 
-            Destroy(other.gameObject);
         }
     }
 
@@ -67,6 +76,9 @@ public class PlayerStats : MonoBehaviour
         {
             equippedWeapon--;
         }
+
+
+
     }
 
     private void OnApplicationQuit()
