@@ -75,7 +75,7 @@ public class ProjectileScript : MonoBehaviour
                     tmp.RemoveAt(i);
                    // enemyArr.RemoveAt(i);
                     EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-                    EventManager.Event.CheckForEnemies();
+                    //EventManager.Event.CheckForEnemies();
 
 
                     break;

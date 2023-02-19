@@ -10,7 +10,7 @@ public class AlarmEvent : MonoBehaviour
     Animator m_Animator;
     [SerializeField] private float AlarmRadius = 20.0f;
     [SerializeField] private float AlarmDuration = 20.0f;
-    private Transform AlarmPos;
+    private GameObject[] AlarmPos;
     private Transform[] temp;
 
     // Update is called once per frame
@@ -19,6 +19,7 @@ public class AlarmEvent : MonoBehaviour
         EventManager.Event.SetOffAlarm += CheckForNearbyEnemies;
         EventManager.Event.NoEnemiesNearBy += EnemiesWithinRadius;
 
+       
         //Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         //EventManager.AlarmEvent.Check += EnemiesWithinRadius;
     }
@@ -26,9 +27,12 @@ public class AlarmEvent : MonoBehaviour
     {
         m_AudioSource = GetComponent<AudioSource>();
         m_Animator = GetComponentInChildren<Animator>();
-        AlarmPos = GameObject.Find("AlarmPosition").transform;
-        temp = new Transform[1];
-        temp[0] = AlarmPos;
+        AlarmPos = GameObject.FindGameObjectsWithTag("AlarmPosition");
+        temp = new Transform[AlarmPos.Length];
+        for (int i = 0; i < AlarmPos.Length; ++i)
+        {
+            temp[i] = AlarmPos[i].transform;
+        }
 
     }
     public void OnDisable()
@@ -45,17 +49,30 @@ public class AlarmEvent : MonoBehaviour
             {
                 Debug.Log("Playing Sound");
                 m_AudioSource.Play();
-                AlarmFlickering.LightSource.flickeringLight.enabled = true;
                 m_Animator.enabled = true;
+                GameObject.Find("Alarm Light").GetComponent<Light>().enabled = true;//AlarmFlickering.LightSource.flickeringLight.enabled = true;          
             }
         }
         else
         {
-            m_AudioSource.Stop();
-            m_Animator.enabled = false;
-            AlarmFlickering.LightSource.flickeringLight.enabled = false;
-
-
+            if (EventManager.Event.GetActiveBool() == true)
+            {
+                if (BoolEnemiesWithinRadius())
+                {
+                    AlarmDuration = 20.0f;
+                }
+                else
+                {
+                    if (m_AudioSource.isPlaying)
+                    {
+                        EventManager.Event.SetActiveBool(false);
+                        AlarmDuration = 20.0f;
+                        m_AudioSource.Stop();
+                        m_Animator.enabled = false;
+                        GameObject.Find("Alarm Light").GetComponent<Light>().enabled = false;
+                    }
+                }
+            }
         }
     }
     public void Update()
@@ -65,11 +82,6 @@ public class AlarmEvent : MonoBehaviour
             AlarmDuration -= Time.deltaTime;
            // Debug.Log(AlarmDuration);
         }
-        else
-        {
-            AlarmDuration = 20.0f;
-            EventManager.Event.SetActiveBool(false);
-        }
     }
     private void CheckForNearbyEnemies()
     {
@@ -77,12 +89,18 @@ public class AlarmEvent : MonoBehaviour
         // Debug.Log("SOMEBODY SET OFF THE ALARM!");
         foreach (GameObject nearbyEnemies in EnemyManager.enemyManager.GetNumberOfEnemies())
         {
-            if (Vector3.Distance(nearbyEnemies.transform.position, transform.position) < AlarmRadius)
+            NearestAlarm(nearbyEnemies);
+            if (Vector3.Distance(nearbyEnemies.transform.position, temp[0].position) < AlarmRadius)
             {
-                //Debug.Log("Alarm:Chase the player");
+               // Debug.Log("Alarm:Chase the player");
                 nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().AlarmedState, temp);
                 //GSM.SwitchState(GSM.ChaseState);
 
+            }
+            else
+            {
+                Debug.Log("Go Search State Due to Alarm");
+                nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().SearchState, EventManager.Event.SortWaypoints());
             }
         }
     }
@@ -91,13 +109,46 @@ public class AlarmEvent : MonoBehaviour
        // Enemies = EnemyManager.enemyManager.GetNumberOfEnemies();
         foreach (GameObject nearbyEnemies in EnemyManager.enemyManager.GetNumberOfEnemies())
         {
-            Debug.Log(EnemyManager.enemyManager.GetNumberOfEnemies().Length);
+            //Debug.Log(EnemyManager.enemyManager.GetNumberOfEnemies().Length);
             if (Vector3.Distance(nearbyEnemies.transform.position, transform.position) < AlarmRadius)
             {
                 EventManager.Event.SetActiveBool(true);
+                EventManager.Event.StartAlarm();
                 return;
             }
         }
         Debug.Log("False");
+    }
+    private bool BoolEnemiesWithinRadius()
+    {
+        // Enemies = EnemyManager.enemyManager.GetNumberOfEnemies();
+        foreach (GameObject nearbyEnemies in EnemyManager.enemyManager.GetNumberOfEnemies())
+        {
+            Debug.Log(EnemyManager.enemyManager.GetNumberOfEnemies().Length);
+            if (Vector3.Distance(nearbyEnemies.transform.position, transform.position) < AlarmRadius)
+            {
+                if (nearbyEnemies.GetComponent<GuardStateManager>().returnState() == nearbyEnemies.GetComponent<GuardStateManager>().ChaseState
+                    || nearbyEnemies.GetComponent<GuardStateManager>().returnState() == nearbyEnemies.GetComponent<GuardStateManager>().AlarmedState)
+                return true;
+            }
+
+        }
+        return false;
+
+    }
+    private void NearestAlarm(GameObject enemy)
+    {
+        for (int i = 0; i < temp.Length - 2; i++)
+        {
+            float dist1 = Vector3.Distance(temp[i].position, enemy.transform.position);
+            float dist2 = Vector3.Distance(temp[i + 1].position, enemy.transform.position);
+            if (dist1 < dist2)
+            {
+                var tempo = temp[i];
+                temp[i] = temp[i + 1];
+                temp[i + 1] = tempo;
+            }
+
+        }
     }
 }

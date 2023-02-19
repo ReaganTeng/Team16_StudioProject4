@@ -44,6 +44,7 @@ public class GuardStateManager : MonoBehaviour
         //waypoints[1].Transform.position = GetComponent<Transform>().position + new Vector3(20, 0, 0);
         //Instantiate(waypoints[1], go.transform.position + new Vector3(20, 0, 0), new Quaternion(0, 0, 0, 0));
         //
+        player = GameObject.Find("PlayerArmature");
     }
 
 
@@ -87,9 +88,6 @@ public class GuardStateManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        player = GameObject.Find("PlayerArmature");
-
         //player = GameObject.FindGameObjectWithTag("Player");
         enemyPos = GetComponent<Transform>();
 
@@ -105,6 +103,8 @@ public class GuardStateManager : MonoBehaviour
         //Destroy(waypoints[1]);
         //Instantiate(waypoints[1], go.transform.position + new Vector3(20, 0, 0), new Quaternion(0, 0, 0, 0));
         //
+        if (waypoints.Length == 0)
+            waypoints = EventManager.Event.SortWaypoints();
 
         currentState = state;
         state.EnterState(this, waypoints);
@@ -148,4 +148,9 @@ public class GuardStateManager : MonoBehaviour
     {
         return pov2;
     }
+    public GuardStateBase returnState()
+    {
+        return currentState;
+    }
+
 }

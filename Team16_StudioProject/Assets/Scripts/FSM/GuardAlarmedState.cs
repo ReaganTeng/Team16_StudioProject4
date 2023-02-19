@@ -46,9 +46,10 @@ public class GuardAlarmedState : GuardStateBase
 
         if (guard.navMeshAgent.remainingDistance < guard.navMeshAgent.stoppingDistance)
         {
-            Debug.Log(AlarmWP.position);
+            //Debug.Log(AlarmWP.position);
             if (!alrCheck)
             {
+                Debug.Log("CURRENTLY SEARCHING FOR THE PLAYER DUE TO ALARM");
                 guard.SwitchState(guard.SearchState, EventManager.Event.CheckForNearestWP());
                 alrCheck = true;
             }

@@ -32,31 +32,26 @@ public class GuardChaseState : GuardStateBase
         if (gracePeriod > 0.0f)
         {
             gracePeriod -= Time.deltaTime;
+            Debug.Log(gracePeriod);
         }
         else
         {
-            //Debug.Log("ALARM");
             if (EventManager.Event.GetActiveBool() == false)
             {
+                Debug.Log("ALARM");
                 // Debug.Log("Event Active");
                 EventManager.Event.StartAlarm();
                 EventManager.Event.CheckForEnemies();
+                //EventManager.Event.AlarmCountDown();
 
+                //if (pStats.GetHealth() > 0)
+                //{
+                //    Debug.Log("L");
+                //    return;
+                //}
+                // Grace Period is over call the alarm event
+                // alarm.Alarmed = true;
             }
-
-
-
-
-
-            //EventManager.Event.AlarmCountDown();
-
-            //if (pStats.GetHealth() > 0)
-            //{
-            //    Debug.Log("L");
-            //    return;
-            //}
-            // Grace Period is over call the alarm event
-            // alarm.Alarmed = true;
         }
 
         //if player and enemy distance is more than distance

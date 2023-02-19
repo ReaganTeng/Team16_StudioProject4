@@ -18,6 +18,7 @@ public class PlayerInputs : MonoBehaviour
     private Vector3 pos;
     private PlayerStats playerStats;
     public ThirdPersonController thirdPersonController;
+    private GameObject FirePoint;
 
     void Awake()
     {
@@ -27,6 +28,7 @@ public class PlayerInputs : MonoBehaviour
         playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
         gameOverDialog = GameObject.Find("Gameover Dialog");
         gameOverDialog.SetActive(false);
+        FirePoint = GameObject.Find("PlayerCameraRoot");
     }
 
     void Update()
@@ -56,12 +58,12 @@ public class PlayerInputs : MonoBehaviour
             return;
         }
 
-        foreach (Transform child in enemies.transform)
-        {
-            float distance = Vector3.Distance(child.position, transform.position);
-            if (distance < 20)
-                child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
-        }
+        //foreach (Transform child in enemies.transform)
+        //{
+        //    float distance = Vector3.Distance(child.position, transform.position);
+        //    if (distance < 20)
+        //        child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
+        //}
 
         // Throw a coin
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -69,14 +71,17 @@ public class PlayerInputs : MonoBehaviour
 
             // Instantiate the projectile at the position and rotation of this transform
             Rigidbody clone;
-            clone = Instantiate(coin, transform.position, transform.rotation);
+            clone = Instantiate(coin, playerModel.transform.position, playerModel.transform.rotation);
             pos = transform.position;
 
-            clone.position = Camera.main.transform.position;
+            clone.position = playerModel.transform.position;
             //clone.position += Vector3.up * 1.0f;
-            clone.position += Camera.main.transform.forward * 3.0f;
-            clone.velocity = transform.TransformDirection(Camera.main.transform.forward * 40);
-            clone.MoveRotation(Camera.main.transform.rotation);
+            //clone.position += Camera.main.transform.forward * 3.0f;
+            //clone.velocity = transform.TransformDirection(Camera.main.transform.forward * 40);
+            clone.position += playerModel.transform.forward * 3.0f;
+            clone.velocity = transform.TransformDirection(playerModel.transform.forward * 20);
+            clone.MoveRotation(playerModel.transform.rotation);
+            //clone.MoveRotation(Camera.main.transform.rotation);
 
 
         }
@@ -125,14 +130,21 @@ public class PlayerInputs : MonoBehaviour
                 {
                     // Instantiate the projectile at the position and rotation of this transform
                     Rigidbody clone;
-                    clone = Instantiate(projectile, transform.position, transform.rotation);
+                    clone = Instantiate(projectile, playerModel.transform.position, playerModel.transform.rotation);
                     pos = transform.position;   
 
-                    clone.position = Camera.main.transform.position;
-                    //clone.position += Vector3.up * 1.0f;
-                    clone.position += Camera.main.transform.forward * 3.0f;
-                    clone.velocity = transform.TransformDirection(Camera.main.transform.forward * 40);
-                    clone.MoveRotation(Camera.main.transform.rotation);
+                    clone.position = FirePoint.transform.position;
+                    clone.position -= new Vector3(0.0f, 0.5f, 0.0f);
+                    clone.position += playerModel.transform.forward * 2.0f;
+                    clone.velocity = transform.TransformDirection(playerModel.transform.forward * 40);
+                    clone.MoveRotation(playerModel.transform.rotation);
+
+                    foreach (Transform child in enemies.transform)
+                    {
+                        float distance = Vector3.Distance(child.position, transform.position);
+                        if (distance < 20)
+                            child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
+                    }
 
                     playerStats.ammoCount--;
                 }

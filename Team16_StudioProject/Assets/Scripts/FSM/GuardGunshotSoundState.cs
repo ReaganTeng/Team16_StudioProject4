@@ -6,16 +6,16 @@ public class GuardGunshotSoundState : GuardStateBase
 {
     private GameObject coin;
     private float time;
-
+    private Transform[] playerPos;
 
     public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
-        Debug.Log("WHAT'S THAT SOUND");
+       // Debug.Log("WHAT'S THAT SOUND");
         time = 5.0f;
 
 
         guard.navMeshAgent.speed = 5.0f;
-
+        //playerPos = new Transform[1];
         guard.navMeshAgent.SetDestination(guard.getplayerPos().position);
     }
 
@@ -26,6 +26,7 @@ public class GuardGunshotSoundState : GuardStateBase
         if (time <= 0)
         {
             //GameObject.Destroy(coin);
+            //playerPos[0] = guard.getplayerPos();
             guard.SwitchState(guard.SearchState);
         }
 

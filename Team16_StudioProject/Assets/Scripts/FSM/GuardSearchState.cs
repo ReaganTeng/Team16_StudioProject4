@@ -16,7 +16,10 @@ public class GuardSearchState : GuardStateBase
         //wayp[1].position = guard.waypoints[1].position;
 
         //set first destination
-        guard.navMeshAgent.SetDestination(guard.waypoints[0].position);
+        if (wp.Length > 0)
+        {
+            guard.navMeshAgent.SetDestination(guard.waypoints[0].position);
+        }
         guard.navMeshAgent.speed = 5.0f;
         detectiondistance = 5.0f;
         guard.waypoints = wp;
@@ -41,9 +44,11 @@ public class GuardSearchState : GuardStateBase
 
         if (guard.navMeshAgent.remainingDistance < guard.navMeshAgent.stoppingDistance)
         {
-           
-            m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % guard.waypoints.Length;
-            guard.navMeshAgent.SetDestination(guard.waypoints[m_CurrentWaypointIndex].position);
+            if (guard.waypoints.Length > 0)
+            {
+                m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % guard.waypoints.Length;
+                guard.navMeshAgent.SetDestination(guard.waypoints[m_CurrentWaypointIndex].position);
+            }
             
         }
     }

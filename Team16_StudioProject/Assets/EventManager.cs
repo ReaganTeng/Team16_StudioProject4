@@ -64,9 +64,8 @@ public class EventManager : MonoBehaviour
     }
     public Transform[] CheckForNearestWP()
     {
-        //Debug.Log(waypoints.Length);
+        Debug.Log(waypoints.Length);
         WaypointInfo[] wayPointArray = new WaypointInfo[waypoints.Length];
-        float[] wayp = new float[waypoints.Length];
         for (int i = 0; i < waypoints.Length; ++i)
         {
             WaypointInfo wpInfo = new WaypointInfo();
@@ -74,18 +73,7 @@ public class EventManager : MonoBehaviour
             wpInfo.Distance = Vector3.Distance(waypoints[i].transform.position, transform.position);
             wayPointArray[i] = wpInfo;
         }
-        // Sort the array
-        for (int i = 0; i < waypoints.Length - 2; ++i)
-        {
-            if (wayPointArray[i].Distance > wayPointArray[i + 1].Distance)
-            {
-                var temp = wayPointArray[i].Distance;
-                wayPointArray[i].Distance = wayPointArray[i + 1].Distance;
-                wayPointArray[i + 1].Distance = temp;
-            }
-        }
-
-        
+      
         Random r = new Random();
         int bound = r.Next(0, 1);
         int startingPoint = (waypoints.Length) / 2;
@@ -106,7 +94,7 @@ public class EventManager : MonoBehaviour
         else if (bound == 1)
         {
             //genRand = r.Next(startingPoint + 1, waypoints.Length);
-            for (int i = startingPoint - 1; i < waypoints.Length; i++)
+            for (int i = startingPoint; i < waypoints.Length; i++)
             {
                // Debug.Log(i - startingPoint);
                 storeWPTransform[i - startingPoint] = wayPointArray[i].wp.transform;
@@ -120,6 +108,36 @@ public class EventManager : MonoBehaviour
         
 
       //  Debug.Log(storeWPTransform.Length);
+        return storeWPTransform;
+
+    }
+    public Transform[] SortWaypoints()
+    {
+        waypoints = GameObject.FindGameObjectsWithTag("waypoint");
+        WaypointInfo[] wayPointArray = new WaypointInfo[waypoints.Length];
+        for (int i = 0; i < waypoints.Length; ++i)
+        {
+            WaypointInfo wpInfo = new WaypointInfo();
+            wpInfo.wp = waypoints[i];
+            wpInfo.Distance = Vector3.Distance(waypoints[i].transform.position, transform.position);
+            wayPointArray[i] = wpInfo;
+        }
+        // Sort the array
+        for (int i = 0; i < waypoints.Length - 2; ++i)
+        {
+            if (wayPointArray[i].Distance > wayPointArray[i + 1].Distance)
+            {
+                var temp = wayPointArray[i].Distance;
+                wayPointArray[i].Distance = wayPointArray[i + 1].Distance;
+                wayPointArray[i + 1].Distance = temp;
+            }
+        }
+        Transform[] storeWPTransform = new Transform[waypoints.Length];
+        for (int i = 0; i < waypoints.Length; ++i)
+        {
+            storeWPTransform[i] = wayPointArray[i].wp.transform;
+            // Debug.Log(wayPointArray[i].wp.transform.position);
+        }
         return storeWPTransform;
 
     }
