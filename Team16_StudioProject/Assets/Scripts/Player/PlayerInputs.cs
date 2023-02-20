@@ -79,9 +79,9 @@ public class PlayerInputs : MonoBehaviour
             //clone.position += Vector3.up * 1.0f;
             //clone.position += Camera.main.transform.forward * 3.0f;
             //clone.velocity = transform.TransformDirection(Camera.main.transform.forward * 40);
-            clone.position += playerModel.transform.forward * 3.0f;
-            clone.velocity = transform.TransformDirection(playerModel.transform.forward * 20);
-            clone.MoveRotation(playerModel.transform.rotation);
+            clone.position += playerModel.GetComponent<TPSController>().direction  * 3.0f;
+            clone.velocity = transform.TransformDirection(playerModel.GetComponent<TPSController>().direction * 20);
+            clone.MoveRotation(Quaternion.Euler(0.0f, playerModel.GetComponent<TPSController>().angle, 0.0f));
             //clone.MoveRotation(Camera.main.transform.rotation);
 
             playerStats.Numberofcoins -= 1;
@@ -106,6 +106,9 @@ public class PlayerInputs : MonoBehaviour
                         float distance = Vector3.Distance(child.position, pos);
                         if (distance < 1.5f)
                         {
+                            //INSTANTIATE COLLECTIBLE
+                            child.GetComponent<GuardStateManager>().IntantiateObject();
+                            
                             // Destroy the enemy
                             Destroy(child.gameObject);
                             List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
@@ -136,9 +139,9 @@ public class PlayerInputs : MonoBehaviour
 
                     clone.position = FirePoint.transform.position;
                     clone.position -= new Vector3(0.0f, 0.5f, 0.0f);
-                    clone.position += playerModel.transform.forward * 2.0f;
-                    clone.velocity = transform.TransformDirection(playerModel.transform.forward * 40);
-                    clone.MoveRotation(playerModel.transform.rotation);
+                    clone.position += playerModel.GetComponent<TPSController>().direction * 2.0f;
+                    clone.velocity = transform.TransformDirection(playerModel.GetComponent<TPSController>().direction * 30);
+                    clone.MoveRotation(Quaternion.Euler(0.0f, playerModel.GetComponent<TPSController>().angle, 0.0f));
 
                     foreach (Transform child in enemies.transform)
                     {
@@ -179,11 +182,18 @@ public class PlayerInputs : MonoBehaviour
                             Debug.Log("PUNCH");
                             if (child.GetComponent<GuardStateManager>().health <= 0)
                             {
+                                //INSTANTIATE COLLECTIBLE
+                                child.GetComponent<GuardStateManager>().IntantiateObject();
+
                                 Destroy(child.gameObject);
+
                                 List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
 
                                 tmp.RemoveAt(i);
                                 EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
+
+
+
                                 //EventManager.Event.CheckForEnemies();
                                 child.gameObject.SetActive(false);
                             }

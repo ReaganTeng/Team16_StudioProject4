@@ -18,6 +18,8 @@ public class TPSController : MonoBehaviour
 
     private GameObject[] LadderObjects;
 
+    public Vector3 direction;
+    public float angle;
     public Vector3 pos;
 
     private ThirdPersonController thirdPersonController;
@@ -97,15 +99,27 @@ public class TPSController : MonoBehaviour
         var (success, position) = GetMousePosition();
         if (success)
         {
-            // Calculate the direction
-            var direction = position - transform.position;
+            direction = (position - transform.position).normalized;
+
+            //position += transform.position;
 
             // You might want to delete this line.
             // Ignore the height difference.
+
+
+            if (position.x < transform.position.x)
+            {
+                angle = -(Vector3.Angle(transform.position, transform.position - position));
+            }
+            else
+            {
+                angle = Vector3.Angle(transform.position, transform.position - position);
+            }
+            
             direction.y = 0;
 
             // Make the transform look in the direction.
-            transform.forward = direction;
+            //transform.forward = direction;
         }
     }
     private (bool success, Vector3 position) GetMousePosition()

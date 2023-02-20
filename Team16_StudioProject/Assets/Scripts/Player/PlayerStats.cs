@@ -22,7 +22,7 @@ public class PlayerStats : MonoBehaviour
     public int maxAmmoCount;
     [SerializeField] private bool shootPistol = true;
 
-    [SerializeField] public int Numberofkeys = 1;
+    [SerializeField] public int Numberofkeys = 2;
 
     [SerializeField] public int Numberofcoins = 1;
 
@@ -35,6 +35,9 @@ public class PlayerStats : MonoBehaviour
 
     public CollectibleObject firstaid;
     public CollectibleObject ammoclip;
+    public CollectibleObject coin;
+
+
     public EquipmentObject shiv;
 
 
@@ -66,6 +69,12 @@ public class PlayerStats : MonoBehaviour
                 && shivDurability <= 0)
             {
                 shivDurability = 2;
+                Destroy(other.gameObject);
+            }
+            else if (item.item == coin)
+            {
+                Debug.Log("COIN COLLECTED");
+                Numberofcoins += 1;
                 Destroy(other.gameObject);
             }
 
