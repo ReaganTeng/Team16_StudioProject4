@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3377460255026308714}
   - component: {fileID: 3377460255027078732}
   - component: {fileID: 3377460255028077708}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder LP E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3377460255026308716}
   - component: {fileID: 3377460255027078734}
   - component: {fileID: 3377460255028077710}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder LP D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 3377460255026308718}
   - component: {fileID: 3377460255027078736}
   - component: {fileID: 3377460255028077712}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder LP C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 3377460255026308720}
   - component: {fileID: 3377460255027078738}
   - component: {fileID: 3377460255028077714}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder LP B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 3377460255026308722}
   - component: {fileID: 3377460255027078740}
   - component: {fileID: 3377460255028077716}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder LP A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 3377460255026308724}
   - component: {fileID: 3377460255027078742}
   - component: {fileID: 3377460255028077718}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 3377460255026308726}
   - component: {fileID: 3377460255027078744}
   - component: {fileID: 3377460255028077720}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 3377460255026308728}
   - component: {fileID: 3377460255027078746}
   - component: {fileID: 3377460255028077722}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 3377460255026308730}
   - component: {fileID: 3377460255027078748}
   - component: {fileID: 3377460255028077724}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,7 +758,7 @@ GameObject:
   - component: {fileID: 3377460255026308732}
   - component: {fileID: 3377460255027078750}
   - component: {fileID: 3377460255028077726}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StellLadder A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -842,7 +842,8 @@ GameObject:
   - component: {fileID: 3377460255016421790}
   - component: {fileID: 3377460255364573031}
   - component: {fileID: 3377460255364573030}
-  m_Layer: 0
+  - component: {fileID: 775714816362952835}
+  m_Layer: 3
   m_Name: Free_SteelLadder
   m_TagString: Ladder
   m_Icon: {fileID: 0}
@@ -902,7 +903,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3377460255025822302}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
@@ -949,3 +950,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &775714816362952835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3377460255025822302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 828715ac12457ee4dae2d8c5a589291b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
