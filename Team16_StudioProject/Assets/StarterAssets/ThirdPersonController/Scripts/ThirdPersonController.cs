@@ -261,49 +261,51 @@ namespace StarterAssets
             _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
-            //// normalise input direction
-            //Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-            //_targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-            //                      _mainCamera.transform.eulerAngles.y;
-            //// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
-            //// if there is a move input rotate player when the player is moving
-            ////if (_input.move != Vector2.zero)
-            ////{
-                
-            ////    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
-            ////        RotationSmoothTime);
+            // normalise input direction
+            Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                                  _mainCamera.transform.eulerAngles.y;
+            // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
+            // if there is a move input rotate player when the player is moving
+            //if (_input.move != Vector2.zero)
+            //{
 
-            ////    // rotate to face input direction relative to camera position
-                
-            ////    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
-                
-            ////}
+            //    float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+            //        RotationSmoothTime);
+
+            //    // rotate to face input direction relative to camera position
+
+            //    transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+
+            //}
 
 
             //Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
             // move the player
             if (!Climbing)
             {
-                if (Input.GetKey(KeyCode.W))
-                {
-                    _controller.Move(transform.forward.normalized * (_speed * Time.deltaTime) +
+                _controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) +
                                         new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-                }
-                else if (Input.GetKey(KeyCode.S))
-                {
-                    _controller.Move(-transform.forward.normalized * (_speed * Time.deltaTime) +
-                                        new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    _controller.Move(-transform.right.normalized * (_speed * Time.deltaTime) +
-                                        new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-                }          
-                else if (Input.GetKey(KeyCode.D))
-                {
-                    _controller.Move(transform.right.normalized * (_speed * Time.deltaTime) +
-                                        new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-                }
+                //if (Input.GetKey(KeyCode.W))
+                //{
+                //    _controller.Move(transform.forward.normalized * (_speed * Time.deltaTime) +
+                //                        new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                //}
+                //else if (Input.GetKey(KeyCode.S))
+                //{
+                //    _controller.Move(-transform.forward.normalized * (_speed * Time.deltaTime) +
+                //                        new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                //}
+                //if (Input.GetKey(KeyCode.A))
+                //{
+                //    _controller.Move(-transform.right.normalized * (_speed * Time.deltaTime) +
+                //                        new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                //}          
+                //else if (Input.GetKey(KeyCode.D))
+                //{
+                //    _controller.Move(transform.right.normalized * (_speed * Time.deltaTime) +
+                //                        new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                //}
             }
             else
             {
