@@ -34,7 +34,12 @@ public class SecurityCameraScript : MonoBehaviour
         player = GameObject.Find("PlayerArmature");
         collider = GetComponent<Collider>();
         pos = transform.position;
-        m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
+
+        if (gameObject.GetComponent<Light>() == null)
+        {
+            m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
+        }
+
 
         if (waypoints.Length > 0) 
             navMeshAgent.SetDestination(waypoints[0].position);
