@@ -66,6 +66,10 @@ public class ProjectileScript : MonoBehaviour
 
                     if (child.GetComponent<GuardStateManager>().health <= 0)
                     {
+
+                        //INSTANTIATE COLLECTIBLE
+                        child.GetComponent<GuardStateManager>().IntantiateObject();
+
                         Destroy(child);
                         child.SetActive(false);
 

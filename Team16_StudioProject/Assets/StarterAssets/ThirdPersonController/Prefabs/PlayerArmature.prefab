@@ -1202,6 +1202,9 @@ MonoBehaviour:
   aimColliderLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   debugTransform: {fileID: 0}
   pos: {x: 0, y: 0, z: 0}
 --- !u!114 &4416926081852918493
@@ -1317,11 +1320,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   ammoCount: 10
+  clipCount: 1
+  shivDurability: 2
+  maxAmmoCount: 0
   shootPistol: 1
   Numberofkeys: 1
+  Numberofcoins: 1
   equippedWeapon: 0
   inventory: {fileID: 11400000, guid: fe7c0117d9f49b247b262d31b99e1bf4, type: 2}
   firstaid: {fileID: 11400000, guid: 2e96272a6806ae34189037e2a0712c26, type: 2}
+  ammoclip: {fileID: 11400000, guid: d31dbd540fb00864a907ea643e4d5e52, type: 2}
+  coin: {fileID: 11400000, guid: 67aa569768ff8494580d95cf33b02994, type: 2}
+  shiv: {fileID: 11400000, guid: f4f2d378f138edc4e8972c364aadb6d0, type: 2}
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0

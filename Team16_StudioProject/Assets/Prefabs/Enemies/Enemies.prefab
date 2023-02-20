@@ -582,6 +582,10 @@ MonoBehaviour:
     type: 3}
   curstate: 
   health: 0
+  pistolClip: {fileID: 2173230329060076521, guid: 16ef06e95a5895646a2c87258f45fe65,
+    type: 3}
+  shiv: {fileID: 4890464438319283094, guid: d880ef9d4b5cc9c4eb3585d12d1d4d8e, type: 3}
+  coin: {fileID: 825773668044350865, guid: 8becd3c1a546ff144ae090a85b522e76, type: 3}
 --- !u!136 &3751484280772504296
 CapsuleCollider:
   m_ObjectHideFlags: 0
