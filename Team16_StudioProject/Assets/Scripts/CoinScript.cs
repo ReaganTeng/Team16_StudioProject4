@@ -34,18 +34,22 @@ public class CoinScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        foreach (Transform child in enemies.transform)
-        {
-            float distance = Vector3.Distance(child.position, transform.position);
-            if (distance < 20 )
-            {
-                if (child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().PatrolState
-                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
-                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
-                {
-                    child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().CoinState);
-                }
 
+        if (enemies != null)
+        {
+            foreach (Transform child in enemies.transform)
+            {
+                float distance = Vector3.Distance(child.position, transform.position);
+                if (distance < 20)
+                {
+                    if (child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().PatrolState
+                    || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
+                    || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
+                    {
+                        child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().CoinState);
+                    }
+
+                }
             }
         }
 

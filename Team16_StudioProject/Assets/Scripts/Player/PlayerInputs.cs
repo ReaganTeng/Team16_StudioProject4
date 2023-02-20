@@ -58,13 +58,6 @@ public class PlayerInputs : MonoBehaviour
             return;
         }
 
-        //foreach (Transform child in enemies.transform)
-        //{
-        //    float distance = Vector3.Distance(child.position, transform.position);
-        //    if (distance < 20)
-        //        child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
-        //}
-
         // Throw a coin
         if (Input.GetKeyDown(KeyCode.LeftControl) 
             && playerStats.Numberofcoins > 0)
@@ -74,15 +67,11 @@ public class PlayerInputs : MonoBehaviour
             Rigidbody clone;
             clone = Instantiate(coin, playerModel.transform.position, playerModel.transform.rotation);
             pos = transform.position;
-
             clone.position = playerModel.transform.position;
-            //clone.position += Vector3.up * 1.0f;
-            //clone.position += Camera.main.transform.forward * 3.0f;
-            //clone.velocity = transform.TransformDirection(Camera.main.transform.forward * 40);
             clone.position += playerModel.GetComponent<TPSController>().direction  * 3.0f;
+            clone.velocity = new Vector3(0, 0, 0);
             clone.velocity = transform.TransformDirection(playerModel.GetComponent<TPSController>().direction * 20);
             clone.MoveRotation(Quaternion.Euler(0.0f, playerModel.GetComponent<TPSController>().angle, 0.0f));
-            //clone.MoveRotation(Camera.main.transform.rotation);
 
             playerStats.Numberofcoins -= 1;
         }
@@ -143,11 +132,15 @@ public class PlayerInputs : MonoBehaviour
                     clone.velocity = transform.TransformDirection(playerModel.GetComponent<TPSController>().direction * 30);
                     clone.MoveRotation(Quaternion.Euler(0.0f, playerModel.GetComponent<TPSController>().angle, 0.0f));
 
-                    foreach (Transform child in enemies.transform)
+                    if (enemies != null)
                     {
-                        float distance = Vector3.Distance(child.position, transform.position);
-                        if (distance < 20)
-                            child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
+
+                        foreach (Transform child in enemies.transform)
+                        {
+                            float distance = Vector3.Distance(child.position, transform.position);
+                            if (distance < 20)
+                                child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
+                        }
                     }
 
                     playerStats.ammoCount--;

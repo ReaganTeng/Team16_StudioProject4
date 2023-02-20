@@ -13,6 +13,12 @@ public class WeaponUI : MonoBehaviour
     private PlayerStats playerStats;
     [SerializeField] TextMeshProUGUI numberOfAmmo;
 
+
+    [SerializeField] TextMeshProUGUI numberOfKeys;
+
+    [SerializeField] TextMeshProUGUI numberOfcoins;
+
+
     private GameObject weaponUI;
 
     private GameObject pistolImage;
@@ -23,6 +29,8 @@ public class WeaponUI : MonoBehaviour
 
     private int shivCount;
 
+    private int keycount;
+    private int coincount;
 
 
     // Start is called before the first frame update
@@ -41,16 +49,17 @@ public class WeaponUI : MonoBehaviour
       ammo = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().ammoCount;
       clipCount = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().clipCount;
       shivCount = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().shivDurability;
+        keycount = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().Numberofkeys;
+        coincount = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().Numberofcoins;
 
+        numberOfKeys.SetText("KEYS: " + keycount.ToString());
+        numberOfcoins.SetText(coincount.ToString());
 
         switch (playerStats.equippedWeapon)
         {
             case PlayerStats.EquippedWeapon.Shiv:
-                       
                 shivImage.GetComponent<RawImage>().enabled = true;
                 pistolImage.GetComponent<RawImage>().enabled = false;
-
-
                 numberOfAmmo.SetText("  " + shivCount.ToString());
                 break;
             case PlayerStats.EquippedWeapon.Pistol:
@@ -58,9 +67,10 @@ public class WeaponUI : MonoBehaviour
                 pistolImage.GetComponent<RawImage>().enabled = true;
                 shivImage.GetComponent<RawImage>().enabled = false;
 
-
                 numberOfAmmo.SetText(ammo.ToString() + "/" + clipCount.ToString());
                 break;
+
+
         }
 
     }
