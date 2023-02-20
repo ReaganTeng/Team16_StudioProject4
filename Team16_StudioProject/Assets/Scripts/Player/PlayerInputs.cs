@@ -112,7 +112,7 @@ public class PlayerInputs : MonoBehaviour
 
                             tmp.RemoveAt(i);
                             EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-                            EventManager.Event.CheckForEnemies();
+                            //EventManager.Event.CheckForEnemies();
                             child.gameObject.SetActive(false);
 
                             playerStats.shivDurability--;
@@ -184,7 +184,7 @@ public class PlayerInputs : MonoBehaviour
 
                                 tmp.RemoveAt(i);
                                 EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-                                EventManager.Event.CheckForEnemies();
+                                //EventManager.Event.CheckForEnemies();
                                 child.gameObject.SetActive(false);
                             }
                             break;
