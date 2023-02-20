@@ -34,6 +34,7 @@ public class GuardStateManager : MonoBehaviour
 
     private Observer[] childscript;
 
+    public int health;
 
 
     void Awake()
@@ -65,7 +66,7 @@ public class GuardStateManager : MonoBehaviour
         }
         //
 
-
+        health = 100;
 
         //Debug.Log("WAYPOINTS ARE: " + waypoints[0].position);
         currentState.EnterState(this, waypoints);
@@ -137,6 +138,10 @@ public class GuardStateManager : MonoBehaviour
         return player;
     }
 
+    public void damage(int dmg)
+    {
+        health -= dmg;
+    }
 
     public GameObject getpov1()
     {

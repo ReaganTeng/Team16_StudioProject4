@@ -25,13 +25,27 @@ public class RenderWeaponModel : MonoBehaviour
         switch (playerStats.equippedWeapon)
         {
             case PlayerStats.EquippedWeapon.Shiv:
-                       
-                shivModel.SetActive(true);
-                pistolModel.SetActive(false);       
+                if (playerStats.shivDurability > 0)
+                {
+                    shivModel.SetActive(true);
+                    pistolModel.SetActive(false);
+                }
+                else
+                {
+                    playerStats.equippedWeapon = PlayerStats.EquippedWeapon.fists;
+                }
                 break;
             case PlayerStats.EquippedWeapon.Pistol:
+
+
                 shivModel.SetActive(false);
-                pistolModel.SetActive(true);                          
+                pistolModel.SetActive(true);
+                break;
+
+
+            default:
+                shivModel.SetActive(false);
+                pistolModel.SetActive(false);
                 break;
         }
     }

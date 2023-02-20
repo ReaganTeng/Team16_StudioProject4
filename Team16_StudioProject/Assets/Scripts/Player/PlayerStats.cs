@@ -9,6 +9,9 @@ public class PlayerStats : MonoBehaviour
     {
         Shiv,
         Pistol,
+
+        fists,
+
         NUM_TYPES
     }
 

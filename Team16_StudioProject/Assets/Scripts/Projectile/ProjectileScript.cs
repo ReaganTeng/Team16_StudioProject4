@@ -60,22 +60,26 @@ public class ProjectileScript : MonoBehaviour
                 float distance = Vector3.Distance(child.transform.position, pos);
                 if (distance < 1.3f)
                 {
-                   // Debug.Log(i);
+                    child.GetComponent<GuardStateManager>().damage(10);
 
-                    // Destroy the enemy
-                    Destroy(child);
-                    child.SetActive(false);
-                    Destroy(gameObject);
 
-                    List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
-                    //ArrayList enemyArr = new ArrayList(EnemyManager.enemyManager.GetNumberOfEnemies());
-                    // GameObject enemyToRemove = child;
-                    // int numIndex = enemyArr.IndexOf(enemyArr, i);
 
-                    tmp.RemoveAt(i);
-                   // enemyArr.RemoveAt(i);
-                    EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-                    //EventManager.Event.CheckForEnemies();
+                    if (child.GetComponent<GuardStateManager>().health <= 0)
+                    {
+                        Destroy(child);
+                        child.SetActive(false);
+
+
+                        List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
+                        //ArrayList enemyArr = new ArrayList(EnemyManager.enemyManager.GetNumberOfEnemies());
+                        // GameObject enemyToRemove = child;
+                        // int numIndex = enemyArr.IndexOf(enemyArr, i);
+
+                        tmp.RemoveAt(i);
+                        // enemyArr.RemoveAt(i);
+                        EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
+                        EventManager.Event.CheckForEnemies();
+                    }
 
 
                     break;

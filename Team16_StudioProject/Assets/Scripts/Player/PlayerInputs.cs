@@ -157,6 +157,45 @@ public class PlayerInputs : MonoBehaviour
                 }
 
                 break;
+
+
+
+            //PUNCH
+            case PlayerStats.EquippedWeapon.fists:
+
+                pos = playerModel.transform.position;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    int i = 0;
+                    foreach (Transform child in enemies.transform)
+                    {
+                        float distance = Vector3.Distance(child.position, pos);
+                        if (distance < 1.5f)
+                        {
+
+                            child.GetComponent<GuardStateManager>().damage(5);
+
+                            Debug.Log("PUNCH");
+                            if (child.GetComponent<GuardStateManager>().health <= 0)
+                            {
+                                Destroy(child.gameObject);
+                                List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
+
+                                tmp.RemoveAt(i);
+                                EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
+                                EventManager.Event.CheckForEnemies();
+                                child.gameObject.SetActive(false);
+                            }
+                            break;
+                        }
+                        i++;
+                    }
+                }
+                break;
+            //
+
+            default:
+                break;
         }
 
     }

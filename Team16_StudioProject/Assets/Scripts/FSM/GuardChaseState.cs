@@ -25,7 +25,7 @@ public class GuardChaseState : GuardStateBase
         lookpos.y = 0;
         var rotation = Quaternion.LookRotation(lookpos);
         guard.getgenemyPos().rotation = Quaternion.Slerp(
-            guard.getgenemyPos().rotation, rotation, Time.deltaTime * 3
+            guard.getgenemyPos().rotation, rotation, Time.deltaTime * 10
             );
 
 
