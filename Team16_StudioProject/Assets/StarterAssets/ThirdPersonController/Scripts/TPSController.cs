@@ -11,7 +11,7 @@ public class TPSController : MonoBehaviour
     [SerializeField] private float normalSensitivity;
     [SerializeField] private float aimSensitivity;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private LayerMask groundMask = new LayerMask();
 
     [SerializeField] private Transform debugTransform;
     private Camera mainCamera;
