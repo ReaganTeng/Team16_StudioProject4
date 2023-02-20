@@ -24,6 +24,10 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] public int Numberofkeys = 1;
 
+    [SerializeField] public int Numberofcoins = 1;
+
+
+
     public EquippedWeapon equippedWeapon;
     private GameObject healthBar;
 

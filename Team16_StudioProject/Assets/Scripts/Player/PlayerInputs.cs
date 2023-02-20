@@ -66,7 +66,8 @@ public class PlayerInputs : MonoBehaviour
         //}
 
         // Throw a coin
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) 
+            && playerStats.Numberofcoins > 0)
         {
 
             // Instantiate the projectile at the position and rotation of this transform
@@ -83,7 +84,7 @@ public class PlayerInputs : MonoBehaviour
             clone.MoveRotation(playerModel.transform.rotation);
             //clone.MoveRotation(Camera.main.transform.rotation);
 
-
+            playerStats.Numberofcoins -= 1;
         }
 
    
@@ -111,7 +112,7 @@ public class PlayerInputs : MonoBehaviour
 
                             tmp.RemoveAt(i);
                             EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-                            EventManager.Event.CheckForEnemies();
+                            //EventManager.Event.CheckForEnemies();
                             child.gameObject.SetActive(false);
 
                             playerStats.shivDurability--;
@@ -183,7 +184,7 @@ public class PlayerInputs : MonoBehaviour
 
                                 tmp.RemoveAt(i);
                                 EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-                                EventManager.Event.CheckForEnemies();
+                                //EventManager.Event.CheckForEnemies();
                                 child.gameObject.SetActive(false);
                             }
                             break;

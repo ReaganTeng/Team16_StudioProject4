@@ -12,12 +12,24 @@ public class SecurityCameraScript : MonoBehaviour
     private Vector3 pos;
     public Transform[] waypoints;
 
+
+
+
+
     int m_CurrentWaypointIndex;
     public NavMeshAgent navMeshAgent;
+
+
+
+    bool detected_player;
+    float timer;
 
     // Start is called before the first frame update
     void Start()
     {
+        detected_player = false;
+        timer = 5;
+
         enemies = GameObject.Find("Enemies");
         player = GameObject.Find("PlayerArmature");
         collider = GetComponent<Collider>();
@@ -33,21 +45,57 @@ public class SecurityCameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waypoints.Length > 0)
+        if (gameObject.GetComponent<Light>() == null)
         {
-            if (navMeshAgent.remainingDistance < 2)
+            if (waypoints.Length > 0)
             {
-                m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
-                navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+                if (navMeshAgent.remainingDistance < 2)
+                {
+                    m_CurrentWaypointIndex = (m_CurrentWaypointIndex + 1) % waypoints.Length;
+                    navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+                }
             }
         }
 
+        if (detected_player == true)
+        {
 
+            timer -= 1 * Time.deltaTime;
 
+            if (gameObject.GetComponent<Light>() == null)
+            {
+                navMeshAgent.speed = 0;
+                gameObject.GetComponentInChildren<Light>().color = Color.red;
+            }
+            else
+            {
+                gameObject.GetComponent<Light>().color = Color.red;
+            }
+
+            if (timer <= 0)
+            {
+                detected_player = false;
+            }
+        }
+        else
+        {
+            if (gameObject.GetComponent<Light>() == null)
+            {
+                gameObject.GetComponentInChildren<Light>().color = Color.green;
+                navMeshAgent.speed = 10;
+
+            }
+            else
+            {
+                gameObject.GetComponent<Light>().color = Color.green;
+            }
+
+            timer = 5;
+        }
     }
 
 
-     void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
      {
 
         if (other.tag == "Player")
@@ -60,6 +108,8 @@ public class SecurityCameraScript : MonoBehaviour
                   //  child.GetComponent<GuardStateManager>().SetTargetPosition(pos);
                     child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().SecurityState);
 
+
+                detected_player = true;
 
             }
         }
