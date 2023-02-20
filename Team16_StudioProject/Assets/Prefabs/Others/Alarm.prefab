@@ -224,8 +224,8 @@ GameObject:
   - component: {fileID: 8157871783341658117}
   - component: {fileID: 4916014753920589719}
   m_Layer: 0
-  m_Name: Alarm Light
-  m_TagString: Untagged
+  m_Name: AlarmLight
+  m_TagString: AlarmLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -6,8 +6,6 @@ using System;
 public class AlarmEvent : MonoBehaviour
 {
     private GameObject[] Enemies;
-    AudioSource m_AudioSource;
-    Animator m_Animator;
     [SerializeField] private float AlarmRadius = 20.0f;
     [SerializeField] private float AlarmDuration = 20.0f;
     private GameObject[] AlarmPos;
@@ -25,8 +23,6 @@ public class AlarmEvent : MonoBehaviour
     }
     public void Awake()
     {
-        m_AudioSource = GetComponent<AudioSource>();
-        m_Animator = GetComponentInChildren<Animator>();
         AlarmPos = GameObject.FindGameObjectsWithTag("AlarmPosition");
         temp = new Transform[AlarmPos.Length];
         for (int i = 0; i < AlarmPos.Length; ++i)
@@ -44,14 +40,10 @@ public class AlarmEvent : MonoBehaviour
     public void FixedUpdate()
     {
         if (EventManager.Event.GetActiveBool() == true && AlarmDuration > 0.0f)
-        {
-            if (!m_AudioSource.isPlaying)
-            {
-                Debug.Log("Playing Sound");
-                m_AudioSource.Play();
-                m_Animator.enabled = true;
-                GameObject.Find("Alarm Light").GetComponent<Light>().enabled = true;//AlarmFlickering.LightSource.flickeringLight.enabled = true;          
-            }
+        {       
+            Debug.Log("Playing Sound");
+            AlarmManager.alarmManager.PlayAlarm();
+            AlarmManager.alarmManager.OnAlarmLights();           
         }
         else
         {
@@ -63,14 +55,11 @@ public class AlarmEvent : MonoBehaviour
                 }
                 else
                 {
-                    if (m_AudioSource.isPlaying)
-                    {
-                        EventManager.Event.SetActiveBool(false);
-                        AlarmDuration = 20.0f;
-                        m_AudioSource.Stop();
-                        m_Animator.enabled = false;
-                        GameObject.Find("Alarm Light").GetComponent<Light>().enabled = false;
-                    }
+                    
+                    EventManager.Event.SetActiveBool(false);
+                    AlarmDuration = 20.0f;
+                    AlarmManager.alarmManager.StopAlarm();
+                    AlarmManager.alarmManager.OffAlarmLights();
                 }
             }
         }
