@@ -39,8 +39,12 @@ public class CoinScript : MonoBehaviour
             float distance = Vector3.Distance(child.position, transform.position);
             if (distance < 20 )
             {
-
-                child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().CoinState);
+                if (child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().PatrolState
+                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
+                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
+                {
+                    child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().CoinState);
+                }
 
             }
         }

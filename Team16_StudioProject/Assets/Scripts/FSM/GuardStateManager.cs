@@ -153,6 +153,7 @@ public class GuardStateManager : MonoBehaviour
     {
         return pov2;
     }
+
     public GuardStateBase returnState()
     {
         return currentState;
