@@ -16,7 +16,6 @@ public class GuardCoinState : GuardStateBase
         coin = GameObject.Find("Coin(Clone)");
         time = 5.0f;
 
-
         guard.navMeshAgent.speed = 5.0f;
         distfromPlayer = 10.0f;
         stoppingdistance = 3.0f;

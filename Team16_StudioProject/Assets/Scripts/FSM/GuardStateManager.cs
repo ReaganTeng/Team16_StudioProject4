@@ -37,6 +37,11 @@ public class GuardStateManager : MonoBehaviour
     public int health;
 
 
+    public GameObject pistolClip;
+    public GameObject shiv;
+    public GameObject coin;
+
+
     void Awake()
     {
         //FOR GUARDPATROLSTATE
@@ -83,6 +88,10 @@ public class GuardStateManager : MonoBehaviour
         return childscript[i].getdetected();
     }
 
+    public void IntantiateObject()
+    {
+        Instantiate(shiv, enemyPos.position, Quaternion.identity);
+    }
 
 
 
@@ -91,6 +100,14 @@ public class GuardStateManager : MonoBehaviour
     {
         //player = GameObject.FindGameObjectWithTag("Player");
         enemyPos = GetComponent<Transform>();
+
+
+        //if(health <= 0)
+        //{
+
+        //    IntantiateObject();
+        //    Debug.Log("INSTANTIATE");
+        //}
 
         currentState.UpdateState(this);
 
@@ -158,5 +175,8 @@ public class GuardStateManager : MonoBehaviour
     {
         return currentState;
     }
+
+
+    
 
 }

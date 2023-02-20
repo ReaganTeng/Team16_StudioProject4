@@ -106,6 +106,9 @@ public class PlayerInputs : MonoBehaviour
                         float distance = Vector3.Distance(child.position, pos);
                         if (distance < 1.5f)
                         {
+                            //INSTANTIATE COLLECTIBLE
+                            child.GetComponent<GuardStateManager>().IntantiateObject();
+                            
                             // Destroy the enemy
                             Destroy(child.gameObject);
                             List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
@@ -179,11 +182,18 @@ public class PlayerInputs : MonoBehaviour
                             Debug.Log("PUNCH");
                             if (child.GetComponent<GuardStateManager>().health <= 0)
                             {
+                                //INSTANTIATE COLLECTIBLE
+                                child.GetComponent<GuardStateManager>().IntantiateObject();
+
                                 Destroy(child.gameObject);
+
                                 List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
 
                                 tmp.RemoveAt(i);
                                 EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
+
+
+
                                 //EventManager.Event.CheckForEnemies();
                                 child.gameObject.SetActive(false);
                             }
