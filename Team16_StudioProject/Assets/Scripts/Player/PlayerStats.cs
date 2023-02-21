@@ -44,7 +44,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         healthBar = GameObject.Find("Health Bar");
-        maxAmmoCount = ammoCount;
+        maxAmmoCount = 12;
     }
 
     public void OnTriggerEnter(Collider other)
