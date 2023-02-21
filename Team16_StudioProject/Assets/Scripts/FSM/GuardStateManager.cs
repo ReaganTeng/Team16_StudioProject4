@@ -125,17 +125,17 @@ public class GuardStateManager : MonoBehaviour
         {
             case 1:
                 {
-                    Instantiate(shiv, enemyPos.position, Quaternion.identity);
+                    Instantiate(shiv, new Vector3(enemyPos.position.x, enemyPos.position.y + 0.5f, enemyPos.position.z - 3.0f), Quaternion.identity);
                     break;
                 }
             case 2:
                 {
-                    Instantiate(pistolClip, enemyPos.position, Quaternion.identity);
+                    Instantiate(pistolClip, new Vector3(enemyPos.position.x, enemyPos.position.y + 0.5f, enemyPos.position.z - 3.0f), Quaternion.identity);
                     break;
                 }
             case 3:
                 {
-                    Instantiate(coin, enemyPos.position, Quaternion.identity);
+                    Instantiate(coin, new Vector3(enemyPos.position.x, enemyPos.position.y + 0.5f, enemyPos.position.z - 3.0f), Quaternion.identity);
                     break;
                 }
             default:

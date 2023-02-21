@@ -23,6 +23,13 @@ public class GuardCoinState : GuardStateBase
 
     public override void UpdateState(GuardStateManager guard)
     {
+        if(coin == null)
+        {
+            return;
+        }
+
+
+
         time -= Time.deltaTime;
 
         if (time <= 0)

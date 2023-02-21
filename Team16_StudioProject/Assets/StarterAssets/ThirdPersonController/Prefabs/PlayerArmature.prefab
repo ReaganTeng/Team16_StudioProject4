@@ -1206,6 +1206,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   debugTransform: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
+  angle: 0
   pos: {x: 0, y: 0, z: 0}
 --- !u!114 &4416926081852918493
 MonoBehaviour:
@@ -1331,6 +1333,7 @@ MonoBehaviour:
   firstaid: {fileID: 11400000, guid: 2e96272a6806ae34189037e2a0712c26, type: 2}
   ammoclip: {fileID: 11400000, guid: d31dbd540fb00864a907ea643e4d5e52, type: 2}
   coin: {fileID: 11400000, guid: 67aa569768ff8494580d95cf33b02994, type: 2}
+  key: {fileID: 11400000, guid: c8d3d8917b905df4da5763689fca40a1, type: 2}
   shiv: {fileID: 11400000, guid: f4f2d378f138edc4e8972c364aadb6d0, type: 2}
 --- !u!1 &4523139366846529165
 GameObject:
