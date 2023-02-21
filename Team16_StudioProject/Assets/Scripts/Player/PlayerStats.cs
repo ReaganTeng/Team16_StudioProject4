@@ -36,6 +36,7 @@ public class PlayerStats : MonoBehaviour
     public CollectibleObject firstaid;
     public CollectibleObject ammoclip;
     public CollectibleObject coin;
+    public CollectibleObject key;
 
 
     public EquipmentObject shiv;
@@ -44,7 +45,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         healthBar = GameObject.Find("Health Bar");
-        maxAmmoCount = ammoCount;
+        maxAmmoCount = 12;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -73,8 +74,12 @@ public class PlayerStats : MonoBehaviour
             }
             else if (item.item == coin)
             {
-                Debug.Log("COIN COLLECTED");
                 Numberofcoins += 1;
+                Destroy(other.gameObject);
+            }
+            else if (item.item == key)
+            {
+                Numberofkeys += 1;
                 Destroy(other.gameObject);
             }
 
