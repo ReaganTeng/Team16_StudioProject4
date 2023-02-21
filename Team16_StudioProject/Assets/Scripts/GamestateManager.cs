@@ -66,7 +66,7 @@ public class GamestateManager : MonoBehaviour
 
 
                 // Display the Gameover dialog
-                Time.timeScale = 1;
+                Time.timeScale = 0;
 
                 gameOverDialog.SetActive(true);
                 if (Input.GetKeyDown(KeyCode.Return))
