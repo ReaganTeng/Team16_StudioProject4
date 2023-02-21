@@ -9,16 +9,13 @@ public class PauseInput : MonoBehaviour
     public GameObject player;
     private GameObject pauseScreen;
 
-    public Button resumeBtn;
 
     // Start is called before the first frame update
     void Start()
     {
         //player = GameObject.Find("PlayerArmature").GetComponent<PlayerInputs>();
         pauseScreen = GameObject.Find("Pause Screen");
-        // Buttons
-        resumeBtn = GetComponent<Button>();   
-        resumeBtn.onClick.AddListener(ResumeButton);
+        
                             
 
     }
@@ -26,7 +23,6 @@ public class PauseInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public void ResumeButton()
