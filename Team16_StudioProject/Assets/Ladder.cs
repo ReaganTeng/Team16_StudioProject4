@@ -10,12 +10,18 @@ public class Ladder : MonoBehaviour
     {
         Armature = GameObject.Find("PlayerArmature");
     }
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider collider)
     {
-        Armature.GetComponent<ThirdPersonController>().SetClimbing(true);
+        if (collider.gameObject == Armature)
+        {
+            Armature.GetComponent<ThirdPersonController>().SetClimbing(true);
+        }
     }
-    void OnTriggerExit()
+    void OnTriggerExit(Collider collider)
     {
-        Armature.GetComponent<ThirdPersonController>().SetClimbing(false);
+        if (collider.gameObject == Armature)
+        {
+            Armature.GetComponent<ThirdPersonController>().SetClimbing(false);
+        }
     }
 }
