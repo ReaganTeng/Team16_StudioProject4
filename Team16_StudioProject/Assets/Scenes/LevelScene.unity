@@ -7858,8 +7858,23 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 2744080983866192128, guid: 8566fc692908c3340a3dd7b3e6b81316,
         type: 3}
+      propertyPath: ammoCount
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744080983866192128, guid: 8566fc692908c3340a3dd7b3e6b81316,
+        type: 3}
+      propertyPath: clipCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744080983866192128, guid: 8566fc692908c3340a3dd7b3e6b81316,
+        type: 3}
       propertyPath: Numberofkeys
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2744080983866192128, guid: 8566fc692908c3340a3dd7b3e6b81316,
+        type: 3}
+      propertyPath: equippedWeapon
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4824602385298448370, guid: 8566fc692908c3340a3dd7b3e6b81316,
         type: 3}
