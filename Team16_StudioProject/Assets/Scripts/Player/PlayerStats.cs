@@ -36,6 +36,7 @@ public class PlayerStats : MonoBehaviour
     public CollectibleObject firstaid;
     public CollectibleObject ammoclip;
     public CollectibleObject coin;
+    public CollectibleObject key;
 
 
     public EquipmentObject shiv;
@@ -58,25 +59,26 @@ public class PlayerStats : MonoBehaviour
             if(item.item == firstaid)
             {
                 health += 20;
-                Destroy(other.gameObject);
+
             }
             else if (item.item == ammoclip)
             {
                 clipCount += 1;
-                Destroy(other.gameObject);
             }
             else if (item.item == shiv
                 && shivDurability <= 0)
             {
                 shivDurability = 2;
-                Destroy(other.gameObject);
             }
             else if (item.item == coin)
             {
-                Debug.Log("COIN COLLECTED");
                 Numberofcoins += 1;
-                Destroy(other.gameObject);
             }
+            else if (item.item == key)
+            {
+                Numberofkeys += 1;
+            }
+            Destroy(other.gameObject);
 
 
         }

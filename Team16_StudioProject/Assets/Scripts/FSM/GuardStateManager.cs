@@ -154,7 +154,7 @@ public class GuardStateManager : MonoBehaviour
         enemyPos = GetComponent<Transform>();
 
 
-        
+
 
         //if(health <= 0)
         //{
@@ -231,6 +231,6 @@ public class GuardStateManager : MonoBehaviour
     }
 
 
-    
+
 
 }
