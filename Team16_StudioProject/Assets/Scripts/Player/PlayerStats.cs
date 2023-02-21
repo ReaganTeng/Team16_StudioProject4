@@ -59,29 +59,26 @@ public class PlayerStats : MonoBehaviour
             if(item.item == firstaid)
             {
                 health += 20;
-                Destroy(other.gameObject);
+
             }
             else if (item.item == ammoclip)
             {
                 clipCount += 1;
-                Destroy(other.gameObject);
             }
             else if (item.item == shiv
                 && shivDurability <= 0)
             {
                 shivDurability = 2;
-                Destroy(other.gameObject);
             }
             else if (item.item == coin)
             {
                 Numberofcoins += 1;
-                Destroy(other.gameObject);
             }
             else if (item.item == key)
             {
                 Numberofkeys += 1;
-                Destroy(other.gameObject);
             }
+            Destroy(other.gameObject);
 
 
         }
