@@ -96,14 +96,17 @@ public class PlayerInputs : MonoBehaviour
                         if (distance < 1.5f)
                         {
                             //INSTANTIATE COLLECTIBLE
-                            child.GetComponent<GuardStateManager>().IntantiateObject_random();
+                            child.GetComponent<GuardStateManager>().IntantiateObject();
+                            
                             // Destroy the enemy
                             Destroy(child.gameObject);
                             List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
+
                             tmp.RemoveAt(i);
                             EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
+                            //EventManager.Event.CheckForEnemies();
                             child.gameObject.SetActive(false);
-                            
+
                             playerStats.shivDurability--;
                             break;
                         }
@@ -173,7 +176,7 @@ public class PlayerInputs : MonoBehaviour
                             if (child.GetComponent<GuardStateManager>().health <= 0)
                             {
                                 //INSTANTIATE COLLECTIBLE
-                                child.GetComponent<GuardStateManager>().IntantiateObject_random();
+                                child.GetComponent<GuardStateManager>().IntantiateObject();
 
                                 Destroy(child.gameObject);
 

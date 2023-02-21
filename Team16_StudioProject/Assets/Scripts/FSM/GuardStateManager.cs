@@ -42,8 +42,6 @@ public class GuardStateManager : MonoBehaviour
     public GameObject coin;
 
 
-    public int generator;
-
     void Awake()
     {
         //FOR GUARDPATROLSTATE
@@ -92,57 +90,7 @@ public class GuardStateManager : MonoBehaviour
 
     public void IntantiateObject()
     {
-        switch (generator)
-        {
-            case 1:
-                {
-                    Instantiate(shiv, enemyPos.position, Quaternion.identity);
-                    break;
-                }
-            case 2:
-                {
-                    Instantiate(pistolClip, enemyPos.position, Quaternion.identity);
-                    break;
-                }
-            case 3:
-                {
-                    Instantiate(coin, enemyPos.position, Quaternion.identity);
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
-    }
-
-
-    public void IntantiateObject_random()
-    {
-        //Random rnd = new Random();
-        int random_generator = Random.Range(1, 4);
-        switch (random_generator)
-        {
-            case 1:
-                {
-                    Instantiate(shiv, enemyPos.position, Quaternion.identity);
-                    break;
-                }
-            case 2:
-                {
-                    Instantiate(pistolClip, enemyPos.position, Quaternion.identity);
-                    break;
-                }
-            case 3:
-                {
-                    Instantiate(coin, enemyPos.position, Quaternion.identity);
-                    break;
-                }
-            default:
-                {
-                    break;
-                }
-        }
+        Instantiate(shiv, enemyPos.position, Quaternion.identity);
     }
 
 
@@ -153,8 +101,6 @@ public class GuardStateManager : MonoBehaviour
         //player = GameObject.FindGameObjectWithTag("Player");
         enemyPos = GetComponent<Transform>();
 
-
-        
 
         //if(health <= 0)
         //{
