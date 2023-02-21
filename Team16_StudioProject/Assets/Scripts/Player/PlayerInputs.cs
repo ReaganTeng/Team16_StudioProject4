@@ -198,6 +198,7 @@ public class PlayerInputs : MonoBehaviour
 
                         if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0)
                         {
+                            Debug.Log("Shoot");
                             // Instantiate the projectile at the position and rotation of this transform
                             Rigidbody clone;
                             clone = Instantiate(projectile, playerModel.transform.position, playerModel.transform.rotation);
