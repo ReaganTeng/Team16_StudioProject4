@@ -27,9 +27,9 @@ public class PauseInput : MonoBehaviour
 
     public void ResumeButton()
     {
-        player = GameObject.Find("Player Character");
+        GameObject gameState = GameObject.Find("Gamestate Manager");
         pauseScreen = GameObject.Find("Pause Screen");
-        player.GetComponent<PlayerInputs>().currentState = PlayerInputs.Gamestate.GAMEPLAY;
+        gameState.GetComponent<GamestateManager>().currentState = GamestateManager.Gamestate.GAMEPLAY;
         Time.timeScale = 1;
         pauseScreen.SetActive(false);
 
