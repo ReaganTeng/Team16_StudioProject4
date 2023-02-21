@@ -58,8 +58,6 @@ public class EnemyProjectile : MonoBehaviour
                 float distance = Vector3.Distance(child.position, pos);
                 if (distance < 1.7f)
                 {
-                    // Destroy the enemy
-                    //Destroy(child.gameObject);
                     Destroy(gameObject);
                     players.GetComponent<PlayerStats>().health -= 10;
 
