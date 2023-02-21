@@ -96,7 +96,7 @@ public class PlayerInputs : MonoBehaviour
                         if (distance < 1.5f)
                         {
                             //INSTANTIATE COLLECTIBLE
-                            child.GetComponent<GuardStateManager>().IntantiateObject();
+                            child.GetComponent<GuardStateManager>().IntantiateObject_random();
                             
                             // Destroy the enemy
                             Destroy(child.gameObject);
@@ -176,7 +176,7 @@ public class PlayerInputs : MonoBehaviour
                             if (child.GetComponent<GuardStateManager>().health <= 0)
                             {
                                 //INSTANTIATE COLLECTIBLE
-                                child.GetComponent<GuardStateManager>().IntantiateObject();
+                                child.GetComponent<GuardStateManager>().IntantiateObject_random();
 
                                 Destroy(child.gameObject);
 

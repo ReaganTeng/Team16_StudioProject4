@@ -68,7 +68,7 @@ public class ProjectileScript : MonoBehaviour
                     {
 
                         //INSTANTIATE COLLECTIBLE
-                        child.GetComponent<GuardStateManager>().IntantiateObject();
+                        child.GetComponent<GuardStateManager>().IntantiateObject_random();
 
                         Destroy(child);
                         child.SetActive(false);
