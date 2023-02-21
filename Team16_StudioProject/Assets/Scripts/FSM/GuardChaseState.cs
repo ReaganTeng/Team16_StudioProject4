@@ -16,6 +16,7 @@ public class GuardChaseState : GuardStateBase
         guard.navMeshAgent.speed = 2.0f;
         distfromPlayer = 10.0f;
         stoppingdistance = 3.0f;
+        GlobalVolume.globalVolume.SetChase(true);
     }
 
     public override void UpdateState(GuardStateManager guard)
@@ -28,6 +29,7 @@ public class GuardChaseState : GuardStateBase
             guard.getgenemyPos().rotation, rotation, Time.deltaTime * 10
             );
 
+        GlobalVolume.globalVolume.SetVignetteIntensity();
 
         if (gracePeriod > 0.0f)
         {
@@ -51,6 +53,7 @@ public class GuardChaseState : GuardStateBase
                 //}
                 // Grace Period is over call the alarm event
                 // alarm.Alarmed = true;
+                gracePeriod = 5.0f;
             }
         }
 
@@ -59,6 +62,7 @@ public class GuardChaseState : GuardStateBase
         {
             gracePeriod = 5.0f;
             guard.SwitchState(guard.SearchState);
+            GlobalVolume.globalVolume.SetChase(false);
         }
 
         //STOPPING DISTANCE

@@ -60,6 +60,7 @@ public class AlarmEvent : MonoBehaviour
                     AlarmDuration = 20.0f;
                     AlarmManager.alarmManager.StopAlarm();
                     AlarmManager.alarmManager.OffAlarmLights();
+                    GlobalVolume.globalVolume.OffVignette();
                 }
             }
         }
