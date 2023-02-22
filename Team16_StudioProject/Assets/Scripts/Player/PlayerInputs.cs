@@ -40,7 +40,7 @@ public class PlayerInputs : MonoBehaviour
     {
         player = GameObject.Find("Player Character");
         playerModel = GameObject.Find("PlayerArmature");
-        enemies = GameObject.Find("Enemies");
+        enemies = GameObject.Find("Enemy Manager");
         playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
         FirePoint = GameObject.Find("PlayerCameraRoot");
 
@@ -157,7 +157,7 @@ public class PlayerInputs : MonoBehaviour
                         foreach (Transform child in enemies.transform)
                         {
                             float distance = Vector3.Distance(child.position, transform.position);
-                            if (distance < 20)
+                            if (distance < 40)
                                 child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
                         }
                     }
