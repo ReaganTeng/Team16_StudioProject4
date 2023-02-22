@@ -26,6 +26,7 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] public int Numberofcoins = 1;
 
+    private GameObject[] zone;
 
 
     public EquippedWeapon equippedWeapon;
@@ -38,12 +39,18 @@ public class PlayerStats : MonoBehaviour
     public CollectibleObject coin;
     public CollectibleObject key;
 
+    public bool gunequipped;
 
     public EquipmentObject shiv;
+    public EquipmentObject pistol;
 
+
+    private int zoneno;
 
     void Start()
     {
+
+        gunequipped = true;
         healthBar = GameObject.Find("Health Bar");
         maxAmmoCount = 12;
     }
@@ -88,6 +95,12 @@ public class PlayerStats : MonoBehaviour
                 Destroy(other.gameObject);
 
             }
+            else if (item.item == pistol)
+            {
+                gunequipped = true;
+                Destroy(other.gameObject);
+
+            }
 
 
         }
@@ -105,7 +118,36 @@ public class PlayerStats : MonoBehaviour
         }
 
 
+        zone = GameObject.FindGameObjectsWithTag("Z");
 
+
+        for (int i = 0; i < zone.Length; i++)
+        {
+            zone[i].GetComponent<WhatZone>().entity = gameObject;
+            Debug.Log("SCALE " +  i + " " + zone[i].GetComponent<Transform>().localScale.x )/*= 3*/;
+
+            if (/*zone[i].GetComponent<WhatZone>().m_InRange == true
+             && */gameObject.transform.position.x < zone[i].GetComponent<Transform>().position.x + (zone[i].GetComponent<Transform>().localScale.x/2)
+             && gameObject.transform.position.x > zone[i].GetComponent<Transform>().position.x - (zone[i].GetComponent<Transform>().localScale.x / 2)
+             && gameObject.transform.position.z > zone[i].GetComponent<Transform>().position.z - (zone[i].GetComponent<Transform>().localScale.z / 2)
+            && gameObject.transform.position.z < zone[i].GetComponent<Transform>().position.z + (zone[i].GetComponent<Transform>().localScale.z / 2)
+
+             )
+            //if (zone[i].GetComponent<Collider>() == gameObject.GetComponent<Transform>())
+            {
+                zoneno = zone[i].GetComponent<WhatZone>().zone_number;
+                Debug.Log("PLAYER ZONE " + zoneno);
+
+            }
+        }
+
+
+    }
+
+
+    public int returnzoneNumber()
+    {
+        return zoneno;
     }
 
     private void OnApplicationQuit()

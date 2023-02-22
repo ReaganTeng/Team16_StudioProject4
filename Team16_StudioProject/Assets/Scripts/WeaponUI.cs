@@ -69,6 +69,10 @@ public class WeaponUI : MonoBehaviour
 
                 numberOfAmmo.SetText(ammo.ToString() + "/" + clipCount.ToString());
                 break;
+            default:
+                numberOfAmmo.SetText("Fists");
+                break;
+
 
 
         }

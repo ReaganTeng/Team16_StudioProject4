@@ -10,6 +10,9 @@ public class CoinScript : MonoBehaviour
 
     private float timer;
 
+    private GameObject player;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +25,10 @@ public class CoinScript : MonoBehaviour
     {
         // rb.velocity.x--;  
         //Debug.Log(transform.position);
-        enemies = GameObject.Find("Enemies");
+        enemies = GameObject.Find("Enemy Manager");
+
+        player = GameObject.Find("PlayerArmature");
+
 
         timer -= Time.deltaTime;
 
@@ -34,22 +40,28 @@ public class CoinScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-
         if (enemies != null)
         {
             foreach (Transform child in enemies.transform)
             {
                 float distance = Vector3.Distance(child.position, transform.position);
-                if (distance < 20)
+                if (distance < 50
+                    && (child.GetComponent<GuardStateManager>().returnzoneNumber() == player.GetComponent<PlayerStats>().returnzoneNumber())
+                    )
                 {
+                    //Debug.Log("COIN SEEN");
                     if (child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().PatrolState
                     || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
                     || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
                     {
-                        child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().CoinState);
+                        child.GetComponent<GuardStateManager>().SS(child.GetComponent<GuardStateManager>().CoinState);
                     }
 
                 }
+                //else/* if (child.GetComponent<GuardStateManager>().returnzoneNumber() != player.GetComponent<PlayerStats>().returnzoneNumber())*/
+                //{
+                //    Debug.Log("COIN NOT SEEN");
+                //}
             }
         }
 

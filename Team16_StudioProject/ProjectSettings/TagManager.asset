@@ -13,6 +13,7 @@ TagManager:
   - AlarmPosition
   - AlarmLight
   - Zone
+  - Z
   layers:
   - Default
   - TransparentFX
