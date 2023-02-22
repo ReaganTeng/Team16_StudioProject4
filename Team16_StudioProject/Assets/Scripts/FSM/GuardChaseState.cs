@@ -34,7 +34,7 @@ public class GuardChaseState : GuardStateBase
         if (gracePeriod > 0.0f)
         {
             gracePeriod -= Time.deltaTime;
-            Debug.Log(gracePeriod);
+            //Debug.Log(gracePeriod);
         }
         else
         {
