@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GuardStateManager : MonoBehaviour
 {
+    public int ZoneNumber;
     public GuardStateBase currentState;
     public GuardPatrolState PatrolState = new GuardPatrolState();
     public GuardChaseState ChaseState = new GuardChaseState();

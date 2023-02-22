@@ -1374,7 +1374,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &267860165
 PrefabInstance:
@@ -1383,6 +1383,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 470550155}
     m_Modifications:
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
+      propertyPath: ZoneNumber
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -1479,6 +1484,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 470550155}
     m_Modifications:
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
+      propertyPath: ZoneNumber
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -1665,6 +1675,11 @@ PrefabInstance:
         type: 3}
       propertyPath: curstate
       value: Station
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
+      propertyPath: ZoneNumber
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5075534488604402034, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
@@ -2001,6 +2016,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
+      propertyPath: ZoneNumber
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 356563881}
@@ -2186,6 +2206,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 470550155}
     m_Modifications:
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
+      propertyPath: ZoneNumber
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -2760,6 +2785,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
+      propertyPath: ZoneNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 40841864}
@@ -3242,6 +3272,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 470550155}
     m_Modifications:
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
+      propertyPath: ZoneNumber
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -3891,6 +3926,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
+      propertyPath: ZoneNumber
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 842842946}
@@ -4078,6 +4118,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
+      propertyPath: ZoneNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 1220591047}
@@ -4172,6 +4217,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 470550155}
     m_Modifications:
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
+      propertyPath: ZoneNumber
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -5234,6 +5284,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
+      propertyPath: ZoneNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 755329174}
@@ -5537,6 +5592,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 470550155}
     m_Modifications:
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
+      propertyPath: ZoneNumber
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
       propertyPath: waypoints.Array.data[0]
@@ -6618,6 +6678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: curstate
       value: Station
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
+      propertyPath: ZoneNumber
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5075534488604402034, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
@@ -8208,7 +8273,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1490392590 stripped
 Transform:
@@ -11021,6 +11086,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
+      propertyPath: ZoneNumber
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 755329174}
@@ -11661,6 +11731,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
+      propertyPath: ZoneNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
       propertyPath: waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 555356326}
@@ -12203,6 +12278,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 470550155}
     m_Modifications:
+    - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
+        type: 3}
+      propertyPath: ZoneNumber
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4714221467842657924, guid: abeb186619cc7e6419cb81e1e4dfa162,
         type: 3}
       propertyPath: waypoints.Array.data[0]

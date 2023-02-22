@@ -72,7 +72,7 @@ public class EventManager : MonoBehaviour
     public Transform[] CheckForNearestZone(Transform enemypos)
     {
         //Debug.Log(waypoints.Length);
-        int ZoneIndex = FindNearestZone(enemypos);
+        int ZoneIndex = enemypos.GetComponent<GuardStateManager>().ZoneNumber;
         //Debug.Log(ZoneIndex);
         GameObject Zone = GameObject.Find("Zone" + ZoneIndex);
         int WaypointLength = -1;

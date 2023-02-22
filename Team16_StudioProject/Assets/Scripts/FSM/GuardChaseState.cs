@@ -70,9 +70,9 @@ public class GuardChaseState : GuardStateBase
         {
             guard.navMeshAgent.speed = 0.0f;
         }
-        else if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > stoppingdistance)
+        else
         {
-            guard.navMeshAgent.speed = 2.0f;
+            guard.navMeshAgent.speed = 5.0f;
         }
 
 
