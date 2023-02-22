@@ -82,14 +82,17 @@ public class AlarmEvent : MonoBehaviour
             NearestAlarm(nearbyEnemies);
             if (Vector3.Distance(nearbyEnemies.transform.position, temp[0].position) < AlarmRadius)
             {
-               // Debug.Log("Alarm:Chase the player");
+                // Debug.Log("Alarm:Chase the player");
                 nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().AlarmedState, temp);
                 //GSM.SwitchState(GSM.ChaseState);
-
             }
             else
             {
+                Debug.Log("WP IS " + EventManager.Event.SortWaypoints());
+
                 Debug.Log("Go Search State Due to Alarm");
+
+
                 nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().SearchState, EventManager.Event.SortWaypoints());
             }
         }
