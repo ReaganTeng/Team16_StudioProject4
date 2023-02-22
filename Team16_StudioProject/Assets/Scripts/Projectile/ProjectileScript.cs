@@ -49,6 +49,7 @@ public class ProjectileScript : MonoBehaviour
         {
             int i = 0;
 
+
             if (collision.gameObject.tag != "Enemy")
             {
                 Destroy(gameObject);
@@ -57,10 +58,14 @@ public class ProjectileScript : MonoBehaviour
 
             foreach (GameObject child in EnemyManager.enemyManager.GetNumberOfEnemies())
             {
+                //Debug.Log("SHOT");
+
                 float distance = Vector3.Distance(child.transform.position, pos);
-                if (distance < 1.3f)
+                if (distance < 3.0f)
                 {
                     child.GetComponent<GuardStateManager>().damage(10);
+
+                    //Debug.Log("ENEMY HEALTH " + child.GetComponent<GuardStateManager>().health);
 
 
 

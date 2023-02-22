@@ -82,12 +82,9 @@ public class AlarmEvent : MonoBehaviour
             NearestAlarm(nearbyEnemies);
             if (Vector3.Distance(nearbyEnemies.transform.position, temp[0].position) < AlarmRadius)
             {
-               // Debug.Log("Alarm:Chase the player");
-
-               // Set the Enemy to move to the front of the alarm
+                // Debug.Log("Alarm:Chase the player");
                 nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().AlarmedState, temp);
                 //GSM.SwitchState(GSM.ChaseState);
-
             }
             else
             {
