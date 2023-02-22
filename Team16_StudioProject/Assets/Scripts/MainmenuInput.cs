@@ -11,8 +11,10 @@ public class MainmenuInput : MonoBehaviour
 
     private GameObject storyDialog;
     private GameObject mainMenu;
+    private GameObject settings;
+    private GameObject howToPlay;
 
-    // For story dialog 'animation'
+    // For story scrolling text
     int storyIndex;
     TextMeshProUGUI storyText;
     string tempText;
@@ -25,14 +27,15 @@ public class MainmenuInput : MonoBehaviour
 
         storyDialog = GameObject.Find("Story");
         mainMenu = GameObject.Find("Mainmenu");
+        settings = GameObject.Find("Settings");
+        howToPlay = GameObject.Find("How To Play");
 
-        // For story dialog
+        // For story scrolling text
         storyIndex = 0;
         storyText = GameObject.Find("Story Text").GetComponent<TextMeshProUGUI>();
         tempText = storyText.text;
         newText = "";
         time = 0;
-
     }
 
     // Update is called once per frame
@@ -48,16 +51,19 @@ public class MainmenuInput : MonoBehaviour
 
     IEnumerator MainMenu()
     {
-        // Begin gameplay when pressing ENTER in story dialog
-        if (mainMenu.activeSelf)
+        // Render only mainmenu
+        if (mainMenu.gameObject.activeSelf)
+        {
             storyDialog.SetActive(false);
+            settings.SetActive(false);
+            howToPlay.SetActive(false);
+        }
+
 
         if (storyDialog.gameObject.activeSelf)
         {
-  
-
-
-
+            // Begin gameplay when pressing ENTER in story dialog
+            // Can ENTER no matter if text has finished scrolling or not.
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 SceneManager.LoadScene("LevelScene");
@@ -87,4 +93,21 @@ public class MainmenuInput : MonoBehaviour
         storyDialog.SetActive(true);
         mainMenu.SetActive(false);
     }
+
+    public void SettingsButton()
+    {
+        settings.SetActive(true);
+        mainMenu.SetActive(false);
+    }
+
+    public void HowToPlayButton()
+    {
+        howToPlay.SetActive(true);
+        mainMenu.SetActive(false);
+    }
+
+    public void BackButton()
+    {
+        mainMenu.SetActive(true);
+    }   
 }
