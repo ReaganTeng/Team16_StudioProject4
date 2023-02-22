@@ -187,7 +187,7 @@ public class PlayerInputs : MonoBehaviour
                         if (distance < 1.5f)
                         {
 
-                            child.GetComponent<GuardStateManager>().damage(5);
+                            child.gameObject.GetComponent<GuardStateManager>().damage(5);
 
                             Debug.Log("PUNCH");
                             if (child.GetComponent<GuardStateManager>().health <= 0)
