@@ -23,7 +23,7 @@ public class AlarmEvent : MonoBehaviour
     }
     public void Awake()
     {
-        AlarmPos = GameObject.FindGameObjectsWithTag("AlarmPosition");
+        AlarmPos = GameObject.FindGameObjectsWithTag("Alarm");
         temp = new Transform[AlarmPos.Length];
         for (int i = 0; i < AlarmPos.Length; ++i)
         {
@@ -41,7 +41,7 @@ public class AlarmEvent : MonoBehaviour
     {
         if (EventManager.Event.GetActiveBool() == true && AlarmDuration > 0.0f)
         {       
-            Debug.Log("Playing Sound");
+            //Debug.Log("Playing Sound");
             AlarmManager.alarmManager.PlayAlarm();
             AlarmManager.alarmManager.OnAlarmLights();           
         }
@@ -60,7 +60,7 @@ public class AlarmEvent : MonoBehaviour
                     AlarmDuration = 20.0f;
                     AlarmManager.alarmManager.StopAlarm();
                     AlarmManager.alarmManager.OffAlarmLights();
-                    GlobalVolume.globalVolume.OffVignette();
+                   // GlobalVolume.globalVolume.OffVignette();
                 }
             }
         }
@@ -80,6 +80,7 @@ public class AlarmEvent : MonoBehaviour
         foreach (GameObject nearbyEnemies in EnemyManager.enemyManager.GetNumberOfEnemies())
         {
             NearestAlarm(nearbyEnemies);
+            Debug.Log(temp[0]);
             if (Vector3.Distance(nearbyEnemies.transform.position, temp[0].position) < AlarmRadius)
             {
                 // Debug.Log("Alarm:Chase the player");
@@ -116,7 +117,7 @@ public class AlarmEvent : MonoBehaviour
         // Enemies = EnemyManager.enemyManager.GetNumberOfEnemies();
         foreach (GameObject nearbyEnemies in EnemyManager.enemyManager.GetNumberOfEnemies())
         {
-            Debug.Log(EnemyManager.enemyManager.GetNumberOfEnemies().Length);
+            //Debug.Log(EnemyManager.enemyManager.GetNumberOfEnemies().Length);
             if (Vector3.Distance(nearbyEnemies.transform.position, transform.position) < AlarmRadius)
             {
                 if (nearbyEnemies.GetComponent<GuardStateManager>().returnState() == nearbyEnemies.GetComponent<GuardStateManager>().ChaseState
@@ -130,11 +131,11 @@ public class AlarmEvent : MonoBehaviour
     }
     private void NearestAlarm(GameObject enemy)
     {
-        for (int i = 0; i < temp.Length - 2; i++)
+        for (int i = 0; i <= temp.Length - 2; i++)
         {
             float dist1 = Vector3.Distance(temp[i].position, enemy.transform.position);
             float dist2 = Vector3.Distance(temp[i + 1].position, enemy.transform.position);
-            if (dist1 < dist2)
+            if (dist1 > dist2)
             {
                 var tempo = temp[i];
                 temp[i] = temp[i + 1];

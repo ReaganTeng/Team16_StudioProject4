@@ -73,18 +73,18 @@ public class EventManager : MonoBehaviour
     {
         //Debug.Log(waypoints.Length);
         int ZoneIndex = FindNearestZone(enemypos);
+        //Debug.Log(ZoneIndex);
         GameObject Zone = GameObject.Find("Zone" + ZoneIndex);
-        int WaypointLength = 0;
+        int WaypointLength = -1;
         foreach (Transform transform in Zone.GetComponentsInChildren<Transform>())
         {
             WaypointLength++;
+           // Debug.Log(transform);
         }
         Transform[] storeWPTransform = new Transform[WaypointLength];
-        int idx = 0;
-        foreach (Transform transform in Zone.GetComponentsInChildren<Transform>())
-        {
-            storeWPTransform[idx] = transform;
-            idx++;
+        for (int i = 0; i < WaypointLength; i++)
+        { 
+            storeWPTransform[i] = Zone.GetComponentsInChildren<Transform>()[i + 1];
         }
         return storeWPTransform;
     }
@@ -92,6 +92,7 @@ public class EventManager : MonoBehaviour
     public Transform[] SortWaypoints(Transform enemypos, Transform[] wpArray)
     {
         waypoints = wpArray;
+        Debug.Log("WP Length:" + waypoints.Length);
         WaypointInfo[] wayPointArray = new WaypointInfo[waypoints.Length];
         for (int i = 0; i < waypoints.Length; ++i)
         {
@@ -107,9 +108,9 @@ public class EventManager : MonoBehaviour
             {
                 if (wayPointArray[i].Distance > wayPointArray[i + 1].Distance)
                 {
-                    var temp = wayPointArray[i].Distance;
-                    wayPointArray[i].Distance = wayPointArray[i + 1].Distance;
-                    wayPointArray[i + 1].Distance = temp;
+                    var temp = wayPointArray[i];
+                    wayPointArray[i] = wayPointArray[i + 1];
+                    wayPointArray[i + 1] = temp;
                 }
             }
         }
@@ -130,6 +131,7 @@ public class EventManager : MonoBehaviour
             ZoneInfo zInfo = new ZoneInfo();
             zInfo.ZoneIdx = i + 1;
             zInfo.Distance = Vector3.Distance(ZoneArray[i].transform.position, enemypos.position);
+            Debug.Log(zInfo.ZoneIdx + ", Distance:" + zInfo.Distance);
             ZoneInfoArray[i] = zInfo;             
         }
 
@@ -140,9 +142,9 @@ public class EventManager : MonoBehaviour
             {
                 if (ZoneInfoArray[i].Distance > ZoneInfoArray[i + 1].Distance)
                 {
-                    var temp = ZoneInfoArray[i].Distance;
-                    ZoneInfoArray[i].Distance = ZoneInfoArray[i + 1].Distance;
-                    ZoneInfoArray[i + 1].Distance = temp;
+                    var temp = ZoneInfoArray[i];
+                    ZoneInfoArray[i] = ZoneInfoArray[i + 1];
+                    ZoneInfoArray[i + 1] = temp;
                 }
             }
         }
