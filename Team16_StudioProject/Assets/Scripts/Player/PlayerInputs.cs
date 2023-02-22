@@ -30,7 +30,8 @@ public class PlayerInputs : MonoBehaviour
     public ThirdPersonController thirdPersonController;
     private GameObject FirePoint;
 
-
+    public AudioSource ShootAudioSource;
+    public AudioSource ReloadAudioSource;
     public GamestateManager gameState;
 
 
@@ -139,6 +140,7 @@ public class PlayerInputs : MonoBehaviour
                 {
                     Debug.Log("Shoot");
                     // Instantiate the projectile at the position and rotation of this transform
+                    PlayShootSound();
                     Rigidbody clone;
                     clone = Instantiate(projectile, playerModel.transform.position, playerModel.transform.rotation);
                     pos = transform.position;
@@ -168,6 +170,7 @@ public class PlayerInputs : MonoBehaviour
                 {
                     playerStats.ammoCount = playerStats.maxAmmoCount;
                     playerStats.clipCount--;
+                    PlayReloadSound();
                 }
 
                 break;
@@ -219,6 +222,14 @@ public class PlayerInputs : MonoBehaviour
                 break;
         }
 
+    }
+    public void PlayShootSound()
+    {
+        ShootAudioSource.Play();
+    }
+    public void PlayReloadSound()
+    {
+        ReloadAudioSource.Play();
     }
 
 }

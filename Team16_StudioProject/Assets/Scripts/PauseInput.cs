@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class PauseInput : MonoBehaviour
 {
@@ -34,4 +36,14 @@ public class PauseInput : MonoBehaviour
         pauseScreen.SetActive(false);
 
     }
+
+    public void QuitButton()
+    {
+        Time.timeScale = 1;
+        GameObject gameState = GameObject.Find("Gamestate Manager");
+        gameState.GetComponent<GamestateManager>().currentState = GamestateManager.Gamestate.GAMEPLAY;
+        SceneManager.LoadScene("MainMenu");
+
+    }
 }
+
