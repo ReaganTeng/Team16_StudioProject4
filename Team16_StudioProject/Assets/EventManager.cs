@@ -6,8 +6,13 @@ using Random = System.Random;
 
 class WaypointInfo
 {
-    public GameObject wp;
+    public Transform wp;
     public float Distance;
+}
+class ZoneInfo
+{
+    public float Distance; // Distance between the enemy and the zone
+    public int ZoneIdx; // Zone Number
 }
 
 public class EventManager : MonoBehaviour
@@ -18,7 +23,8 @@ public class EventManager : MonoBehaviour
     public event Action NoEnemiesNearBy;
     public event Action StartCountDown;
     public bool isActive = false;
-    private GameObject[] waypoints;
+    private Transform[] waypoints;
+    private GameObject[] ZoneArray;
 
     // Start is called before the first frame update
     void Awake()
@@ -26,7 +32,8 @@ public class EventManager : MonoBehaviour
         if (Event == null)
         {
             Event = this;
-            waypoints = GameObject.FindGameObjectsWithTag("waypoint");
+            ZoneArray = GameObject.FindGameObjectsWithTag("Zone"); // Get All The Zones GameObject
+
         }
         else
         {
@@ -62,83 +69,85 @@ public class EventManager : MonoBehaviour
     {
         isActive = boolean;
     }
-    public Transform[] CheckForNearestWP()
+    public Transform[] CheckForNearestZone(Transform enemypos)
     {
-        Debug.Log(waypoints.Length);
-        WaypointInfo[] wayPointArray = new WaypointInfo[waypoints.Length];
-        for (int i = 0; i < waypoints.Length; ++i)
+        //Debug.Log(waypoints.Length);
+        int ZoneIndex = FindNearestZone(enemypos);
+        GameObject Zone = GameObject.Find("Zone" + ZoneIndex);
+        int WaypointLength = 0;
+        foreach (Transform transform in Zone.GetComponentsInChildren<Transform>())
         {
-            WaypointInfo wpInfo = new WaypointInfo();
-            wpInfo.wp = waypoints[i];
-            wpInfo.Distance = Vector3.Distance(waypoints[i].transform.position, transform.position);
-            wayPointArray[i] = wpInfo;
+            WaypointLength++;
         }
-      
-        Random r = new Random();
-        int bound = r.Next(0, 1);
-        int startingPoint = (waypoints.Length) / 2;
-        Transform[] storeWPTransform = new Transform[startingPoint];
-        //int genRand = 0;
-        //Debug.Log(bound);
-        //Debug.Log(startingPoint);
-
-        if (bound == 0)
+        Transform[] storeWPTransform = new Transform[WaypointLength];
+        int idx = 0;
+        foreach (Transform transform in Zone.GetComponentsInChildren<Transform>())
         {
-            for (int i = 0; i < startingPoint; ++i)
-            {
-                storeWPTransform[i] = wayPointArray[i].wp.transform;
-                // Debug.Log(wayPointArray[i].wp.transform.position);
-            }
-
+            storeWPTransform[idx] = transform;
+            idx++;
         }
-        else if (bound == 1)
-        {
-            //genRand = r.Next(startingPoint + 1, waypoints.Length);
-            for (int i = startingPoint; i < waypoints.Length; i++)
-            {
-               // Debug.Log(i - startingPoint);
-                storeWPTransform[i - startingPoint] = wayPointArray[i].wp.transform;
-                
-                // Debug.Log(wayPointArray[i].wp.transform.position);
-            }
-        }
-        //Debug.Log(startingPoint);
-        //Debug.Log(genRand);
-
-        
-
-      //  Debug.Log(storeWPTransform.Length);
         return storeWPTransform;
-
     }
-    public Transform[] SortWaypoints()
+
+    public Transform[] SortWaypoints(Transform enemypos, Transform[] wpArray)
     {
-        waypoints = GameObject.FindGameObjectsWithTag("waypoint");
+        waypoints = wpArray;
         WaypointInfo[] wayPointArray = new WaypointInfo[waypoints.Length];
         for (int i = 0; i < waypoints.Length; ++i)
         {
             WaypointInfo wpInfo = new WaypointInfo();
             wpInfo.wp = waypoints[i];
-            wpInfo.Distance = Vector3.Distance(waypoints[i].transform.position, transform.position);
+            wpInfo.Distance = Vector3.Distance(waypoints[i].position, enemypos.position);
             wayPointArray[i] = wpInfo;
         }
         // Sort the array
-        for (int i = 0; i < waypoints.Length - 2; ++i)
+        for (int j = 0; j < waypoints.Length; j++)
         {
-            if (wayPointArray[i].Distance > wayPointArray[i + 1].Distance)
+            for (int i = 0; i < waypoints.Length - 2; ++i)
             {
-                var temp = wayPointArray[i].Distance;
-                wayPointArray[i].Distance = wayPointArray[i + 1].Distance;
-                wayPointArray[i + 1].Distance = temp;
+                if (wayPointArray[i].Distance > wayPointArray[i + 1].Distance)
+                {
+                    var temp = wayPointArray[i].Distance;
+                    wayPointArray[i].Distance = wayPointArray[i + 1].Distance;
+                    wayPointArray[i + 1].Distance = temp;
+                }
             }
         }
         Transform[] storeWPTransform = new Transform[waypoints.Length];
         for (int i = 0; i < waypoints.Length; ++i)
         {
-            storeWPTransform[i] = wayPointArray[i].wp.transform;
+            storeWPTransform[i] = wayPointArray[i].wp;
             // Debug.Log(wayPointArray[i].wp.transform.position);
         }
         return storeWPTransform;
 
     }
+    private int FindNearestZone(Transform enemypos) // Finds the nearest zone
+    {
+        ZoneInfo[] ZoneInfoArray = new ZoneInfo[ZoneArray.Length];
+        for (int i = 0; i < ZoneArray.Length; i++)
+        {
+            ZoneInfo zInfo = new ZoneInfo();
+            zInfo.ZoneIdx = i + 1;
+            zInfo.Distance = Vector3.Distance(ZoneArray[i].transform.position, enemypos.position);
+            ZoneInfoArray[i] = zInfo;             
+        }
+
+        // Sort the array
+        for (int j = 0; j < ZoneInfoArray.Length; j++)
+        {
+            for (int i = 0; i < ZoneInfoArray.Length - 2; ++i)
+            {
+                if (ZoneInfoArray[i].Distance > ZoneInfoArray[i + 1].Distance)
+                {
+                    var temp = ZoneInfoArray[i].Distance;
+                    ZoneInfoArray[i].Distance = ZoneInfoArray[i + 1].Distance;
+                    ZoneInfoArray[i + 1].Distance = temp;
+                }
+            }
+        }
+
+        return ZoneInfoArray[0].ZoneIdx;
+    }
+    
 }

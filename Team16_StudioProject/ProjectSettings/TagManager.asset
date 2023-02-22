@@ -12,6 +12,7 @@ TagManager:
   - waypoint
   - AlarmPosition
   - AlarmLight
+  - Zone
   layers:
   - Default
   - TransparentFX

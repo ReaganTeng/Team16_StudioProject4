@@ -176,7 +176,7 @@ public class GuardStateManager : MonoBehaviour
         //Instantiate(waypoints[1], go.transform.position + new Vector3(20, 0, 0), new Quaternion(0, 0, 0, 0));
         //
         if (waypoints.Length == 0)
-            waypoints = EventManager.Event.SortWaypoints();
+            waypoints = EventManager.Event.SortWaypoints(transform, EventManager.Event.CheckForNearestZone(transform));
 
         currentState = state;
         state.EnterState(this, waypoints);
@@ -184,6 +184,7 @@ public class GuardStateManager : MonoBehaviour
     public void SwitchState(GuardStateBase state, Transform[] newWP)
     {
         currentState = state;
+        waypoints = newWP;
         state.EnterState(this, newWP);
     }
 

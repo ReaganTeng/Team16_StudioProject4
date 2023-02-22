@@ -50,7 +50,7 @@ public class GuardAlarmedState : GuardStateBase
             if (!alrCheck)
             {
                 Debug.Log("CURRENTLY SEARCHING FOR THE PLAYER DUE TO ALARM");
-                guard.SwitchState(guard.SearchState, EventManager.Event.CheckForNearestWP());
+                guard.SwitchState(guard.SearchState, EventManager.Event.CheckForNearestZone(guard.getgenemyPos()));
                 alrCheck = true;
             }
         }

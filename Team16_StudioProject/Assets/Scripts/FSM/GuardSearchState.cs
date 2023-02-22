@@ -22,8 +22,6 @@ public class GuardSearchState : GuardStateBase
         }
         guard.navMeshAgent.speed = 5.0f;
         detectiondistance = 5.0f;
-        guard.waypoints = wp;
-        numberOfWaypoints = wp.Length;
         //Debug.Log(wp.Length);
         //Debug.Log(numberOfWaypoints);
     }
