@@ -30,7 +30,7 @@ public class SecurityCameraScript : MonoBehaviour
         detected_player = false;
         timer = 3;
 
-        enemies = GameObject.Find("Enemies");
+        enemies = GameObject.Find("Enemy Manager");
         player = GameObject.Find("PlayerArmature");
         collider = GetComponent<Collider>();
         pos = transform.position;

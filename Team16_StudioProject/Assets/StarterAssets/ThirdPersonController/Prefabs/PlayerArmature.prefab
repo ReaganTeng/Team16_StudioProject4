@@ -1334,7 +1334,9 @@ MonoBehaviour:
   ammoclip: {fileID: 11400000, guid: d31dbd540fb00864a907ea643e4d5e52, type: 2}
   coin: {fileID: 11400000, guid: 67aa569768ff8494580d95cf33b02994, type: 2}
   key: {fileID: 11400000, guid: c8d3d8917b905df4da5763689fca40a1, type: 2}
+  gunequipped: 0
   shiv: {fileID: 11400000, guid: f4f2d378f138edc4e8972c364aadb6d0, type: 2}
+  pistol: {fileID: 11400000, guid: 5f7ea2f6207b92945ae5f297d335fc36, type: 2}
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0

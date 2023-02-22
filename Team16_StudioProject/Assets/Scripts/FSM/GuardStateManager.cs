@@ -34,6 +34,8 @@ public class GuardStateManager : MonoBehaviour
 
     private Observer[] childscript;
 
+    private GameObject[] zone;
+
     public int health;
 
 
@@ -43,6 +45,9 @@ public class GuardStateManager : MonoBehaviour
 
 
     public int generator;
+
+
+    private int zoneno;
 
     void Awake()
     {
@@ -72,6 +77,8 @@ public class GuardStateManager : MonoBehaviour
             currentState = PatrolState;
         }
         //
+
+        
 
         health = 100;
 
@@ -154,7 +161,23 @@ public class GuardStateManager : MonoBehaviour
         enemyPos = GetComponent<Transform>();
 
 
+        zone = GameObject.FindGameObjectsWithTag("Z");
+        for (int i = 0; i < zone.Length; i++)
+        {
+            zone[i].GetComponent<WhatZone>().entity = gameObject;
 
+            if (/*zone[i].GetComponent<WhatZone>().m_InRange == true*/
+                gameObject.transform.position.x < zone[i].GetComponent<Transform>().position.x + (zone[i].GetComponent<Transform>().localScale.x / 2)
+             && gameObject.transform.position.x > zone[i].GetComponent<Transform>().position.x - (zone[i].GetComponent<Transform>().localScale.x / 2)
+             && gameObject.transform.position.z > zone[i].GetComponent<Transform>().position.z - (zone[i].GetComponent<Transform>().localScale.z / 2)
+            && gameObject.transform.position.z < zone[i].GetComponent<Transform>().position.z + (zone[i].GetComponent<Transform>().localScale.z / 2)
+            )
+            {
+                zoneno = zone[i].GetComponent<WhatZone>().zone_number;
+                //Debug.Log("ZONE ENTITY " + zone[i].GetComponent<WhatZone>().entity + " ZONE NUMBER " + zoneno);
+                //Debug.Log("ZONE IS " + zoneno);
+            }
+        }
 
         //if(health <= 0)
         //{
@@ -189,6 +212,24 @@ public class GuardStateManager : MonoBehaviour
     }
 
 
+
+    public void SS(GuardStateBase state)
+    {
+        //FOR GUARDPATROLSTATE
+        //Destroy(waypoints[0]);
+        //Instantiate(waypoints[0], go.transform.position + new Vector3(-20, 0, 0), new Quaternion(0, 0, 0, 0));
+        //Destroy(waypoints[1]);
+        //Instantiate(waypoints[1], go.transform.position + new Vector3(20, 0, 0), new Quaternion(0, 0, 0, 0));
+        //
+        
+
+        currentState = state;
+        state.EnterState(this, waypoints);
+    }
+    public int returnzoneNumber()
+    {
+        return zoneno;
+    }
 
     public Vector3 gettargetpos()
     {

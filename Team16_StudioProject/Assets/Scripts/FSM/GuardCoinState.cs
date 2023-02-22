@@ -12,6 +12,8 @@ public class GuardCoinState : GuardStateBase
 
     public override void EnterState(GuardStateManager guard, Transform[] wp)
     {
+        
+
         Debug.Log("DISTRACTED STATE");
         coin = GameObject.Find("Coin(Clone)");
         time = 5.0f;
@@ -23,10 +25,10 @@ public class GuardCoinState : GuardStateBase
 
     public override void UpdateState(GuardStateManager guard)
     {
-        if(coin == null)
-        {
-            return;
-        }
+        //if (coin == null)
+        //{
+        //    return;
+        //}
 
 
 
@@ -42,7 +44,14 @@ public class GuardCoinState : GuardStateBase
         //CONTANTLY SET DESTINATION AS PLAYER'S CURRENT POSITION
         guard.navMeshAgent.SetDestination(coin.transform.position);
 
-
+        for (int i = 0; i < 2; i++)
+        {
+            if (guard.returnObserver(i) == true
+                && (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < 5.0f))
+            {
+                guard.SwitchState(guard.ChaseState);
+            }
+        }
 
 
         //     //if player and enemy distance is more than distance

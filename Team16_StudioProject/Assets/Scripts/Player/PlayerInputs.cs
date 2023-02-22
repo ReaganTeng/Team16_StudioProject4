@@ -39,7 +39,7 @@ public class PlayerInputs : MonoBehaviour
     {
         player = GameObject.Find("Player Character");
         playerModel = GameObject.Find("PlayerArmature");
-        enemies = GameObject.Find("Enemies");
+        enemies = GameObject.Find("Enemy Manager");
         playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
         FirePoint = GameObject.Find("PlayerCameraRoot");
 
@@ -99,122 +99,123 @@ public class PlayerInputs : MonoBehaviour
         switch (playerStats.equippedWeapon)
         {
             case PlayerStats.EquippedWeapon.Shiv:
-
-
-                pos = playerModel.transform.position;
-
-                if (Input.GetMouseButtonDown(0) && playerStats.shivDurability > 0)
                 {
-                    int i = 0;
-                    foreach (Transform child in enemies.transform)
+                    pos = playerModel.transform.position;
+
+                    if (Input.GetMouseButtonDown(0) && playerStats.shivDurability > 0)
                     {
-                        float distance = Vector3.Distance(child.position, pos);
-                        if (distance < 1.5f)
-                        {
-                            //INSTANTIATE COLLECTIBLE
-                            child.gameObject.GetComponent<GuardStateManager>().IntantiateObject_random();
-
-                            // Destroy the enemy
-                            Destroy(child.gameObject);
-                            List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
-
-                            tmp.RemoveAt(i);
-                            EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-                            //EventManager.Event.CheckForEnemies();
-                            child.gameObject.SetActive(false);
-
-                            playerStats.shivDurability--;
-                            break;
-                        }
-                        i++;
-                    }
-                }
-
-
-                break;
-            case PlayerStats.EquippedWeapon.Pistol:
-
-
-                if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0)
-                {
-                    Debug.Log("Shoot");
-                    // Instantiate the projectile at the position and rotation of this transform
-                    Rigidbody clone;
-                    clone = Instantiate(projectile, playerModel.transform.position, playerModel.transform.rotation);
-                    pos = transform.position;
-
-                    clone.position = FirePoint.transform.position;
-                    clone.position -= new Vector3(0.0f, 0.5f, 0.0f);
-                    clone.position += playerModel.GetComponent<TPSController>().direction * 2.0f;
-                    clone.velocity = transform.TransformDirection(playerModel.GetComponent<TPSController>().direction * 30);
-                    clone.MoveRotation(Quaternion.Euler(0.0f, playerModel.GetComponent<TPSController>().angle, 0.0f));
-
-                    if (enemies != null)
-                    {
-
+                        int i = 0;
                         foreach (Transform child in enemies.transform)
                         {
-                            float distance = Vector3.Distance(child.position, transform.position);
-                            if (distance < 20)
-                                child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
-                        }
-                    }
-
-                    playerStats.ammoCount--;
-                }
-
-                // Reloading pistol
-                if (Input.GetKeyDown(KeyCode.R) && playerStats.clipCount > 0)
-                {
-                    playerStats.ammoCount = playerStats.maxAmmoCount;
-                    playerStats.clipCount--;
-                }
-
-                break;
-
-
-
-            //PUNCH
-            case PlayerStats.EquippedWeapon.fists:
-
-                pos = playerModel.transform.position;
-                if (Input.GetMouseButtonDown(0))
-                {
-                    int i = 0;
-                    foreach (Transform child in enemies.transform)
-                    {
-                        float distance = Vector3.Distance(child.position, pos);
-                        if (distance < 1.5f)
-                        {
-
-                            child.gameObject.GetComponent<GuardStateManager>().damage(5);
-
-                            Debug.Log("PUNCH");
-                            if (child.GetComponent<GuardStateManager>().health <= 0)
+                            float distance = Vector3.Distance(child.position, pos);
+                            if (distance < 4.0f)
                             {
                                 //INSTANTIATE COLLECTIBLE
-                                child.GetComponent<GuardStateManager>().IntantiateObject_random();
+                                child.gameObject.GetComponent<GuardStateManager>().IntantiateObject_random();
 
+                                // Destroy the enemy
                                 Destroy(child.gameObject);
-
                                 List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
 
                                 tmp.RemoveAt(i);
                                 EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-
-
-
                                 //EventManager.Event.CheckForEnemies();
                                 child.gameObject.SetActive(false);
-                            }
-                            break;
-                        }
-                        i++;
-                    }
-                }
-                break;
-            //
 
+                                playerStats.shivDurability--;
+                                break;
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+                }
+            case PlayerStats.EquippedWeapon.Pistol:
+
+                {
+                        if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0)
+                        {
+                            Debug.Log("Shoot");
+                            // Instantiate the projectile at the position and rotation of this transform
+                            Rigidbody clone;
+                            clone = Instantiate(projectile, playerModel.transform.position, playerModel.transform.rotation);
+                            pos = transform.position;
+
+                            clone.position = FirePoint.transform.position;
+                            clone.position -= new Vector3(0.0f, 0.5f, 0.0f);
+                            clone.position += playerModel.GetComponent<TPSController>().direction * 2.0f;
+                            clone.velocity = transform.TransformDirection(playerModel.GetComponent<TPSController>().direction * 30);
+                            clone.MoveRotation(Quaternion.Euler(0.0f, playerModel.GetComponent<TPSController>().angle, 0.0f));
+
+                            if (enemies != null)
+                            {
+                                foreach (Transform child in enemies.transform)
+                                {
+                                    float distance = Vector3.Distance(child.position, transform.position);
+                                    if (distance < 40)
+                                    {
+                                        Debug.Log("WHATS THAT NOISE");
+                                        child.GetComponent<GuardStateManager>().SS(child.GetComponent<GuardStateManager>().GunshotSoundState);
+                                    }
+                                }
+                            }
+
+                            playerStats.ammoCount--;
+                        }
+
+                        // Reloading pistol
+                        if (Input.GetKeyDown(KeyCode.R) && playerStats.clipCount > 0)
+                        {
+                            playerStats.ammoCount = playerStats.maxAmmoCount;
+                            playerStats.clipCount--;
+                        }
+                   
+               
+
+                   
+
+                    break;
+                }
+
+
+            //PUNCH
+            case PlayerStats.EquippedWeapon.fists:
+                {
+                    pos = playerModel.transform.position;
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        int i = 0;
+                        foreach (Transform child in enemies.transform)
+                        {
+                            float distance = Vector3.Distance(child.position, pos);
+                            if (distance < 4.0f)
+                            {
+
+                                child.gameObject.GetComponent<GuardStateManager>().damage(5);
+
+                                Debug.Log("PUNCH");
+                                if (child.GetComponent<GuardStateManager>().health <= 0)
+                                {
+                                    //INSTANTIATE COLLECTIBLE
+                                    child.GetComponent<GuardStateManager>().IntantiateObject_random();
+
+                                    Destroy(child.gameObject);
+
+                                    List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
+
+                                    tmp.RemoveAt(i);
+                                    EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
+                                    //EventManager.Event.CheckForEnemies();
+                                    child.gameObject.SetActive(false);
+                                }
+                                break;
+                            }
+                            i++;
+                        }
+                    }
+                    break;
+                    //
+                }
             default:
                 break;
         }

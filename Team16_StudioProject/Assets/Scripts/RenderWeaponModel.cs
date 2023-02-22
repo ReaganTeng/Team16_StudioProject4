@@ -37,9 +37,16 @@ public class RenderWeaponModel : MonoBehaviour
                 break;
             case PlayerStats.EquippedWeapon.Pistol:
 
+                if (playerStats.gunequipped == true)
+                {
+                    shivModel.SetActive(false);
+                    pistolModel.SetActive(true);
+                }
+                else
+                {
+                    playerStats.equippedWeapon = PlayerStats.EquippedWeapon.fists;
 
-                shivModel.SetActive(false);
-                pistolModel.SetActive(true);
+                }
                 break;
 
 
