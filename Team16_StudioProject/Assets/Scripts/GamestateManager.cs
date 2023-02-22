@@ -49,15 +49,6 @@ public class GamestateManager : MonoBehaviour
                 Time.timeScale = 0;
                 pauseScreen.SetActive(true);
 
-                //  Return to Gameplay
-                if (Input.GetKeyDown(KeyCode.Escape))
-                {
-                    currentState = Gamestate.GAMEPLAY;
-                    pauseScreen.SetActive(false);
-
-                    Time.timeScale = 1;
-
-                }
 
                 break;
 
@@ -74,6 +65,7 @@ public class GamestateManager : MonoBehaviour
                     // Restarts the scene.
                     Scene scene = SceneManager.GetActiveScene();
                     SceneManager.LoadScene(scene.name);
+                    Time.timeScale = 1;
                 }
                 break;
 
