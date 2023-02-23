@@ -62,8 +62,6 @@ public class PlayerHurtScript : MonoBehaviour
         Vector3 directionToTarget = player.transform.position - hurtPos;
         float angle = Vector3.Angle(Camera.main.transform.forward, directionToTarget);
 
-        Debug.Log(angle);
-
         directionToTarget.x += -distance * Mathf.Cos(angle * 2 * Mathf.Deg2Rad);
         directionToTarget.y += -distance * Mathf.Sin(angle * 2 *  Mathf.Deg2Rad);
 
