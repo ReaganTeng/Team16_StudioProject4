@@ -171,7 +171,7 @@ public class PlayerInputs : MonoBehaviour
                                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
                                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
                                 {
-                                    Debug.Log("WHATS THAT SOUND, FROM: " + child);
+                                    //Debug.Log("WHTS THAT SOUND, FROM: " + child);
                                     child.GetComponent<GuardStateManager>().SS(child.GetComponent<GuardStateManager>().GunshotSoundState);
                                 }
                             }
@@ -194,8 +194,7 @@ public class PlayerInputs : MonoBehaviour
 
 
             //PUNCH
-            case PlayerStats.EquippedWeapon.fists:
-
+            case PlayerStats.EquippedWeapon.Fists:
                 pos = playerModel.transform.position;
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -205,7 +204,6 @@ public class PlayerInputs : MonoBehaviour
                         float distance = Vector3.Distance(child.position, pos);
                         if (distance < 1.5f)
                         {
-
                             child.gameObject.GetComponent<GuardStateManager>().damage(5);
 
                             Debug.Log("PUNCH");
@@ -213,16 +211,10 @@ public class PlayerInputs : MonoBehaviour
                             {
                                 //INSTANTIATE COLLECTIBLE
                                 child.GetComponent<GuardStateManager>().IntantiateObject_random();
-
                                 Destroy(child.gameObject);
-
                                 List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
-
                                 tmp.RemoveAt(i);
                                 EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-
-
-
                                 //EventManager.Event.CheckForEnemies();
                                 child.gameObject.SetActive(false);
                             }
