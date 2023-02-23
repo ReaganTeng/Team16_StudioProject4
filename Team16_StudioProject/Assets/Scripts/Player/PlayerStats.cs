@@ -40,14 +40,25 @@ public class PlayerStats : MonoBehaviour
     public EquipmentObject pistol;
 
 
+    public bool[] weapon = new bool[3];
+
+
+
     private int zoneno;
 
     void Start()
     {
+        for(int i = 0; i< 3; i++)
+        {
+            weapon[i] = false;
+        }
+        weapon[0] = true;
+
 
         gunequipped = false;
         healthBar = GameObject.Find("Health Bar");
         maxAmmoCount = 12;
+        equippedWeapon = EquippedWeapon.Fists;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -83,6 +94,7 @@ public class PlayerStats : MonoBehaviour
                 shivDurability = 2;
                 //equippedWeapon = EquippedWeapon.Shiv;
 
+
                 Destroy(other.gameObject);
             }
             else if (item.item == coin)
@@ -100,6 +112,9 @@ public class PlayerStats : MonoBehaviour
             else if (item.item == pistol)
             {
                 gunequipped = true;
+
+                weapon[2] = true;
+
                 Destroy(other.gameObject);
 
             }
@@ -111,22 +126,58 @@ public class PlayerStats : MonoBehaviour
         if(Input.GetAxis("Mouse ScrollWheel") > 0 && equippedWeapon < EquippedWeapon.NUM_TYPES - 1)
         {
             Debug.Log("inc");
+            EquippedWeapon tempweapon = equippedWeapon;
             equippedWeapon++;
 
+            while (weapon[(int)equippedWeapon] == false)
+            {
+                equippedWeapon++;
 
-            
-
+                if ((int)equippedWeapon > 2)
+                {
+                    equippedWeapon = tempweapon;
+                    break;
+                }
+            }
 
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && equippedWeapon > 0)
         {
             Debug.Log("dec");
+            EquippedWeapon tempweapon = equippedWeapon;
             equippedWeapon--;
 
+            while (weapon[(int)equippedWeapon] == false)
+            {
+                equippedWeapon--;
 
-            
+                if((int)equippedWeapon < 0)
+                {
+                    equippedWeapon = tempweapon;
+                    break;
+                }
+            }
         }
 
+
+        if(shivDurability > 0)
+        {
+            weapon[1] = true;
+        }
+        else
+        {
+            weapon[1] = false;
+        }
+
+
+        if (gunequipped == true)
+        {
+            weapon[2] = true;
+        }
+        else
+        {
+            weapon[2] = false;
+        }
 
         //switch (equippedWeapon)
         //{
