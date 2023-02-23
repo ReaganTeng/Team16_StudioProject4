@@ -17,10 +17,11 @@ public class GuardSearchState : GuardStateBase
 
         //set first destination
         if (wp.Length > 0)
-        {
             guard.navMeshAgent.SetDestination(guard.waypoints[0].position);
-        }
-        guard.navMeshAgent.speed = 5.0f;
+        if (guard.navMeshAgent.speed == null)
+            guard.navMeshAgent.speed = 5.0f;
+
+
         detectiondistance = 5.0f;
         //Debug.Log(wp.Length);
         //Debug.Log(numberOfWaypoints);

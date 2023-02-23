@@ -212,10 +212,12 @@ public class GuardStateManager : MonoBehaviour
         currentState = state;
         state.EnterState(this, waypoints);
     }
-    public void SwitchState(GuardStateBase state, Transform[] newWP)
+    public void SwitchState(GuardStateBase state, Transform[] newWP, float speed)
     {
         currentState = state;
         waypoints = newWP;
+        navMeshAgent.speed = speed;
+
         state.EnterState(this, newWP);
     }
 

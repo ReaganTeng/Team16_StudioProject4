@@ -55,8 +55,9 @@ public class AlarmEvent : MonoBehaviour
                 }
                 else
                 {
-                    
+                    //Debug.Log("EVENT IS OVER!!!!!!");
                     EventManager.Event.SetActiveBool(false);
+                    SetEnemySpeed();
                     AlarmDuration = 20.0f;
                     AlarmManager.alarmManager.StopAlarm();
                     AlarmManager.alarmManager.OffAlarmLights();
@@ -84,7 +85,7 @@ public class AlarmEvent : MonoBehaviour
             if (Vector3.Distance(nearbyEnemies.transform.position, temp[0].position) < AlarmRadius)
             {
                 // Debug.Log("Alarm:Chase the player");
-                nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().AlarmedState, temp);
+                nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().AlarmedState, temp, 10.0f);
                 //GSM.SwitchState(GSM.ChaseState);
             }
             else
@@ -93,7 +94,7 @@ public class AlarmEvent : MonoBehaviour
                 Transform[] nearestWP = EventManager.Event.SortWaypoints(nearbyEnemies.transform,
                     EventManager.Event.CheckForNearestZone(nearbyEnemies.transform));
                 // Set the Enemy Search Waypoints , Sort the waypoints starting from the nearest way point
-                nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().SearchState, nearestWP);
+                nearbyEnemies.GetComponent<GuardStateManager>().SwitchState(nearbyEnemies.GetComponent<GuardStateManager>().SearchState, nearestWP, 10.0f);
             }
         }
     }
@@ -142,6 +143,13 @@ public class AlarmEvent : MonoBehaviour
                 temp[i + 1] = tempo;
             }
 
+        }
+    }
+    private void SetEnemySpeed() // Set Enemy Speed Back to normal after the alarm event is over
+    {
+        foreach (GameObject nearbyEnemies in EnemyManager.enemyManager.GetNumberOfEnemies())
+        {
+            nearbyEnemies.GetComponent<GuardStateManager>().navMeshAgent.speed = 5.0f;
         }
     }
 }

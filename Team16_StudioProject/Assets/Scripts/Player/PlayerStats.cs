@@ -226,7 +226,7 @@ public class PlayerStats : MonoBehaviour
             //if (zone[i].GetComponent<Collider>() == gameObject.GetComponent<Transform>())
             {
                 zoneno = zone[i].GetComponent<WhatZone>().zone_number;
-               // Debug.Log("PLAYER ZONE " + zoneno);
+                //Debug.Log("PLAYER ZONE " + zoneno);
 
             }
         }
