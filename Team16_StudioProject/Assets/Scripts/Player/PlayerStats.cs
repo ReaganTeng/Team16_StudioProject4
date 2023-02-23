@@ -55,7 +55,7 @@ public class PlayerStats : MonoBehaviour
         weapon[0] = true;
 
 
-        gunequipped = false;
+       // gunequipped = false;
         healthBar = GameObject.Find("Health Bar");
         maxAmmoCount = 12;
         equippedWeapon = EquippedWeapon.Fists;
