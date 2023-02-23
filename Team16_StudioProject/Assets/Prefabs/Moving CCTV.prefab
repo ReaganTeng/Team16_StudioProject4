@@ -189,6 +189,11 @@ PrefabInstance:
       propertyPath: m_InnerSpotAngle
       value: 18.336523
       objectReference: {fileID: 0}
+    - target: {fileID: 6094236100280619330, guid: acf676c3d9a433d419a768ebcbce7b71,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 503
+      objectReference: {fileID: 0}
     - target: {fileID: 6094236100280619331, guid: acf676c3d9a433d419a768ebcbce7b71,
         type: 3}
       propertyPath: navMeshAgent
