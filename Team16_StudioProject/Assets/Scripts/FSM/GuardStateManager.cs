@@ -183,7 +183,7 @@ public class GuardStateManager : MonoBehaviour
             {
                 zoneno = zone[i].GetComponent<WhatZone>().zone_number;
                 //Debug.Log("ZONE ENTITY " + zone[i].GetComponent<WhatZone>().entity + " ZONE NUMBER " + zoneno);
-                Debug.Log("ZONE IS " + zoneno);
+                //Debug.Log("ZONE IS " + zoneno);
             }
         }
 

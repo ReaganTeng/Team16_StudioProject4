@@ -7,9 +7,10 @@ public class PlayerStats : MonoBehaviour
 
     public enum EquippedWeapon
     {
+        Fists,
         Shiv,
         Pistol,
-        Fists,
+
         NUM_TYPES
     }
 
@@ -34,9 +35,7 @@ public class PlayerStats : MonoBehaviour
     public CollectibleObject ammoclip;
     public CollectibleObject coin;
     public CollectibleObject key;
-
     public bool gunequipped;
-
     public EquipmentObject shiv;
     public EquipmentObject pistol;
 
@@ -79,9 +78,11 @@ public class PlayerStats : MonoBehaviour
 
             }
             else if (item.item == shiv
-                && shivDurability == 0)
+                && shivDurability <= 0)
             {
                 shivDurability = 2;
+                //equippedWeapon = EquippedWeapon.Shiv;
+
                 Destroy(other.gameObject);
             }
             else if (item.item == coin)
@@ -109,50 +110,55 @@ public class PlayerStats : MonoBehaviour
     {
         if(Input.GetAxis("Mouse ScrollWheel") > 0 && equippedWeapon < EquippedWeapon.NUM_TYPES - 1)
         {
+            Debug.Log("inc");
             equippedWeapon++;
+
+
+            
+
+
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && equippedWeapon > 0)
         {
+            Debug.Log("dec");
             equippedWeapon--;
+
+
+            
         }
 
-        switch (equippedWeapon)
-        {
-            case EquippedWeapon.Shiv:
-                {
-                    Debug.Log("SHIV");
-                    if (shivDurability <= 0)
-                    {
-                        equippedWeapon = EquippedWeapon.Fists;
-                    }
-                    break;
-                }
-            case EquippedWeapon.Pistol:
-                { 
-                    Debug.Log("PISTOl");
-                    if (gunequipped == false)
-                    {
-                        equippedWeapon = EquippedWeapon.Fists;
 
-                    }
-                    break;
-                }
-            default:
-                {
-                    Debug.Log("FISTS");
-                    break;
-                }
-        }
-
-        //if(shivDurability > 0)
+        //switch (equippedWeapon)
         //{
-        //    Debug.Log("SHIV");
-        //}
-        //else
-        //{
-        //    Debug.Log(" NO SHIV");
+        //    case EquippedWeapon.Shiv:
+        //        {
 
+        //            if (shivDurability <= 0)
+        //            {
+        //                equippedWeapon = EquippedWeapon.Fists;
+        //                break;
+        //            }
+        //            break;
+        //        }
+        //    case EquippedWeapon.Pistol:
+        //        {
+        //            if (gunequipped == false)
+        //            {
+        //                equippedWeapon = EquippedWeapon.Fists;
+        //                break;
+        //            }
+        //            break;
+        //        }
+        //    default:
+        //        {
+        //            break;
+        //        }
         //}
+
+        Debug.Log("EQUPPED WEAPON " + equippedWeapon);
+
+
+      
 
 
         zone = GameObject.FindGameObjectsWithTag("Z");

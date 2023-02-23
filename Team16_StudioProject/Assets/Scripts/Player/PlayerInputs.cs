@@ -46,7 +46,7 @@ public class PlayerInputs : MonoBehaviour
         playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
         FirePoint = GameObject.Find("PlayerCameraRoot");
         gameState = GameObject.Find("Gamestate Manager").GetComponent<GamestateManager>();
-                enemies = GameObject.Find("Enemy Manager");
+        enemies = GameObject.Find("Enemy Manager");
 
         time_between_shots = 0.0f;
     }
@@ -143,7 +143,8 @@ public class PlayerInputs : MonoBehaviour
                 break;
             case PlayerStats.EquippedWeapon.Pistol:
                 if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0
-                    && time_between_shots <= 0.0f)
+                    && time_between_shots <= 0.0f
+                    && playerStats.gunequipped == true)
                 {
                     // Instantiate the projectile at the position and rotation of this transform
                     PlayShootSound();
@@ -202,7 +203,7 @@ public class PlayerInputs : MonoBehaviour
                     foreach (Transform child in enemies.transform)
                     {
                         float distance = Vector3.Distance(child.position, pos);
-                        if (distance < 1.5f)
+                        if (distance < 4.0f)
                         {
                             child.gameObject.GetComponent<GuardStateManager>().damage(5);
 
