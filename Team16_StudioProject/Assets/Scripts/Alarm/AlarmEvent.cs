@@ -23,7 +23,7 @@ public class AlarmEvent : MonoBehaviour
     }
     public void Awake()
     {
-        AlarmPos = GameObject.FindGameObjectsWithTag("Alarm");
+        AlarmPos = GameObject.FindGameObjectsWithTag("AlarmPosition");
         temp = new Transform[AlarmPos.Length];
         for (int i = 0; i < AlarmPos.Length; ++i)
         {
@@ -80,7 +80,7 @@ public class AlarmEvent : MonoBehaviour
         foreach (GameObject nearbyEnemies in EnemyManager.enemyManager.GetNumberOfEnemies())
         {
             NearestAlarm(nearbyEnemies);
-            Debug.Log(temp[0]);
+            Debug.Log("Alarm Pos:"+temp[0].position);
             if (Vector3.Distance(nearbyEnemies.transform.position, temp[0].position) < AlarmRadius)
             {
                 // Debug.Log("Alarm:Chase the player");
