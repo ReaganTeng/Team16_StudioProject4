@@ -17,7 +17,10 @@ public class CoinScript : MonoBehaviour
     void Start()
     {
         //enemies = GameObject.Find("Enemies");
-        timer = 3.0f;
+        timer = 6.0f;
+
+        enemies = GameObject.Find("Enemy Manager");
+
     }
 
     // Update is called once per frame
@@ -25,7 +28,6 @@ public class CoinScript : MonoBehaviour
     {
         // rb.velocity.x--;  
         //Debug.Log(transform.position);
-        enemies = GameObject.Find("Enemy Manager");
         player = GameObject.Find("PlayerArmature");
 
 
@@ -35,34 +37,62 @@ public class CoinScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
 
-    void OnCollisionEnter(Collision collision)
-    {
         if (enemies != null)
         {
             foreach (Transform child in enemies.transform)
             {
                 float distance = Vector3.Distance(child.position, transform.position);
-                if (distance < 50
+                if (distance < 20
                     && child.GetComponent<GuardStateManager>().returnzoneNumber() == player.GetComponent<PlayerStats>().returnzoneNumber()
-                   /* && child.GetComponent<Rigidbody>().velocity == new Vector3(1,1,1)*/)
+                   && gameObject.GetComponent<Rigidbody>().velocity == new Vector3(0, 0, 0))
                 {
-                    //Debug.Log("COIN SEEN");
+                    Debug.Log("COIN SEEN");
                     if (child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().PatrolState
                     || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
                     || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
                     {
                         child.GetComponent<GuardStateManager>().SS(child.GetComponent<GuardStateManager>().CoinState);
                     }
-
                 }
-                //else/* if (child.GetComponent<GuardStateManager>().returnzoneNumber() != player.GetComponent<PlayerStats>().returnzoneNumber())*/
-                //{
-                //    Debug.Log("COIN NOT SEEN");
-                //}
             }
         }
 
+        //if (enemies != null)
+        //{
+        //    foreach (Transform child in enemies.transform)
+        //    {
+
+        //            float dist = Vector3.Distance(child.position, transform.position);
+        //        Debug.Log("DIST " + dist);  
+        //    }
+        //}
+
+        //Debug.Log("COIN VELOCITY " + gameObject.GetComponent<Rigidbody>().velocity);
+
     }
+
+    //void OnCollisionEnter(Collision collision)
+    //{
+    //    if (enemies != null)
+    //    {
+    //        foreach (Transform child in enemies.transform)
+    //        {
+    //            float distance = Vector3.Distance(child.position, transform.position);
+    //            if (distance < 30
+    //                && child.GetComponent<GuardStateManager>().returnzoneNumber() == player.GetComponent<PlayerStats>().returnzoneNumber()
+    //               && gameObject.GetComponent<Rigidbody>().velocity ==  new Vector3(0,0,0))
+    //            {
+    //                Debug.Log("COIN SEEN");
+    //                if (child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().PatrolState
+    //                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
+    //                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
+    //                {
+    //                    child.GetComponent<GuardStateManager>().SS(child.GetComponent<GuardStateManager>().CoinState);
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //}
 }

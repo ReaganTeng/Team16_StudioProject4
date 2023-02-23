@@ -23,6 +23,7 @@ public class PlayerInputs : MonoBehaviour
     private GameObject player;
     private GameObject playerModel;
     private GameObject enemies;
+    private GameObject coinobject;
 
     private GameObject gameOverDialog;
     private Vector3 pos;
@@ -32,19 +33,24 @@ public class PlayerInputs : MonoBehaviour
 
     public AudioSource ShootAudioSource;
     public AudioSource ReloadAudioSource;
+    public AudioSource ShivAudioSource;
+    public AudioSource PunchAudioSource;
     public GamestateManager gameState;
 
 
+
+    private float time_between_shots;
 
     void Awake()
     {
         player = GameObject.Find("Player Character");
         playerModel = GameObject.Find("PlayerArmature");
-        enemies = GameObject.Find("Enemy Manager");
         playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
         FirePoint = GameObject.Find("PlayerCameraRoot");
         gameState = GameObject.Find("Gamestate Manager").GetComponent<GamestateManager>();
+        enemies = GameObject.Find("Enemy Manager");
 
+        time_between_shots = 0.0f;
     }
 
     
@@ -56,6 +62,16 @@ public class PlayerInputs : MonoBehaviour
         // Don't update if NOT IN gameplay state
         if (gameState.currentState != GamestateManager.Gamestate.GAMEPLAY)
             return;
+
+        /*if (enemies != null)
+        {
+            foreach (Transform child in enemies.transform)
+            {
+                float dist = Vector3.Distance(child.position, playerModel.transform.position);
+                Debug.Log("DISTANCE IS " + dist);
+            }
+        }*/
+        coinobject = GameObject.Find("Coin(Clone)");
 
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -75,7 +91,8 @@ public class PlayerInputs : MonoBehaviour
 
         // Throw a coin
         if (Input.GetKeyDown(KeyCode.LeftControl)
-            && playerStats.Numberofcoins > 0)
+            && playerStats.Numberofcoins > 0
+            && coinobject == null)
         {
 
             // Instantiate the projectile at the position and rotation of this transform
@@ -90,16 +107,13 @@ public class PlayerInputs : MonoBehaviour
             playerStats.Numberofcoins -= 1;
         }
 
-
+        time_between_shots -= 1.0f * Time.deltaTime;
 
         // Left click 
-
         switch (playerStats.equippedWeapon)
         {
             case PlayerStats.EquippedWeapon.Shiv:
-
-
-                pos = playerModel.transform.position;
+                pos= playerModel.transform.position;
 
                 if (Input.GetMouseButtonDown(0) && playerStats.shivDurability > 0)
                 {
@@ -107,11 +121,10 @@ public class PlayerInputs : MonoBehaviour
                     foreach (Transform child in enemies.transform)
                     {
                         float distance = Vector3.Distance(child.position, pos);
-                        if (distance < 1.5f)
+                        if (distance < 4.0f)
                         {
                             //INSTANTIATE COLLECTIBLE
                             child.gameObject.GetComponent<GuardStateManager>().IntantiateObject_random();
-
                             // Destroy the enemy
                             Destroy(child.gameObject);
                             List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
@@ -121,6 +134,7 @@ public class PlayerInputs : MonoBehaviour
                             //EventManager.Event.CheckForEnemies();
                             child.gameObject.SetActive(false);
 
+                            PlayShivSound();
                             playerStats.shivDurability--;
                             break;
                         }
@@ -131,7 +145,9 @@ public class PlayerInputs : MonoBehaviour
 
                 break;
             case PlayerStats.EquippedWeapon.Pistol:
-                if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0)
+                if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0
+                    && time_between_shots <= 0.0f
+                    && playerStats.gunequipped == true)
                 {
                     // Instantiate the projectile at the position and rotation of this transform
                     PlayShootSound();
@@ -147,11 +163,11 @@ public class PlayerInputs : MonoBehaviour
 
                     if (enemies != null)
                     {
-
                         foreach (Transform child in enemies.transform)
                         {
-                            float distance = Vector3.Distance(child.position, transform.position);
-                            if (distance < 40
+                            float distance = Vector3.Distance(child.position, playerModel.transform.position);
+
+                            if (distance < 30
                                && child.GetComponent<GuardStateManager>().returnzoneNumber() == playerStats.returnzoneNumber()
                                )
                             {
@@ -159,13 +175,13 @@ public class PlayerInputs : MonoBehaviour
                                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
                                || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
                                 {
-                                    Debug.Log("WHATS THAT SOUND");
+                                    //Debug.Log("WHTS THAT SOUND, FROM: " + child);
                                     child.GetComponent<GuardStateManager>().SS(child.GetComponent<GuardStateManager>().GunshotSoundState);
                                 }
                             }
                         }
                     }
-
+                    time_between_shots = 1.0f;
                     playerStats.ammoCount--;
                 }
 
@@ -182,8 +198,7 @@ public class PlayerInputs : MonoBehaviour
 
 
             //PUNCH
-            case PlayerStats.EquippedWeapon.fists:
-
+            case PlayerStats.EquippedWeapon.Fists:
                 pos = playerModel.transform.position;
                 if (Input.GetMouseButtonDown(0))
                 {
@@ -191,26 +206,20 @@ public class PlayerInputs : MonoBehaviour
                     foreach (Transform child in enemies.transform)
                     {
                         float distance = Vector3.Distance(child.position, pos);
-                        if (distance < 1.5f)
+                        if (distance < 4.0f)
                         {
-
                             child.gameObject.GetComponent<GuardStateManager>().damage(5);
 
                             Debug.Log("PUNCH");
                             if (child.GetComponent<GuardStateManager>().health <= 0)
                             {
                                 //INSTANTIATE COLLECTIBLE
+                                PlayPunchSound();
                                 child.GetComponent<GuardStateManager>().IntantiateObject_random();
-
                                 Destroy(child.gameObject);
-
                                 List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
-
                                 tmp.RemoveAt(i);
                                 EnemyManager.enemyManager.SetNumberOfEnemies(tmp.ToArray());
-
-
-
                                 //EventManager.Event.CheckForEnemies();
                                 child.gameObject.SetActive(false);
                             }
@@ -235,5 +244,12 @@ public class PlayerInputs : MonoBehaviour
     {
         ReloadAudioSource.Play();
     }
-
+    public void PlayShivSound()
+    {
+        ShivAudioSource.Play();
+    }
+    public void PlayPunchSound()
+    {
+        PunchAudioSource.Play();
+    }
 }

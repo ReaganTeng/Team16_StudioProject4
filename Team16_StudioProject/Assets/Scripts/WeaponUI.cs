@@ -23,6 +23,7 @@ public class WeaponUI : MonoBehaviour
 
     private GameObject pistolImage;
     private GameObject shivImage;
+    private GameObject fistImage;
 
     private int ammo;
     private int clipCount;
@@ -39,6 +40,8 @@ public class WeaponUI : MonoBehaviour
         playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
         shivImage = GameObject.Find("Shiv Image");
         pistolImage =  GameObject.Find("Pistol Image");
+       fistImage = GameObject.Find("Fist");
+
         numberOfAmmo = GameObject.Find("Weapon Use Text").GetComponent<TextMeshProUGUI>();
     }
 
@@ -58,18 +61,41 @@ public class WeaponUI : MonoBehaviour
         switch (playerStats.equippedWeapon)
         {
             case PlayerStats.EquippedWeapon.Shiv:
-                shivImage.GetComponent<RawImage>().enabled = true;
-                pistolImage.GetComponent<RawImage>().enabled = false;
-                numberOfAmmo.SetText("  " + shivCount.ToString());
+                //if (playerStats.shivDurability <= 0)
+                //{
+                //    shivImage.GetComponent<RawImage>().enabled = false;
+                //    pistolImage.GetComponent<RawImage>().enabled = false;
+                //    fistImage.GetComponent<RawImage>().enabled = true;
+                //    numberOfAmmo.SetText("Fists");
+                //}
+                //else
+                //{
+                    shivImage.GetComponent<RawImage>().enabled = true;
+                    pistolImage.GetComponent<RawImage>().enabled = false;
+                    fistImage.GetComponent<RawImage>().enabled = false;
+                    numberOfAmmo.SetText("  " + shivCount.ToString());
+                //}
                 break;
             case PlayerStats.EquippedWeapon.Pistol:
-                
-                pistolImage.GetComponent<RawImage>().enabled = true;
-                shivImage.GetComponent<RawImage>().enabled = false;
-
-                numberOfAmmo.SetText(ammo.ToString() + "/" + clipCount.ToString());
+                //if (playerStats.gunequipped == false)
+                //{
+                //    shivImage.GetComponent<RawImage>().enabled = false;
+                //    pistolImage.GetComponent<RawImage>().enabled = false;
+                //    fistImage.GetComponent<RawImage>().enabled = true;
+                //    numberOfAmmo.SetText("Fists");
+                //}
+                //else
+                //{
+                    pistolImage.GetComponent<RawImage>().enabled = true;
+                    shivImage.GetComponent<RawImage>().enabled = false;
+                    fistImage.GetComponent<RawImage>().enabled = false;
+                    numberOfAmmo.SetText(ammo.ToString() + "/" + clipCount.ToString());
+                //}
                 break;
             default:
+                shivImage.GetComponent<RawImage>().enabled = false;
+                pistolImage.GetComponent<RawImage>().enabled = false;
+                fistImage.GetComponent<RawImage>().enabled = true;
                 numberOfAmmo.SetText("Fists");
                 break;
 

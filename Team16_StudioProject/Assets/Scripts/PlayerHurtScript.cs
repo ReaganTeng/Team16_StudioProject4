@@ -45,25 +45,42 @@ public class PlayerHurtScript : MonoBehaviour
 
         float distance = 80;
 
+        GameObject enemies = GameObject.Find("Enemy Manager");
 
-           Vector3 newPosition = startPos;
+        foreach (Transform enemyChild in enemies.transform)
+        {
+
+            if (enemyChild.gameObject.GetComponent<GuardStateManager>().hitPlayer)
+            {
+                hurtPos = enemyChild.gameObject.transform.position;
+            }
+
+        }
+
+
 
         Vector3 directionToTarget = player.transform.position - hurtPos;
         float angle = Vector3.Angle(Camera.main.transform.forward, directionToTarget);
 
-        
-         var x = -distance * Mathf.Cos(angle * 2 * Mathf.Deg2Rad);
-        var y = -distance * Mathf.Sin(angle * 2 *  Mathf.Deg2Rad);
+        directionToTarget.x += -distance * Mathf.Cos(angle * 2 * Mathf.Deg2Rad);
+        directionToTarget.y += -distance * Mathf.Sin(angle * 2 *  Mathf.Deg2Rad);
 
-        newPosition.x += x;
-        newPosition.y += y;
 
         transform.rotation = Quaternion.Euler(0, 0, angle * 2);
-        transform.position = newPosition;
+        transform.position = startPos + directionToTarget;
 
         time -= Time.deltaTime;
         if (time <= 0)
         {
+            foreach (Transform enemyChild in enemies.transform)
+            {
+
+                if (enemyChild.gameObject.GetComponent<GuardStateManager>().hitPlayer)
+                {
+                    enemyChild.gameObject.GetComponent<GuardStateManager>().hitPlayer = false;
+                }
+
+            }
             image.enabled = false;
         }
     }

@@ -111,6 +111,7 @@ public class SecurityCameraScript : MonoBehaviour
             timer = 3;
         }
 
+       
 
         navMeshAgent.speed = 10;
 
@@ -122,16 +123,27 @@ public class SecurityCameraScript : MonoBehaviour
 
         if (other.tag == "Player")
         {
-            foreach (Transform child in enemies.transform)
+            if (enemies != null)
             {
-                child.GetComponent<GuardStateManager>().targetPosition = player.transform.position;
-                child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().SecurityState);
+                foreach (Transform child in enemies.transform)
+                {
 
+                    if (child.GetComponent<GuardStateManager>().returnzoneNumber() == player.GetComponent<PlayerStats>().returnzoneNumber()
+                      )
+                    {
+                        if (child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().PatrolState
+                        || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
+                        || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
+                        {
+                            child.GetComponent<GuardStateManager>().targetPosition = player.transform.position;
+                            child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().SecurityState);
+                        }
+                    }
+                    detected_player = true;
 
-                detected_player = true;
-
+                }
             }
         }
 
-     }
+    }
 }
