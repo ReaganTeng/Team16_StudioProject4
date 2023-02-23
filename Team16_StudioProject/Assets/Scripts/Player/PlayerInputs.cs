@@ -43,8 +43,6 @@ public class PlayerInputs : MonoBehaviour
         enemies = GameObject.Find("Enemy Manager");
         playerStats = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>();
         FirePoint = GameObject.Find("PlayerCameraRoot");
-
-
         gameState = GameObject.Find("Gamestate Manager").GetComponent<GamestateManager>();
 
     }
@@ -86,7 +84,6 @@ public class PlayerInputs : MonoBehaviour
             pos = transform.position;
             clone.position = playerModel.transform.position;
             clone.position += playerModel.GetComponent<TPSController>().direction * 3.0f;
-            clone.velocity = new Vector3(0, 0, 0);
             clone.velocity = transform.TransformDirection(playerModel.GetComponent<TPSController>().direction * 20);
             clone.MoveRotation(Quaternion.Euler(0.0f, playerModel.GetComponent<TPSController>().angle, 0.0f));
 
@@ -134,11 +131,8 @@ public class PlayerInputs : MonoBehaviour
 
                 break;
             case PlayerStats.EquippedWeapon.Pistol:
-
-
                 if (Input.GetMouseButtonDown(0) && playerStats.ammoCount > 0)
                 {
-                    Debug.Log("Shoot");
                     // Instantiate the projectile at the position and rotation of this transform
                     PlayShootSound();
                     Rigidbody clone;
@@ -157,8 +151,18 @@ public class PlayerInputs : MonoBehaviour
                         foreach (Transform child in enemies.transform)
                         {
                             float distance = Vector3.Distance(child.position, transform.position);
-                            if (distance < 40)
-                                child.GetComponent<GuardStateManager>().SwitchState(child.GetComponent<GuardStateManager>().GunshotSoundState);
+                            if (distance < 40
+                               && child.GetComponent<GuardStateManager>().returnzoneNumber() == playerStats.returnzoneNumber()
+                               )
+                            {
+                                if (child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().PatrolState
+                               || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().SearchState
+                               || child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().StationState)
+                                {
+                                    Debug.Log("WHATS THAT SOUND");
+                                    child.GetComponent<GuardStateManager>().SS(child.GetComponent<GuardStateManager>().GunshotSoundState);
+                                }
+                            }
                         }
                     }
 

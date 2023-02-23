@@ -12,8 +12,6 @@ public class GuardGunshotSoundState : GuardStateBase
     {
        // Debug.Log("WHAT'S THAT SOUND");
         time = 5.0f;
-
-
         guard.navMeshAgent.speed = 5.0f;
         //playerPos = new Transform[1];
         guard.navMeshAgent.SetDestination(guard.getplayerPos().position);
@@ -30,8 +28,14 @@ public class GuardGunshotSoundState : GuardStateBase
             guard.SwitchState(guard.SearchState);
         }
 
-        //Debug.Log("TIME " + time);
-        //CONTANTLY SET DESTINATION AS PLAYER'S CURRENT POSITION
+        for (int i = 0; i < 2; i++)
+        {
+            if (guard.returnObserver(i) == true
+                && (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) < 5.0f))
+            {
+                guard.SwitchState(guard.ChaseState);
+            }
+        }
 
     }
 
