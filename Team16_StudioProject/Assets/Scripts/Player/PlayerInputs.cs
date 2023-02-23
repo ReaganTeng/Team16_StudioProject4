@@ -33,6 +33,8 @@ public class PlayerInputs : MonoBehaviour
 
     public AudioSource ShootAudioSource;
     public AudioSource ReloadAudioSource;
+    public AudioSource ShivAudioSource;
+    public AudioSource PunchAudioSource;
     public GamestateManager gameState;
 
 
@@ -132,6 +134,7 @@ public class PlayerInputs : MonoBehaviour
                             //EventManager.Event.CheckForEnemies();
                             child.gameObject.SetActive(false);
 
+                            PlayShivSound();
                             playerStats.shivDurability--;
                             break;
                         }
@@ -211,6 +214,7 @@ public class PlayerInputs : MonoBehaviour
                             if (child.GetComponent<GuardStateManager>().health <= 0)
                             {
                                 //INSTANTIATE COLLECTIBLE
+                                PlayPunchSound();
                                 child.GetComponent<GuardStateManager>().IntantiateObject_random();
                                 Destroy(child.gameObject);
                                 List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
@@ -240,5 +244,12 @@ public class PlayerInputs : MonoBehaviour
     {
         ReloadAudioSource.Play();
     }
-
+    public void PlayShivSound()
+    {
+        ShivAudioSource.Play();
+    }
+    public void PlayPunchSound()
+    {
+        PunchAudioSource.Play();
+    }
 }
