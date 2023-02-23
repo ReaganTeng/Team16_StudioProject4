@@ -26,7 +26,6 @@ public class CoinScript : MonoBehaviour
         // rb.velocity.x--;  
         //Debug.Log(transform.position);
         enemies = GameObject.Find("Enemy Manager");
-
         player = GameObject.Find("PlayerArmature");
 
 
@@ -46,8 +45,8 @@ public class CoinScript : MonoBehaviour
             {
                 float distance = Vector3.Distance(child.position, transform.position);
                 if (distance < 50
-                    && (child.GetComponent<GuardStateManager>().returnzoneNumber() == player.GetComponent<PlayerStats>().returnzoneNumber())
-                    )
+                    && child.GetComponent<GuardStateManager>().returnzoneNumber() == player.GetComponent<PlayerStats>().returnzoneNumber()
+                   /* && child.GetComponent<Rigidbody>().velocity == new Vector3(1,1,1)*/)
                 {
                     //Debug.Log("COIN SEEN");
                     if (child.GetComponent<GuardStateManager>().returnState() == child.GetComponent<GuardStateManager>().PatrolState

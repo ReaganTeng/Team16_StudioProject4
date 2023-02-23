@@ -50,14 +50,14 @@ public class DoorTrigger : MonoBehaviour
             Vector3 direction = player.transform.position - transform.position + Vector3.up;
             Ray ray = new Ray(transform.position, direction);
             RaycastHit raycastHit;
-            
+
+
             if (Physics.Raycast (ray, out raycastHit))
             {
                 if (raycastHit.collider.transform == player.transform
                     && player.GetComponent<PlayerStats>().Numberofkeys > 0)
                 {
                     player.GetComponent<PlayerStats>().Numberofkeys -= 1;
-
                     m_IsDetected = true;
                 }
                 else

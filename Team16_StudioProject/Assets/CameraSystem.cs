@@ -13,17 +13,17 @@ public class CameraSystem : MonoBehaviour
 
         int edgeScrollSize = 20;
 
-        if (Input.mousePosition.x < edgeScrollSize)
+        if (Input.GetKey(KeyCode.Q))
         {
             rotateDir -= 1f;
         }
-        if (Input.mousePosition.x > Screen.width - edgeScrollSize)
+        if (Input.GetKey(KeyCode.E))
         {
             rotateDir += 1f;
         }
 
 
-        float rotateSpeed = 35f;
+        float rotateSpeed = 35f * 1.5f;
         transform.eulerAngles += new Vector3(0, rotateDir * rotateSpeed * Time.deltaTime, 0);
     }
 }

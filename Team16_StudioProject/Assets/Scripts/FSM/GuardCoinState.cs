@@ -15,8 +15,10 @@ public class GuardCoinState : GuardStateBase
         
 
         Debug.Log("DISTRACTED STATE");
-        coin = GameObject.Find("Coin(Clone)");
         time = 5.0f;
+        coin = GameObject.Find("Coin(Clone)");
+        guard.navMeshAgent.SetDestination(coin.transform.position);
+
 
         guard.navMeshAgent.speed = 5.0f;
         distfromPlayer = 10.0f;
@@ -24,13 +26,12 @@ public class GuardCoinState : GuardStateBase
     }
 
     public override void UpdateState(GuardStateManager guard)
-    {
+    { 
+
         //if (coin == null)
         //{
         //    return;
         //}
-
-
 
         time -= Time.deltaTime;
 
@@ -40,10 +41,7 @@ public class GuardCoinState : GuardStateBase
             guard.SwitchState(guard.SearchState);
         }
 
-        //Debug.Log("TIME " + time);
-        //CONTANTLY SET DESTINATION AS PLAYER'S CURRENT POSITION
-        guard.navMeshAgent.SetDestination(coin.transform.position);
-
+        
         for (int i = 0; i < 2; i++)
         {
             if (guard.returnObserver(i) == true
@@ -54,21 +52,7 @@ public class GuardCoinState : GuardStateBase
         }
 
 
-        //     //if player and enemy distance is more than distance
-        //     if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > distfromPlayer)
-        //     {
-        //         guard.SwitchState(guard.SearchState);
-        //     }
-
-        //     //STOPPING DISTANCE
-        //    if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) <= stoppingdistance)
-        //     {
-        //         guard.navMeshAgent.speed = 0.0f;
-        //     }
-        //     else if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) > stoppingdistance)
-        //     {
-        //         guard.navMeshAgent.speed = 5.0f;
-        //     }
+       
     }
 
     public override void OnCollisionEnter(GuardStateManager guard, Collision collision)
