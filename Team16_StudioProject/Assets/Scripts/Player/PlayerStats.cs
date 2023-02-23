@@ -9,21 +9,17 @@ public class PlayerStats : MonoBehaviour
     {
         Shiv,
         Pistol,
-
-        fists,
-
+        Fists,
         NUM_TYPES
     }
 
     [SerializeField] public int health = 100;
     [SerializeField] public int ammoCount = 10;
     [SerializeField] public int clipCount = 1;
-    [SerializeField] public int shivDurability = 2;
+    [SerializeField] public int shivDurability = 0;
     public int maxAmmoCount;
     [SerializeField] private bool shootPistol = true;
-
     [SerializeField] public int Numberofkeys = 2;
-
     [SerializeField] public int Numberofcoins = 1;
 
     private GameObject[] zone;
@@ -50,7 +46,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
 
-        gunequipped = true;
+        gunequipped = false;
         healthBar = GameObject.Find("Health Bar");
         maxAmmoCount = 12;
     }
@@ -63,12 +59,18 @@ public class PlayerStats : MonoBehaviour
         {
             inventory.AddItem(item.item, 1);
 
-            if(item.item == firstaid)
+            if(item.item == firstaid
+                
+                && health < 100)
             {
                 health += 20;
+
                 Destroy(other.gameObject);
 
-
+                if (health > 100)
+                {
+                    health = 100;
+                }
             }
             else if (item.item == ammoclip)
             {
@@ -77,11 +79,10 @@ public class PlayerStats : MonoBehaviour
 
             }
             else if (item.item == shiv
-                && shivDurability <= 0)
+                && shivDurability == 0)
             {
                 shivDurability = 2;
                 Destroy(other.gameObject);
-
             }
             else if (item.item == coin)
             {
@@ -101,8 +102,6 @@ public class PlayerStats : MonoBehaviour
                 Destroy(other.gameObject);
 
             }
-
-
         }
     }
 
@@ -117,9 +116,46 @@ public class PlayerStats : MonoBehaviour
             equippedWeapon--;
         }
 
+        switch (equippedWeapon)
+        {
+            case EquippedWeapon.Shiv:
+                {
+                    Debug.Log("SHIV");
+                    if (shivDurability <= 0)
+                    {
+                        equippedWeapon = EquippedWeapon.Fists;
+                    }
+                    break;
+                }
+            case EquippedWeapon.Pistol:
+                { 
+                    Debug.Log("PISTOl");
+                    if (gunequipped == false)
+                    {
+                        equippedWeapon = EquippedWeapon.Fists;
+
+                    }
+                    break;
+                }
+            default:
+                {
+                    Debug.Log("FISTS");
+                    break;
+                }
+        }
+
+        //if(shivDurability > 0)
+        //{
+        //    Debug.Log("SHIV");
+        //}
+        //else
+        //{
+        //    Debug.Log(" NO SHIV");
+
+        //}
+
 
         zone = GameObject.FindGameObjectsWithTag("Z");
-
 
         for (int i = 0; i < zone.Length; i++)
         {
@@ -133,7 +169,7 @@ public class PlayerStats : MonoBehaviour
             //if (zone[i].GetComponent<Collider>() == gameObject.GetComponent<Transform>())
             {
                 zoneno = zone[i].GetComponent<WhatZone>().zone_number;
-                Debug.Log("PLAYER ZONE " + zoneno);
+               // Debug.Log("PLAYER ZONE " + zoneno);
 
             }
         }

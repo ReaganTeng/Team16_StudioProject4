@@ -64,11 +64,6 @@ public class ProjectileScript : MonoBehaviour
                 if (distance < 3.0f)
                 {
                     child.GetComponent<GuardStateManager>().damage(10);
-
-                    //Debug.Log("ENEMY HEALTH " + child.GetComponent<GuardStateManager>().health);
-
-
-
                     if (child.GetComponent<GuardStateManager>().health <= 0)
                     {
 
