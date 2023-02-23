@@ -43,6 +43,7 @@ public class GuardStateManager : MonoBehaviour
     public GameObject pistolClip;
     public GameObject shiv;
     public GameObject coin;
+    public GameObject first_aid;
 
 
     public int generator;
@@ -73,12 +74,10 @@ public class GuardStateManager : MonoBehaviour
         {
             currentState = StationState;
         }
-        else/* if (curstate == "Station")*/
+        else
         {
             currentState = PatrolState;
         }
-        //
-
         
 
         health = 100;
@@ -128,7 +127,7 @@ public class GuardStateManager : MonoBehaviour
     public void IntantiateObject_random()
     {
         //Random rnd = new Random();
-        int random_generator = Random.Range(1, 4);
+        int random_generator = Random.Range(1, 5);
         switch (random_generator)
         {
             case 1:
@@ -144,6 +143,11 @@ public class GuardStateManager : MonoBehaviour
             case 3:
                 {
                     Instantiate(coin, new Vector3(enemyPos.position.x, enemyPos.position.y + 0.5f, enemyPos.position.z - 3.0f), Quaternion.identity);
+                    break;
+                }
+            case 4:
+                {
+                    Instantiate(first_aid, new Vector3(enemyPos.position.x, enemyPos.position.y + 0.5f, enemyPos.position.z - 3.0f), Quaternion.identity);
                     break;
                 }
             default:
@@ -165,7 +169,6 @@ public class GuardStateManager : MonoBehaviour
         zone = GameObject.FindGameObjectsWithTag("Z");
         for (int i = 0; i < zone.Length; i++)
         {
-            zone[i].GetComponent<WhatZone>().entity = gameObject;
 
             if (/*zone[i].GetComponent<WhatZone>().m_InRange == true*/
                 gameObject.transform.position.x < zone[i].GetComponent<Transform>().position.x + (zone[i].GetComponent<Transform>().localScale.x / 2)
@@ -176,7 +179,7 @@ public class GuardStateManager : MonoBehaviour
             {
                 zoneno = zone[i].GetComponent<WhatZone>().zone_number;
                 //Debug.Log("ZONE ENTITY " + zone[i].GetComponent<WhatZone>().entity + " ZONE NUMBER " + zoneno);
-                //Debug.Log("ZONE IS " + zoneno);
+                Debug.Log("ZONE IS " + zoneno);
             }
         }
 

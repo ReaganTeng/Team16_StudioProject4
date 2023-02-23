@@ -123,8 +123,6 @@ public class PlayerStats : MonoBehaviour
 
         for (int i = 0; i < zone.Length; i++)
         {
-            zone[i].GetComponent<WhatZone>().entity = gameObject;
-
             if (/*zone[i].GetComponent<WhatZone>().m_InRange == true
              && */gameObject.transform.position.x < zone[i].GetComponent<Transform>().position.x + (zone[i].GetComponent<Transform>().localScale.x/2)
              && gameObject.transform.position.x > zone[i].GetComponent<Transform>().position.x - (zone[i].GetComponent<Transform>().localScale.x / 2)

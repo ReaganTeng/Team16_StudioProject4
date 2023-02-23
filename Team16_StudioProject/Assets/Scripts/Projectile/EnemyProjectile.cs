@@ -24,9 +24,9 @@ public class EnemyProjectile : MonoBehaviour
     {
         // Set a life time for the projectile
         time = 1.0f;
+        players = GameObject.Find("PlayerArmature");
 
         // GameObjects that the projectile can collide with.
-        players = GameObject.Find("PlayerArmature");
         renderHurtImage = GameObject.Find("HurtDirection");
         //playerStats = GameObject.Find("Player Character");
     }
@@ -34,6 +34,8 @@ public class EnemyProjectile : MonoBehaviour
 
     void Update()
     {
+
+
         time -= Time.deltaTime;
 
         pos = transform.position;
@@ -60,7 +62,7 @@ public class EnemyProjectile : MonoBehaviour
                 {
                     Destroy(gameObject);
                     players.GetComponent<PlayerStats>().health -= 10;
-
+                    Debug.Log("HEALTH " + players.GetComponent<PlayerStats>().health);
                     renderHurtImage.GetComponent<PlayerHurtScript>().SetEnabled(true);
                     renderHurtImage.GetComponent<PlayerHurtScript>().time = 2;
                     renderHurtImage.GetComponent<PlayerHurtScript>().hurtPos = pos;

@@ -739,6 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7aafe9a4a5e18408eeb0ca11f8f55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ZoneNumber: 0
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -752,6 +753,8 @@ MonoBehaviour:
     type: 3}
   shiv: {fileID: 4890464438319283094, guid: d880ef9d4b5cc9c4eb3585d12d1d4d8e, type: 3}
   coin: {fileID: 825773668044350865, guid: 8b0af35a6a747dc49ba5deccef9e69ce, type: 3}
+  first_aid: {fileID: 4036921153931855054, guid: 79f44db1f5c0c9741abf96bbdc66c930,
+    type: 3}
   generator: 0
 --- !u!136 &3751484280772504296
 CapsuleCollider:
