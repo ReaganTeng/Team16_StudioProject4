@@ -17,7 +17,7 @@ public class ScrollingBackground : MonoBehaviour
     void Update()
     {
         float x = Mathf.Repeat(Time.time * scrollSpeed, 1);
-        Vector2 offset = new Vector2(x, x);
+        Vector2 offset = new Vector2(x, 0);
         renderer.sharedMaterial.SetTextureOffset("_MainTex", offset);
     }
 }
