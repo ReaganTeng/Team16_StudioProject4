@@ -29,7 +29,7 @@ public class EnemyHealthBarScript : MonoBehaviour
             healthBar.value = GetComponentInParent<GuardStateManager>().health;
         }
 
-        this.transform.rotation = Quaternion.Euler(0.0f, 45.0f, 0.0f);
+        this.transform.forward = Camera.main.transform.forward;
 
     }
 }

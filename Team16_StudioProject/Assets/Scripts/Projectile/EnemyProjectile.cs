@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Security.Cryptography;
 using UnityEngine;
 
 
@@ -7,10 +9,11 @@ public class EnemyProjectile : MonoBehaviour
 {
 
     float time;
+    public Vector3 startPos;
     private GameObject players;
     private Vector3 pos;
     private GameObject playerStats;
-    private GameObject renderHurtImage;
+    private GameObject renderHurtImage; 
 
 
     // Start is called before the first frame update
@@ -60,6 +63,18 @@ public class EnemyProjectile : MonoBehaviour
                 {
                     Destroy(gameObject);
                     players.GetComponent<PlayerStats>().health -= 10;
+
+                    GameObject enemies = GameObject.Find("Enemy Manager");
+
+                    foreach (Transform enemyChild in enemies.transform)
+                    {
+                        enemyChild.gameObject.GetComponent<GuardStateManager>().hitPlayer = false;
+                        if (startPos == enemyChild.gameObject.GetComponent<GuardStateManager>().shootStartPos)
+                        {
+                            enemyChild.gameObject.GetComponent<GuardStateManager>().hitPlayer = true;
+                        }
+                    }
+
 
                     renderHurtImage.GetComponent<PlayerHurtScript>().SetEnabled(true);
                     renderHurtImage.GetComponent<PlayerHurtScript>().time = 2;

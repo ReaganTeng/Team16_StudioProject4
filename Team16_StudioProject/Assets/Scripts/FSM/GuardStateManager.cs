@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.AI;
 
 using UnityEngine;
+using System.Collections.Specialized;
 
 public class GuardStateManager : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class GuardStateManager : MonoBehaviour
     private GameObject[] zone;
 
     public int health;
+    public bool hitPlayer;
+    public Vector3 shootStartPos;
 
 
     public GameObject pistolClip;
@@ -82,6 +85,7 @@ public class GuardStateManager : MonoBehaviour
         
 
         health = 100;
+        hitPlayer = false;
 
         //Debug.Log("WAYPOINTS ARE: " + waypoints[0].position);
         currentState.EnterState(this, waypoints);
