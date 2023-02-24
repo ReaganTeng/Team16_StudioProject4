@@ -43,6 +43,7 @@ public class PlayerStats : MonoBehaviour
     private TextMeshProUGUI obtainText;
     private float obtainTimer;
 
+    private int maxhealth = 100;
 
     public bool[] weapon = new bool[3];
 
@@ -78,25 +79,21 @@ public class PlayerStats : MonoBehaviour
             obtainTimer = 2;
 
             if(item.item == firstaid
-                
-                && health < 100)
+                && health < maxhealth)
             {
                 obtainText.SetText("Restored 20 health.");
                 health += 20;
 
                 Destroy(other.gameObject);
 
-                if (health > 100)
+                if (health > maxhealth)
                 {
-                    health = 100;
+                    health = maxhealth;
                 }
-
-
-
             }
             else if (item.item == ammoclip)
             {
-                obtainText.SetText("Obtained Pistol clip.");
+                obtainText.SetText("Pistol Clip Obtained.");
                 clipCount += 1;
                 Destroy(other.gameObject);
 
@@ -104,7 +101,7 @@ public class PlayerStats : MonoBehaviour
             else if (item.item == shiv
                 && shivDurability <= 0)
             {
-                obtainText.SetText("Obtained Shiv.");
+                obtainText.SetText("Shiv Obtained.");
                 shivDurability = 2;
                 //equippedWeapon = EquippedWeapon.Shiv;
 
@@ -113,21 +110,21 @@ public class PlayerStats : MonoBehaviour
             }
             else if (item.item == coin)
             {
-                obtainText.SetText("Obtained Coin.");
+                obtainText.SetText("Coin Obtained.");
                 Numberofcoins += 1;
                 Destroy(other.gameObject);
 
             }
             else if (item.item == key)
             {
-                obtainText.SetText("Obtained Key.");
+                obtainText.SetText("Key Obtained.");
                 Numberofkeys += 1;
                 Destroy(other.gameObject);
 
             }
             else if (item.item == pistol)
             {
-                obtainText.SetText("Obtained Pistol.");
+                obtainText.SetText("Pistol Obtained.");
                 gunequipped = true;
 
                 weapon[2] = true;
