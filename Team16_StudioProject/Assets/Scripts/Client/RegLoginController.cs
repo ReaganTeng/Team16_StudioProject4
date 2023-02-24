@@ -11,6 +11,7 @@ public class RegLoginController : MonoBehaviour
     string URLRegBackend=GlobalStuffs.baseURL+"RegisterBackend.php";
     string URLReadPlayerStats=GlobalStuffs.baseURL+"ReadPlayerStatsJSON.php";
     public TextMeshProUGUI displayTxt; //must add using UnityEngine.UI
+    public TextMeshProUGUI loginTxt;
     public TMP_InputField  if_regusername,if_regpassword,if_regemail; //to link to the inpufields
     public TMP_InputField  if_loginusername,if_loginpassword; //to link to the inpufields
     private GameObject Login;
@@ -64,8 +65,9 @@ public class RegLoginController : MonoBehaviour
         switch (webreq.result)
             {
                 case UnityWebRequest.Result.Success:
+                displayTxt.text = webreq.downloadHandler.text;
+                if (webreq.downloadHandler.text == "Registered")
                 RegisterToLoginScreen();
-                    //displayTxt.text=webreq.downloadHandler.text;
                     break;
                 default:
                     displayTxt.text="server error";
