@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Collections.Specialized;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -42,10 +43,18 @@ public class PlayerStats : MonoBehaviour
 
     private TextMeshProUGUI obtainText;
     private float obtainTimer;
+    private float obtainScale;
 
     private int maxhealth = 100;
 
     public bool[] weapon = new bool[3];
+
+    // For time taken in game ending
+    private TextMeshProUGUI timerText;
+    public int timeCounterSecond;
+    public int timeCounterMinute;
+    private float counterTimer;
+    private TimeCounter timerObject;
 
 
 
@@ -64,9 +73,16 @@ public class PlayerStats : MonoBehaviour
         healthBar = GameObject.Find("Health Bar");
         obtainText = GameObject.Find("Obtained Text").GetComponent<TextMeshProUGUI>();
         obtainText.SetText("");
+        timerText = GameObject.Find("Timer").GetComponent<TextMeshProUGUI>();
+        timerObject = GameObject.Find("TimerObject").GetComponent<TimeCounter>();
         obtainTimer = 0;
+        obtainScale = 0;
         maxAmmoCount = 12;
         equippedWeapon = EquippedWeapon.Fists;
+
+        timeCounterSecond = 0;
+        timeCounterMinute = 0;
+        counterTimer = 1;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -75,8 +91,10 @@ public class PlayerStats : MonoBehaviour
         var item = other.GetComponent<Item>();
         if (item)
         {
+            obtainScale = 0;
             inventory.AddItem(item.item, 1);
             obtainTimer = 2;
+
 
             if(item.item == firstaid
                 && health < maxhealth)
@@ -137,8 +155,41 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
+
+        // Time counter
+        counterTimer -= Time.deltaTime;
+        if (counterTimer <= 0)
+        {
+            counterTimer += 1;
+            timeCounterSecond++;
+            if (timeCounterSecond == 60)
+            {
+                timeCounterMinute++;
+                timeCounterSecond = 0;
+            }
+        }
+        if (timeCounterSecond > 9)
+        {
+            timerText.SetText(timeCounterMinute.ToString() + ":" + timeCounterSecond);
+        }
+        else
+        {
+            timerText.SetText(timeCounterMinute.ToString() + ":0" + timeCounterSecond);
+        }
+        timerObject.timeSecond = timeCounterSecond;
+        timerObject.timeMinute = timeCounterMinute;
+
+
+
         if (obtainTimer > 0)
         {
+            if (obtainScale < 1)
+            {
+                obtainScale += 10 * Time.deltaTime;
+            }
+
+            obtainText.transform.localScale = new Vector3(obtainScale, obtainScale, 1);
+
             obtainTimer -= Time.deltaTime;
 
             if (obtainTimer <= 0)
