@@ -68,6 +68,14 @@ public class HealthBarScript : MonoBehaviour
 
             healthBarObject.transform.position = healthBarStartPos + (new Vector3 (0, healthBarTransform, 0));
         }
+        else
+        {
+            currentValue += 50 * Time.deltaTime;
+            if (currentValue > playerStats.GetComponent<PlayerStats>().health)
+            {
+                currentValue = playerStats.GetComponent<PlayerStats>().health;
+            }
+        }
         healthBar.value = currentValue;
 
     }

@@ -43,6 +43,7 @@ public class PlayerStats : MonoBehaviour
     private TextMeshProUGUI obtainText;
     private float obtainTimer;
 
+    private int maxhealth = 100;
 
     public bool[] weapon = new bool[3];
 
@@ -78,21 +79,17 @@ public class PlayerStats : MonoBehaviour
             obtainTimer = 2;
 
             if(item.item == firstaid
-                
-                && health < 100)
+                && health < maxhealth)
             {
                 obtainText.SetText("Restored 20 health.");
                 health += 20;
 
                 Destroy(other.gameObject);
 
-                if (health > 100)
+                if (health > maxhealth)
                 {
-                    health = 100;
+                    health = maxhealth;
                 }
-
-
-
             }
             else if (item.item == ammoclip)
             {

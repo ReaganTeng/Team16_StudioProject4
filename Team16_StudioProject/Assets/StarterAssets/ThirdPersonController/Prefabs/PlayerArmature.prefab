@@ -81,7 +81,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8816013342789532754
 Transform:
   m_ObjectHideFlags: 0
@@ -1435,6 +1435,7 @@ MonoBehaviour:
   gunequipped: 0
   shiv: {fileID: 11400000, guid: f4f2d378f138edc4e8972c364aadb6d0, type: 2}
   pistol: {fileID: 11400000, guid: 5f7ea2f6207b92945ae5f297d335fc36, type: 2}
+  weapon: 000000
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0
