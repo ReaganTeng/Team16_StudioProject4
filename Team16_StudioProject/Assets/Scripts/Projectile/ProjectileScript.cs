@@ -63,7 +63,7 @@ public class ProjectileScript : MonoBehaviour
                 float distance = Vector3.Distance(child.transform.position, pos);
                 if (distance < 3.0f)
                 {
-                    child.GetComponent<GuardStateManager>().damage(10);
+                    child.GetComponent<GuardStateManager>().damage(30);
                     if (child.GetComponent<GuardStateManager>().health <= 0)
                     {
 
