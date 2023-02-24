@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -39,6 +40,9 @@ public class PlayerStats : MonoBehaviour
     public EquipmentObject shiv;
     public EquipmentObject pistol;
 
+    private TextMeshProUGUI obtainText;
+    private float obtainTimer;
+
 
     public bool[] weapon = new bool[3];
 
@@ -57,6 +61,9 @@ public class PlayerStats : MonoBehaviour
 
        // gunequipped = false;
         healthBar = GameObject.Find("Health Bar");
+        obtainText = GameObject.Find("Obtained Text").GetComponent<TextMeshProUGUI>();
+        obtainText.SetText("");
+        obtainTimer = 0;
         maxAmmoCount = 12;
         equippedWeapon = EquippedWeapon.Fists;
     }
@@ -68,11 +75,13 @@ public class PlayerStats : MonoBehaviour
         if (item)
         {
             inventory.AddItem(item.item, 1);
+            obtainTimer = 2;
 
             if(item.item == firstaid
                 
                 && health < 100)
             {
+                obtainText.SetText("Restored 20 health.");
                 health += 20;
 
                 Destroy(other.gameObject);
@@ -81,9 +90,13 @@ public class PlayerStats : MonoBehaviour
                 {
                     health = 100;
                 }
+
+
+
             }
             else if (item.item == ammoclip)
             {
+                obtainText.SetText("Obtained Pistol clip.");
                 clipCount += 1;
                 Destroy(other.gameObject);
 
@@ -91,6 +104,7 @@ public class PlayerStats : MonoBehaviour
             else if (item.item == shiv
                 && shivDurability <= 0)
             {
+                obtainText.SetText("Obtained Shiv.");
                 shivDurability = 2;
                 //equippedWeapon = EquippedWeapon.Shiv;
 
@@ -99,18 +113,21 @@ public class PlayerStats : MonoBehaviour
             }
             else if (item.item == coin)
             {
+                obtainText.SetText("Obtained Coin.");
                 Numberofcoins += 1;
                 Destroy(other.gameObject);
 
             }
             else if (item.item == key)
             {
+                obtainText.SetText("Obtained Key.");
                 Numberofkeys += 1;
                 Destroy(other.gameObject);
 
             }
             else if (item.item == pistol)
             {
+                obtainText.SetText("Obtained Pistol.");
                 gunequipped = true;
 
                 weapon[2] = true;
@@ -123,6 +140,16 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
+        if (obtainTimer > 0)
+        {
+            obtainTimer -= Time.deltaTime;
+
+            if (obtainTimer <= 0)
+            {
+                obtainText.SetText("");
+            }
+        }
+
         if(Input.GetAxis("Mouse ScrollWheel") > 0 && equippedWeapon < EquippedWeapon.NUM_TYPES - 1)
         {
             Debug.Log("inc");
