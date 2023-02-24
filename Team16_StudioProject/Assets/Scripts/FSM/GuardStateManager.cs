@@ -261,6 +261,11 @@ public class GuardStateManager : MonoBehaviour
         return player;
     }
 
+    public GameObject getenemy()
+    {
+        return gameObject;
+    }
+
     public void damage(int dmg)
     {
         health -= dmg;

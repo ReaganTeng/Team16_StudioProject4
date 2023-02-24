@@ -15,7 +15,7 @@ public class GuardChaseState : GuardStateBase
 
         guard.navMeshAgent.speed = 2.0f;
         distfromPlayer = 10.0f;
-        stoppingdistance = 3.0f;
+        stoppingdistance = 4.5f;
         GlobalVolume.globalVolume.SetChase(true);
     }
 
@@ -68,6 +68,7 @@ public class GuardChaseState : GuardStateBase
         //STOPPING DISTANCE
        if (Vector3.Distance(guard.getplayerPos().position, guard.getgenemyPos().position) <= stoppingdistance)
         {
+          
             guard.navMeshAgent.speed = 0.0f;
         }
         else
@@ -78,9 +79,11 @@ public class GuardChaseState : GuardStateBase
 
         timer_between_shots += 1.0f * Time.deltaTime;
 
-
+        //ENEMY SHOOTS BULLET
         if (timer_between_shots >= 0.5f)
         {
+            guard.getenemy().GetComponentInChildren<AnimationStateController>().animator.SetBool("Shootmode", true);
+
             // Instantiate the projectile at the position and rotation of this transform
             Rigidbody clone;
             clone = GameObject.Instantiate(guard.projectile, guard.getgenemyPos().position, guard.getgenemyPos().rotation);
@@ -93,6 +96,12 @@ public class GuardChaseState : GuardStateBase
 
             timer_between_shots = 0;
         }
+        else
+        {
+            guard.getenemy().GetComponentInChildren<Animator>().SetBool("Shootmode", false);
+
+        }
+
 
         //CONTANTLY SET DESTINATION AS PLAYER'S CURRENT POSITION
         guard.navMeshAgent.SetDestination(guard.getplayerPos().position);
