@@ -74,10 +74,10 @@ public class PlayerInputs : MonoBehaviour
         coinobject = GameObject.Find("Coin(Clone)");
 
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            playerStats.health -= 10;
-        }
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    playerStats.health -= 10;
+        //}
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -202,6 +202,7 @@ public class PlayerInputs : MonoBehaviour
                 pos = playerModel.transform.position;
                 if (Input.GetMouseButtonDown(0))
                 {
+
                     int i = 0;
                     foreach (Transform child in enemies.transform)
                     {
@@ -210,11 +211,14 @@ public class PlayerInputs : MonoBehaviour
                         {
                             child.gameObject.GetComponent<GuardStateManager>().damage(5);
 
+                            //INSTANTIATE COLLECTIBLE
+
+                            PlayPunchSound();
+
                             Debug.Log("PUNCH");
                             if (child.GetComponent<GuardStateManager>().health <= 0)
                             {
-                                //INSTANTIATE COLLECTIBLE
-                                PlayPunchSound();
+                                
                                 child.GetComponent<GuardStateManager>().IntantiateObject_random();
                                 Destroy(child.gameObject);
                                 List<GameObject> tmp = new List<GameObject>(EnemyManager.enemyManager.GetNumberOfEnemies());
@@ -250,6 +254,7 @@ public class PlayerInputs : MonoBehaviour
     }
     public void PlayPunchSound()
     {
+        PunchAudioSource.time = 0.5f;
         PunchAudioSource.Play();
     }
 }
