@@ -11,7 +11,7 @@ public static class GlobalStuffs {
     public static int level=1;
     public static bool exist = false;
     
-    public static string baseURL= "http://localhost/server/"; //rename this to your server path
+    public static string baseURL= "http://34.124.188.6/server/"; //rename this to your server path
     static string addscorebackendURL=baseURL+"AddScoreBackend.php";
     static string ReadSBJSONURL=baseURL+"ReadScoreboardJSON.php";
     static string DeleteAllScoreURL=baseURL+"DeleteAllScores.php";
