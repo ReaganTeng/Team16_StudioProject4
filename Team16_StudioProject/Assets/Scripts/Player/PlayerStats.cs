@@ -47,6 +47,13 @@ public class PlayerStats : MonoBehaviour
 
     public bool[] weapon = new bool[3];
 
+    // For time taken in game ending
+    private TextMeshProUGUI timerText;
+    public int timeCounterSecond;
+    public int timeCounterMinute;
+    private float counterTimer;
+    private TimeCounter timerObject;
+
 
 
     private int zoneno;
@@ -64,9 +71,15 @@ public class PlayerStats : MonoBehaviour
         healthBar = GameObject.Find("Health Bar");
         obtainText = GameObject.Find("Obtained Text").GetComponent<TextMeshProUGUI>();
         obtainText.SetText("");
+        timerText = GameObject.Find("Timer").GetComponent<TextMeshProUGUI>();
+        timerObject = GameObject.Find("TimerObject").GetComponent<TimeCounter>();
         obtainTimer = 0;
         maxAmmoCount = 12;
         equippedWeapon = EquippedWeapon.Fists;
+
+        timeCounterSecond = 0;
+        timeCounterMinute = 0;
+        counterTimer = 1;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -137,6 +150,32 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
+
+        // Time counter
+        counterTimer -= Time.deltaTime;
+        if (counterTimer <= 0)
+        {
+            counterTimer += 1;
+            timeCounterSecond++;
+            if (timeCounterSecond == 60)
+            {
+                timeCounterMinute++;
+                timeCounterSecond = 0;
+            }
+        }
+        if (timeCounterSecond > 9)
+        {
+            timerText.SetText(timeCounterMinute.ToString() + ":" + timeCounterSecond);
+        }
+        else
+        {
+            timerText.SetText(timeCounterMinute.ToString() + ":0" + timeCounterSecond);
+        }
+        timerObject.timeSecond = timeCounterSecond;
+        timerObject.timeMinute = timeCounterMinute;     
+
+
+
         if (obtainTimer > 0)
         {
             obtainTimer -= Time.deltaTime;
