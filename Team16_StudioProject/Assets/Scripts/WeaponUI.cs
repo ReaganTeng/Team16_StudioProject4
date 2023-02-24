@@ -55,7 +55,7 @@ public class WeaponUI : MonoBehaviour
         keycount = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().Numberofkeys;
         coincount = GameObject.Find("PlayerArmature").GetComponent<PlayerStats>().Numberofcoins;
 
-        numberOfKeys.SetText("KEYS: " + keycount.ToString());
+        numberOfKeys.SetText(keycount.ToString());
         numberOfcoins.SetText(coincount.ToString());
 
         switch (playerStats.equippedWeapon)
