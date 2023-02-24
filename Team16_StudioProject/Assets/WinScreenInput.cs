@@ -8,11 +8,14 @@ using TMPro;
 public class WinScreenInput : MonoBehaviour
 {
     public Canvas lb_canvas;
-
+    [SerializeField] private TextMeshProUGUI leaderboardInfo;
     // Start is called before the first frame update
     void Start()
     {
-        lb_canvas.enabled = false;
+        if (lb_canvas != null)
+        {
+            lb_canvas.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -30,6 +33,7 @@ public class WinScreenInput : MonoBehaviour
     public void OpenLB()
     {
         lb_canvas.enabled = true;
+        StartCoroutine(GlobalStuffs.GetScoreBoard(leaderboardInfo));
     }
 
     public void CloseLB()

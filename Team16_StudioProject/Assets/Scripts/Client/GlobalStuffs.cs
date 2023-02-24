@@ -4,16 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System;
+using UnityEngine.SceneManagement;
+using TMPro;
+
 public static class GlobalStuffs {
     public static string username="GuestPlayer";
     public static int xp=0;
     public static int cash=0;
     public static int level=1;
     public static bool exist = false;
+    public static bool isCompleted = false;
+    public static int timeTaken = 0;
     
     public static string baseURL= "http://34.124.188.6/server/"; //rename this to your server path
     static string addscorebackendURL=baseURL+"AddScoreBackend.php";
-    static string ReadSBJSONURL=baseURL+"ReadScoreboardJSON.php";
+    static string ReadSBJSONURL=baseURL+"ReadScoreBoardJSON.php";
     static string DeleteAllScoreURL=baseURL+"DeleteAllScores.php";
     static string UpdatePlayerStatsURL=baseURL+"UpdatePlayerStatsBackend.php";
     static string UpdateExistingPlayerStatsURL =baseURL+"UpdateExistingPlayerStatsBackend.php";
@@ -29,6 +34,8 @@ public static class GlobalStuffs {
             {
                 case UnityWebRequest.Result.Success:
                     Debug.Log(":\nReceived: " + webreq.downloadHandler.text);
+                    SceneManager.LoadScene("WinScreen");
+
                     //GetScoreBoard();
                     break;
                 default:
@@ -38,7 +45,7 @@ public static class GlobalStuffs {
             webreq.Dispose();            
     }
     
-    public static IEnumerator GetScoreBoard(Text txtSB)
+    public static IEnumerator GetScoreBoard(TextMeshProUGUI txtSB)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(ReadSBJSONURL))
         {
@@ -81,8 +88,8 @@ public static class GlobalStuffs {
         string ddata="Leaderboard:\n";               
         for(int a=0;a<sb.scores.Count;a++){
             OneScore oneScore=sb.scores[a];
-            Debug.Log(oneScore.username+" : "+oneScore.score + " : " + oneScore.lastPlayed);
-            ddata+=(a + 1 + "."+oneScore.username+" : "+oneScore.score+" : "+oneScore.lastPlayed+"\n");
+            Debug.Log(oneScore.username + " : " + oneScore.score / 60 + " : " + oneScore.score % 60 + oneScore.lastPlayed);
+            ddata += (a + 1 + ".)"+oneScore.username+"|Time Taken:"+oneScore.score / 60+":"+ oneScore.score % 60 +"|Played On:" + oneScore.lastPlayed + "\n");
         }
 
         return ddata;
@@ -175,7 +182,7 @@ public static class GlobalStuffs {
 [Serializable]
 class OneScore {
     public string username;
-    public float score;
+    public int score;
     public string lastPlayed;
 }
 //[Serializable]

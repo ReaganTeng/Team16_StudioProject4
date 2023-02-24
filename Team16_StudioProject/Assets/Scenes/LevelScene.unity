@@ -13987,6 +13987,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf13b46d9e690354f9a0bf7128944cd1, type: 3}
+--- !u!114 &1416702280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1434837660194969395, guid: bf13b46d9e690354f9a0bf7128944cd1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1416702279}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1428536226
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15974,6 +15986,11 @@ PrefabInstance:
       propertyPath: Numberofkeys
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2744080983866192128, guid: 8566fc692908c3340a3dd7b3e6b81316,
+        type: 3}
+      propertyPath: usernametext
+      value: 
+      objectReference: {fileID: 1416702280}
     - target: {fileID: 2744080983866192128, guid: 8566fc692908c3340a3dd7b3e6b81316,
         type: 3}
       propertyPath: equippedWeapon
