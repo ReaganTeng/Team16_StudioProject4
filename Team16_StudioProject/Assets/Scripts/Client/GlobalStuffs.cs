@@ -175,7 +175,7 @@ public static class GlobalStuffs {
 [Serializable]
 class OneScore {
     public string username;
-    public int score;
+    public float score;
     public string lastPlayed;
 }
 //[Serializable]
