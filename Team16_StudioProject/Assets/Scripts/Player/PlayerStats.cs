@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Collections.Specialized;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class PlayerStats : MonoBehaviour
 
     private TextMeshProUGUI obtainText;
     private float obtainTimer;
+    private float obtainScale;
 
     private int maxhealth = 100;
 
@@ -74,6 +76,7 @@ public class PlayerStats : MonoBehaviour
         timerText = GameObject.Find("Timer").GetComponent<TextMeshProUGUI>();
         timerObject = GameObject.Find("TimerObject").GetComponent<TimeCounter>();
         obtainTimer = 0;
+        obtainScale = 0;
         maxAmmoCount = 12;
         equippedWeapon = EquippedWeapon.Fists;
 
@@ -88,8 +91,10 @@ public class PlayerStats : MonoBehaviour
         var item = other.GetComponent<Item>();
         if (item)
         {
+            obtainScale = 0;
             inventory.AddItem(item.item, 1);
             obtainTimer = 2;
+
 
             if(item.item == firstaid
                 && health < maxhealth)
@@ -172,12 +177,19 @@ public class PlayerStats : MonoBehaviour
             timerText.SetText(timeCounterMinute.ToString() + ":0" + timeCounterSecond);
         }
         timerObject.timeSecond = timeCounterSecond;
-        timerObject.timeMinute = timeCounterMinute;     
+        timerObject.timeMinute = timeCounterMinute;
 
 
 
         if (obtainTimer > 0)
         {
+            if (obtainScale < 1)
+            {
+                obtainScale += 10 * Time.deltaTime;
+            }
+
+            obtainText.transform.localScale = new Vector3(obtainScale, obtainScale, 1);
+
             obtainTimer -= Time.deltaTime;
 
             if (obtainTimer <= 0)
