@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Collections.Specialized;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerStats : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class PlayerStats : MonoBehaviour
         NUM_TYPES
     }
 
+    [SerializeField] private TextMeshProUGUI usernametext;
     [SerializeField] public int health = 100;
     [SerializeField] public int ammoCount = 10;
     [SerializeField] public int clipCount = 1;
@@ -83,6 +86,8 @@ public class PlayerStats : MonoBehaviour
         timeCounterSecond = 0;
         timeCounterMinute = 0;
         counterTimer = 1;
+
+        usernametext.text = GlobalStuffs.username;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -304,6 +309,12 @@ public class PlayerStats : MonoBehaviour
                 //Debug.Log("PLAYER ZONE " + zoneno);
 
             }
+        }
+
+        if (GlobalStuffs.isCompleted)
+        {
+            StartCoroutine(GlobalStuffs.DoSendScore(usernametext.text,timerObject.timeMinute * 60 + timerObject.timeSecond));
+            GlobalStuffs.isCompleted = false;
         }
 
 

@@ -10,25 +10,13 @@ public class GameEnding : MonoBehaviour
 {
    
     public GameObject player;
-   
-
-    bool m_IsPlayerAtExit;
-    
+       
     void OnTriggerEnter (Collider other)
     {
         if (other.gameObject == player)
         {
-            m_IsPlayerAtExit = true;
+            GlobalStuffs.isCompleted = true;
         }
-    }
-
-    void Update ()
-    {
-        if (m_IsPlayerAtExit)
-        {
-            SceneManager.LoadScene("WinScreen");
-        }
-        
     }
 
    
