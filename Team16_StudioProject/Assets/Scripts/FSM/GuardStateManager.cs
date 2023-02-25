@@ -67,6 +67,7 @@ public class GuardStateManager : MonoBehaviour
 
         
         m_AudioSource = GetComponent<AudioSource>();
+        m_AudioSource.volume = GameObject.Find("SettingsStats").GetComponent<globalstats>().volumeslider;
         if (!m_AudioSource.isPlaying)
         {
             m_AudioSource.Play();

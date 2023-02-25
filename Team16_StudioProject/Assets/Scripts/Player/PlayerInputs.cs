@@ -242,18 +242,22 @@ public class PlayerInputs : MonoBehaviour
     }
     public void PlayShootSound()
     {
+        ShootAudioSource.volume = GameObject.Find("SettingsStats").GetComponent<globalstats>().volumeslider;
         ShootAudioSource.Play();
     }
     public void PlayReloadSound()
     {
+        ReloadAudioSource.volume = GameObject.Find("SettingsStats").GetComponent<globalstats>().volumeslider;
         ReloadAudioSource.Play();
     }
     public void PlayShivSound()
     {
+        ShivAudioSource.volume = GameObject.Find("SettingsStats").GetComponent<globalstats>().volumeslider;
         ShivAudioSource.Play();
     }
     public void PlayPunchSound()
     {
+        PunchAudioSource.volume = GameObject.Find("SettingsStats").GetComponent<globalstats>().volumeslider;
         PunchAudioSource.time = 0.5f;
         PunchAudioSource.Play();
     }

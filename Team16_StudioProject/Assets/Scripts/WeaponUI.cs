@@ -61,45 +61,29 @@ public class WeaponUI : MonoBehaviour
         switch (playerStats.equippedWeapon)
         {
             case PlayerStats.EquippedWeapon.Shiv:
-                //if (playerStats.shivDurability <= 0)
-                //{
-                //    shivImage.GetComponent<RawImage>().enabled = false;
-                //    pistolImage.GetComponent<RawImage>().enabled = false;
-                //    fistImage.GetComponent<RawImage>().enabled = true;
-                //    numberOfAmmo.SetText("Fists");
-                //}
-                //else
-                //{
+                {
                     shivImage.GetComponent<RawImage>().enabled = true;
                     pistolImage.GetComponent<RawImage>().enabled = false;
                     fistImage.GetComponent<RawImage>().enabled = false;
                     numberOfAmmo.SetText("  " + shivCount.ToString());
-                //}
-                break;
+                    break;
+                }
             case PlayerStats.EquippedWeapon.Pistol:
-                //if (playerStats.gunequipped == false)
-                //{
-                //    shivImage.GetComponent<RawImage>().enabled = false;
-                //    pistolImage.GetComponent<RawImage>().enabled = false;
-                //    fistImage.GetComponent<RawImage>().enabled = true;
-                //    numberOfAmmo.SetText("Fists");
-                //}
-                //else
-                //{
+                {
                     pistolImage.GetComponent<RawImage>().enabled = true;
                     shivImage.GetComponent<RawImage>().enabled = false;
                     fistImage.GetComponent<RawImage>().enabled = false;
                     numberOfAmmo.SetText(ammo.ToString() + "/" + clipCount.ToString());
-                //}
-                break;
+                    break;
+                }
             default:
-                shivImage.GetComponent<RawImage>().enabled = false;
-                pistolImage.GetComponent<RawImage>().enabled = false;
-                fistImage.GetComponent<RawImage>().enabled = true;
-                numberOfAmmo.SetText("Fists");
-                break;
-
-
+                {
+                    shivImage.GetComponent<RawImage>().enabled = false;
+                    pistolImage.GetComponent<RawImage>().enabled = false;
+                    fistImage.GetComponent<RawImage>().enabled = true;
+                    numberOfAmmo.SetText("Fists");
+                    break;
+                }
 
         }
 
