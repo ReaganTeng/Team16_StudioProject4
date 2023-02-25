@@ -13,7 +13,6 @@ public class TimeCounter: MonoBehaviour
         timeSecond = 0;
         timeMinute = 0;
         DontDestroyOnLoad(gameObject);
-
     }
 
     // Update is called once per frame

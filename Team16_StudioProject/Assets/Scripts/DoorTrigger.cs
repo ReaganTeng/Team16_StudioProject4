@@ -67,10 +67,12 @@ public class DoorTrigger : MonoBehaviour
                 }
             }
         }
-        //else
-        //{
-        //    m_IsDetected = false;
-        //}
+        else
+        {
+            //m_IsDetected = false;
+            Debug.Log("DOOR CLOSED");
+
+        }
     }
 
 

@@ -54,6 +54,8 @@ public class GuardStateManager : MonoBehaviour
 
     private int zoneno;
 
+    private AudioSource m_AudioSource;
+
     void Awake()
     {
         //FOR GUARDPATROLSTATE
@@ -62,7 +64,16 @@ public class GuardStateManager : MonoBehaviour
         //waypoints[1].Transform.position = GetComponent<Transform>().position + new Vector3(20, 0, 0);
         //Instantiate(waypoints[1], go.transform.position + new Vector3(20, 0, 0), new Quaternion(0, 0, 0, 0));
         //
-        player = GameObject.Find("PlayerArmature");
+
+        
+        m_AudioSource = GetComponent<AudioSource>();
+        if (!m_AudioSource.isPlaying)
+        {
+            m_AudioSource.Play();
+        }
+        
+
+                player = GameObject.Find("PlayerArmature");
     }
 
 

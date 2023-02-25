@@ -17,7 +17,6 @@ public class PrintTimeTaken : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (timeCounter.timeSecond > 9)
         {
             this.GetComponent<TextMeshProUGUI>().SetText("Time taken " + timeCounter.timeMinute + ":" + timeCounter.timeSecond);
