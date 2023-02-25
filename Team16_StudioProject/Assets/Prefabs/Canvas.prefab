@@ -1016,6 +1016,7 @@ GameObject:
   - component: {fileID: 5398443193633476814}
   - component: {fileID: 5398443193633476813}
   - component: {fileID: 5398443193633476817}
+  - component: {fileID: 2164278842662979513}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1123,6 +1124,23 @@ MonoBehaviour:
   numberOfAmmo: {fileID: 5850780622109065711}
   numberOfKeys: {fileID: 78700269522451382}
   numberOfcoins: {fileID: 796126102436111310}
+--- !u!114 &2164278842662979513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5398443193633476812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c83b0fb98ccba414d807b738394d70f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsGO: {fileID: 0}
+  minimap: {fileID: 7870927715035155884}
+  notification: {fileID: 8955027946946435205}
+  timer: {fileID: 7452623187904175954}
+  username: {fileID: 1434837660194969395}
 --- !u!1 &5398443194124799509
 GameObject:
   m_ObjectHideFlags: 0
