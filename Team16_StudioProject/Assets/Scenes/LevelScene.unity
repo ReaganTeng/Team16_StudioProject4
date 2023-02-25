@@ -15489,6 +15489,11 @@ PrefabInstance:
       propertyPath: SprintSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 259192671515813631, guid: 8566fc692908c3340a3dd7b3e6b81316,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 300865297120792256, guid: 8566fc692908c3340a3dd7b3e6b81316,
         type: 3}
       propertyPath: m_LocalPosition.x

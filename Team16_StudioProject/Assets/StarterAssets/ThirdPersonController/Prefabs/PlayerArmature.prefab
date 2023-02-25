@@ -1136,6 +1136,7 @@ GameObject:
   - component: {fileID: 4070636864858343835}
   - component: {fileID: 4416926081852918493}
   - component: {fileID: 1783473417025641764}
+  - component: {fileID: 1033272929113286009}
   m_Layer: 8
   m_Name: PlayerArmature
   m_TagString: Player
@@ -1418,6 +1419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d596ad2fccf43a3479f58e2762f4ab53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usernametext: {fileID: 0}
   health: 100
   ammoCount: 10
   clipCount: 1
@@ -1436,6 +1438,22 @@ MonoBehaviour:
   shiv: {fileID: 11400000, guid: f4f2d378f138edc4e8972c364aadb6d0, type: 2}
   pistol: {fileID: 11400000, guid: 5f7ea2f6207b92945ae5f297d335fc36, type: 2}
   weapon: 000000
+  timeCounterSecond: 0
+  timeCounterMinute: 0
+--- !u!136 &1033272929113286009
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416926081852918481}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0
