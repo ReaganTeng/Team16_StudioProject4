@@ -53,9 +53,6 @@ public class GamestateManager : MonoBehaviour
                 break;
 
             case Gamestate.GAMEOVER:
-
-
-
                 // Display the Gameover dialog
                 Time.timeScale = 0;
 
@@ -68,7 +65,6 @@ public class GamestateManager : MonoBehaviour
                     Time.timeScale = 1;
                 }
                 break;
-
             case Gamestate.GAMEPLAY:
 
 

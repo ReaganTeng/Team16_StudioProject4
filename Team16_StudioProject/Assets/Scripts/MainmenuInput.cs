@@ -93,6 +93,11 @@ public class MainmenuInput : MonoBehaviour
         mainMenu.SetActive(false);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void SettingsButton()
     {
         settings.SetActive(true);
