@@ -60,6 +60,10 @@ public class GlobalVolume : MonoBehaviour
         {
             vignette.intensity.value -= Time.deltaTime;
         }
+        else
+        {
+            off = false;
+        }
     }
     public void SetChase(bool chase)
     {
