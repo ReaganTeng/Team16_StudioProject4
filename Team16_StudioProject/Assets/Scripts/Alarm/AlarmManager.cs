@@ -32,6 +32,7 @@ public class AlarmManager : MonoBehaviour
         {
             if (!Alarm.GetComponent<AudioSource>().isPlaying)
             {
+                Alarm.GetComponent<AudioSource>().volume = GameObject.Find("SettingsStats").GetComponent<globalstats>().volumeslider;
                 Alarm.GetComponent<AudioSource>().Play();
             }
         }
