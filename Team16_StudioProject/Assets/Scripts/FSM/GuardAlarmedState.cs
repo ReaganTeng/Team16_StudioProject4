@@ -44,7 +44,7 @@ public class GuardAlarmedState : GuardStateBase
             }
         }
 
-        if (guard.navMeshAgent.remainingDistance < guard.navMeshAgent.stoppingDistance)
+        if (guard.navMeshAgent.remainingDistance < 1f)
         {
             //Debug.Log(AlarmWP.position);
             if (!alrCheck)

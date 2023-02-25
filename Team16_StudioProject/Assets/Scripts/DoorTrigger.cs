@@ -59,7 +59,7 @@ public class DoorTrigger : MonoBehaviour
                 {
                     player.GetComponent<PlayerStats>().Numberofkeys -= 1;
                     m_IsDetected = true;
-                    Debug.Log("DOOR OPENED");
+                    //Debug.Log("DOOR OPENED");
                 }
                 else
                 {
@@ -70,7 +70,7 @@ public class DoorTrigger : MonoBehaviour
         else
         {
             //m_IsDetected = false;
-            Debug.Log("DOOR CLOSED");
+           // Debug.Log("DOOR CLOSED");
 
         }
     }

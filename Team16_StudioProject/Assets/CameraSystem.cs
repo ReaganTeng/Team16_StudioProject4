@@ -15,11 +15,11 @@ public class CameraSystem : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Q))
         {
-            rotateDir -= 1f;
+            rotateDir += 1f;
         }
         if (Input.GetKey(KeyCode.E))
         {
-            rotateDir += 1f;
+            rotateDir -= 1f;
         }
 
 
