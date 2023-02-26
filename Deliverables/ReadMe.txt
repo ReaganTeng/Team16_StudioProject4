@@ -7,4 +7,6 @@ E - Rotate camera right
 Scroll - Select weapon
 
 How to play:
-Players will have to make their way through the level without dying. Avoid enemies and collect pickups like ammo clips and health to aid your gameplay and escape successfully.
+Players will have to make their way through the level without dying. 
+Avoid enemies and collect pickups like ammo clips and health to aid 
+your gameplay and escape successfully.
