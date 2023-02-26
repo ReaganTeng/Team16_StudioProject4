@@ -109,7 +109,14 @@ public static class GlobalStuffs {
             OneScore oneScore=sb.scores[a];
             pos.text += "\n" + (a + 1) + ".";
             name.text +=  "\n" + oneScore.username;
-            time.text += "\n" + oneScore.score / 60 + ":" + oneScore.score % 60;
+            if (oneScore.score % 60 < 10)
+            {
+                time.text += "\n" + oneScore.score / 60 + ":0" + oneScore.score % 60;
+            }
+            else
+            {
+                time.text += "\n" + oneScore.score / 60 + ":" + oneScore.score % 60;
+            }
             lastPlayed.text += "\n" + oneScore.lastPlayed;
             //Debug.Log(oneScore.username + " : " + oneScore.score / 60 + " : " + oneScore.score % 60 + oneScore.lastPlayed);
             //ddata += (a + 1 + ".)"+oneScore.username+"|Time Taken:"+oneScore.score / 60+":"+ oneScore.score % 60 +"|Played On:" + oneScore.lastPlayed + "\n");
