@@ -56,7 +56,7 @@ public class GlobalVolume : MonoBehaviour
     }
     public void OffVignette()
     {
-        if (vignette.intensity.value > 0 && off)
+        if (vignette.intensity.value > 0)
         {
             vignette.intensity.value -= Time.deltaTime;
         }

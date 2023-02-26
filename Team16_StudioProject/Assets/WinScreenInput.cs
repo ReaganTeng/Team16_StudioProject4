@@ -7,15 +7,16 @@ using TMPro;
 
 public class WinScreenInput : MonoBehaviour
 {
-    public Canvas lb_canvas;
-    [SerializeField] private TextMeshProUGUI leaderboardInfo;
+    public GameObject lb_canvas;
+    [SerializeField] private TextMeshProUGUI PosInfo;
+    [SerializeField] private TextMeshProUGUI nameInfo;
+    [SerializeField] private TextMeshProUGUI timeInfo;
+    [SerializeField] private TextMeshProUGUI lastPlayedInfo;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (lb_canvas != null)
-        {
-            lb_canvas.enabled = false;
-        }
+        lb_canvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -32,12 +33,20 @@ public class WinScreenInput : MonoBehaviour
 
     public void OpenLB()
     {
-        lb_canvas.enabled = true;
-        StartCoroutine(GlobalStuffs.GetScoreBoard(leaderboardInfo));
+        lb_canvas.SetActive(true);
+        StartCoroutine(GlobalStuffs.GetScoreBoard(PosInfo, nameInfo, timeInfo, lastPlayedInfo));
     }
 
     public void CloseLB()
     {
-        lb_canvas.enabled = false;
+        CleanLeaderboard();
+        lb_canvas.SetActive(false);
+    }
+    public void CleanLeaderboard()
+    {
+        PosInfo.text = "";
+        nameInfo.text = "";
+        timeInfo.text = "";
+        lastPlayedInfo.text = "";
     }
 }
