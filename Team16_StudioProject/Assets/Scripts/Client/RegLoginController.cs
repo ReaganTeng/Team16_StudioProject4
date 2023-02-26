@@ -11,8 +11,9 @@ public class RegLoginController : MonoBehaviour
     string URLRegBackend=GlobalStuffs.baseURL+"RegisterBackend.php";
     string URLReadPlayerStats=GlobalStuffs.baseURL+"ReadPlayerStatsJSON.php";
     public TextMeshProUGUI displayTxt; //must add using UnityEngine.UI
-    public TextMeshProUGUI loginTxt;
-    public TMP_InputField  if_regusername,if_regpassword,if_regemail; //to link to the inpufields
+
+
+    public TMP_InputField  if_regusername,if_regpassword,if_regemail; //to link to the inpufields
     public TMP_InputField  if_loginusername,if_loginpassword; //to link to the inpufields
     private GameObject Login;
     private GameObject Register;
@@ -35,17 +36,21 @@ public class RegLoginController : MonoBehaviour
         switch (webreq.result)
             {
                 case UnityWebRequest.Result.Success:
-                    displayTxt.text=webreq.downloadHandler.text;
-                    if((webreq.downloadHandler.text).Substring(0,13)=="Login Success"){
-                        Debug.Log("Load new Scene");
+                displayTxt.text = webreq.downloadHandler.text;
+                displayTxt.color = new Color(255, 255, 255, 1);
+                if ((webreq.downloadHandler.text).Substring(0,13)=="Login Success"){
+                    Debug.Log("Load new Scene");
                         GlobalStuffs.username=if_loginusername.text;
                     //GlobalStuffs.xp=0;
                     //GlobalStuffs.cash=0;
                     //StartCoroutine(GetPlayerStats(if_loginusername.text));
                     yield return new WaitForSeconds(3);
+                    ClearLoginInput();
                     SceneManager.LoadScene("MainMenu");
                     }
-                    break;
+                displayTxt.color = new Color(255, 0, 0, 1);
+
+                break;
                 default:
                     displayTxt.text="server error";
                     break;
@@ -66,9 +71,16 @@ public class RegLoginController : MonoBehaviour
             {
                 case UnityWebRequest.Result.Success:
                 displayTxt.text = webreq.downloadHandler.text;
+                displayTxt.color = new Color(1, 1, 1, 1);
+
                 if (webreq.downloadHandler.text == "Registered")
-                RegisterToLoginScreen();
-                    break;
+                {
+                    RegisterToLoginScreen();
+                    break;
+                }
+                displayTxt.color = new Color(1, 0, 0, 1);
+
+                break;
                 default:
                     displayTxt.text="server error";
                     break;
@@ -115,11 +127,29 @@ public class RegLoginController : MonoBehaviour
     {
         Login.SetActive(true);
         Register.SetActive(false);
+        ClearInput();
     }
     public void OnDeleteUser()
     {
         StartCoroutine(GlobalStuffs.DeleteCurrentUser());
         //BacktoMain();
+    }
+    public void ClearInput()
+    {
+        if_regusername.Select();
+        if_regusername.text = "";
+        if_regpassword.Select();
+        if_regpassword.text = "";
+        if_regemail.Select();
+        if_regemail.text = "";
+    }
+    public void ClearLoginInput()
+    {
+        if_loginusername.Select();
+        if_loginusername.text = "";
+        if_loginpassword.Select();
+        if_loginpassword.text = "";
+        displayTxt.text = "";
     }
 
 }

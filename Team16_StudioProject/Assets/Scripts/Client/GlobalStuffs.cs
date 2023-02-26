@@ -45,7 +45,7 @@ public static class GlobalStuffs {
             webreq.Dispose();            
     }
     
-    public static IEnumerator GetScoreBoard(TextMeshProUGUI txtSB)
+    public static IEnumerator GetScoreBoard(TextMeshProUGUI pos,TextMeshProUGUI name, TextMeshProUGUI time, TextMeshProUGUI lastPlayed)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(ReadSBJSONURL))
         {
@@ -56,7 +56,7 @@ public static class GlobalStuffs {
                 case UnityWebRequest.Result.Success:
                     Debug.Log("Received: " + webRequest.downloadHandler.text);
                     //displayTxt.text="RawData:\n"+webRequest.downloadHandler.text+"\n";
-                    txtSB.text=Deserialize(webRequest.downloadHandler.text); //added
+                    Deserialize(webRequest.downloadHandler.text, pos, name, time, lastPlayed); //added
                     break;
                 default:
                     Debug.Log("error"+webRequest.error);
@@ -82,17 +82,39 @@ public static class GlobalStuffs {
          webreq.Dispose();
             
     }
-    static string Deserialize(String RawJSON){ 
+    static void Deserialize(String RawJSON, TextMeshProUGUI pos, TextMeshProUGUI name, TextMeshProUGUI time, TextMeshProUGUI lastPlayed)
+    { 
         ScoreList sb=JsonUtility.FromJson<ScoreList>(RawJSON); //convert raw json to objects
          
-        string ddata="Leaderboard:\n";               
-        for(int a=0;a<sb.scores.Count;a++){
+        name.text = "NAME";
+        time.text = "TIME";
+        lastPlayed.text = "PLAYED ON";
+        for (int a=0;a<sb.scores.Count;a++){
+            //if (a == 0)
+            //{
+            //    pos.color = new Color(1f, 0.7f, 0f, 255f);
+            //}
+            //else if (a == 1)
+            //{
+            //    pos.color = new Color(0.59f, 0.59f, 1f, 1f);
+            //}
+            //else if (a == 2)
+            //{
+            //    pos.color = new Color(0.55f, 0.235f, 0.55f, 1f);
+            //}
+            //else
+            //{
+            //    pos.color = new Color(1f, 1f, 1f, 1f);
+            //}
             OneScore oneScore=sb.scores[a];
-            Debug.Log(oneScore.username + " : " + oneScore.score / 60 + " : " + oneScore.score % 60 + oneScore.lastPlayed);
-            ddata += (a + 1 + ".)"+oneScore.username+"|Time Taken:"+oneScore.score / 60+":"+ oneScore.score % 60 +"|Played On:" + oneScore.lastPlayed + "\n");
+            pos.text += "\n" + (a + 1) + ".";
+            name.text +=  "\n" + oneScore.username;
+            time.text += "\n" + oneScore.score / 60 + ":" + oneScore.score % 60;
+            lastPlayed.text += "\n" + oneScore.lastPlayed;
+            //Debug.Log(oneScore.username + " : " + oneScore.score / 60 + " : " + oneScore.score % 60 + oneScore.lastPlayed);
+            //ddata += (a + 1 + ".)"+oneScore.username+"|Time Taken:"+oneScore.score / 60+":"+ oneScore.score % 60 +"|Played On:" + oneScore.lastPlayed + "\n");
         }
 
-        return ddata;
     }
     //public static void DeserializeForStats(String RawJSON)
     //{
